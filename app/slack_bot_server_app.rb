@@ -2,11 +2,14 @@ module SlackBotServer
   class App
     def initialize
       @filenames = ['', '.html', 'index.html', '/index.html']
+
       @rack_static = ::Rack::Static.new(
         lambda { [404, {}, []] },
         root: File.expand_path('../../public', __FILE__),
         urls: ['/']
       )
+
+      check_database!
     end
 
     def self.instance
@@ -24,7 +27,7 @@ module SlackBotServer
 
     def call(env)
       # api
-      response = SlackBotServer::API.call(env)
+      response = Api::Endpoints::RootEndpoint.call(env)
 
       # Check if the App wants us to pass the response along to others
       if response[1]['X-Cascade'] == 'pass'
@@ -44,6 +47,15 @@ module SlackBotServer
       else
         response
       end
+    end
+
+    def check_database!
+      rc = Mongoid.default_client.command(ping: 1)
+      return if rc && rc.ok?
+      fail rc.documents.first['error'] || 'Unexpected error.'
+    rescue Exception => e
+      warn "Error connecting to MongoDB: #{e.message}"
+      raise e
     end
   end
 end

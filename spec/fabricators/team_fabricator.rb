@@ -1,0 +1,2 @@
+Fabricator(:team) do
+end

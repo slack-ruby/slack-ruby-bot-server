@@ -1,30 +1,31 @@
 require 'spec_helper'
 
-describe SlackBotServer::API do
-  include Rack::Test::Methods
+describe Api do
+  include Api::Test::EndpointTest
 
-  def app
-    SlackBotServer::API
-  end
-
-  context 'swagger documentation root' do
-    before do
+  context 'swagger root' do
+    subject do
       get '/api/swagger_doc'
-      expect(last_response.status).to eq(200)
-      @json = JSON.parse(last_response.body)
+      JSON.parse(last_response.body)
     end
-
-    it 'exposes api version' do
-      expect(@json['apiVersion']).to eq('v1')
-      expect(@json['apis'].size).to be > 1
+    it 'documents root level apis' do
+      expect(subject['apis'].map { |api| api['path'] }).to eq([
+        '/teams.{format}',
+        '/swagger_doc.{format}'
+      ])
     end
   end
 
-  context 'swagger documentation api' do
-    before do
-      get '/api/swagger_doc'
-      expect(last_response.status).to eq(200)
-      @apis = JSON.parse(last_response.body)['apis']
+  context 'teams' do
+    subject do
+      get '/api/swagger_doc/teams'
+      JSON.parse(last_response.body)
+    end
+    it 'documents teams apis' do
+      expect(subject['apis'].map { |api| api['path'] }).to eq([
+        '/api/teams/{id}.{format}',
+        '/api/teams.{format}'
+      ])
     end
   end
 end
