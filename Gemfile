@@ -23,4 +23,5 @@ group :test do
   gem 'hyperclient'
   gem 'database_cleaner'
   gem 'fabrication'
+  gem 'faker'
 end
