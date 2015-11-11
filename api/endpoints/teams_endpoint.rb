@@ -12,7 +12,7 @@ module Api
           requires :id, type: String, desc: 'Team ID.'
         end
         get ':id' do
-          team = Team.find(params[:id]) || error!(404, 'Not Found')
+          team = Team.where(id: params[:id], token: headers['Token']).first || error!('Not Found', 404)
           present team, with: Api::Presenters::TeamPresenter
         end
 
@@ -21,7 +21,7 @@ module Api
           use :pagination
         end
         get do
-          teams = paginate_and_sort_by_cursor(Team)
+          teams = paginate_and_sort_by_cursor(Team.where(token: headers['Token']))
           present teams, with: Api::Presenters::TeamsPresenter
         end
 
@@ -43,7 +43,7 @@ module Api
           end
         end
         put ':id' do
-          team = Team.find(params[:id])
+          team = Team.where(id: params[:id], token: headers['Token']).first || error!('Not Found', 404)
           update team, with: Api::Presenters::TeamPresenter, from: params[:team]
         end
 
@@ -52,7 +52,7 @@ module Api
           requires :id, type: String, desc: 'Team id.'
         end
         delete ':id' do
-          team = Team.find(params[:id])
+          team = Team.where(id: params[:id], token: headers['Token']).first || error!('Not Found', 404)
           delete team, with: Api::Presenters::TeamPresenter
         end
       end
