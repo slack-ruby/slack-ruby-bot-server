@@ -15,6 +15,12 @@ RSpec.configure do |config|
   config.raise_errors_for_deprecations!
 end
 
+require 'capybara/rspec'
+Capybara.configure do |config|
+  config.app = SlackBotServer::App.new
+  config.server_port = 9293
+end
+
 Dir[File.join(File.dirname(__FILE__), 'support', '**/*.rb')].each do |file|
   require file
 end

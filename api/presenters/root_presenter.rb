@@ -16,13 +16,11 @@ module Api
         }
       end
 
-      [:team].each do |model|
-        link model do |opts|
-          {
-            href: "#{base_url(opts)}/api/#{model.to_s.pluralize}/{id}",
-            templated: true
-          }
-        end
+      link :team do |opts|
+        {
+          href: "#{base_url(opts)}/api/teams/{id}",
+          templated: true
+        }
       end
 
       private

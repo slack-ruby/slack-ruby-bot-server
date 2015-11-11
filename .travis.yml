@@ -1,6 +1,9 @@
 rvm:
   - 2.2
-
 language: ruby
-
 cache: bundler
+services:
+  - mongodb
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"

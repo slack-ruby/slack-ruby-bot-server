@@ -24,4 +24,6 @@ group :test do
   gem 'database_cleaner'
   gem 'fabrication'
   gem 'faker'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
