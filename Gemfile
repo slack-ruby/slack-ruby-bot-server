@@ -8,6 +8,7 @@ gem 'grape-swagger'
 gem 'grape-roar'
 gem 'mongoid'
 gem 'mongoid-scroll'
+gem 'slack-ruby-bot', github: 'dblock/slack-ruby-bot'
 
 group :development do
   gem 'rake'

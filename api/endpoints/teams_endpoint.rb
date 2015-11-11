@@ -32,7 +32,9 @@ module Api
           end
         end
         post do
-          create Team, with: Api::Presenters::TeamPresenter, from: params[:team]
+          team = create(Team, with: Api::Presenters::TeamPresenter, from: params[:team])
+          SlackRubyBot::Service.start! team.token
+          team
         end
 
         desc 'Update an existing team.'
@@ -44,7 +46,10 @@ module Api
         end
         put ':id' do
           team = Team.where(id: params[:id], token: headers['Token']).first || error!('Not Found', 404)
-          update team, with: Api::Presenters::TeamPresenter, from: params[:team]
+          SlackRubyBot::Service.stop! team.token
+          team = update(team, with: Api::Presenters::TeamPresenter, from: params[:team])
+          SlackRubyBot::Service.start! team.token
+          team
         end
 
         desc 'Delete an existing team.'
@@ -53,6 +58,7 @@ module Api
         end
         delete ':id' do
           team = Team.where(id: params[:id], token: headers['Token']).first || error!('Not Found', 404)
+          SlackRubyBot::Service.stop! team.token
           delete team, with: Api::Presenters::TeamPresenter
         end
       end

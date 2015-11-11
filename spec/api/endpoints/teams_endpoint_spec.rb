@@ -21,6 +21,7 @@ describe Api::Endpoints::TeamsEndpoint do
     end
 
     it 'creates a team' do
+      expect(SlackRubyBot::Service).to receive(:start!).with('token')
       expect do
         team = client.teams._post(team: { token: 'token' })
         expect(team.id).to_not be_blank
@@ -29,12 +30,15 @@ describe Api::Endpoints::TeamsEndpoint do
     end
 
     it 'updates a team' do
+      expect(SlackRubyBot::Service).to receive(:stop!).with(existing_team.token)
+      expect(SlackRubyBot::Service).to receive(:start!).with('updated')
       team = client(existing_team.token).team(id: existing_team.id.to_s)._put(team: { token: 'updated' })
       expect(team.token).to eq 'updated'
     end
 
     it 'deletes a team' do
       team = client(existing_team.token).team(id: existing_team.id.to_s)
+      expect(SlackRubyBot::Service).to receive(:stop!).with(existing_team.token)
       expect do
         team._delete
         expect(team.id).to eq existing_team.id.to_s

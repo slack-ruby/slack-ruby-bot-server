@@ -6,7 +6,6 @@ module Api
       included do
         rescue_from :all, backtrace: true do |e|
           error = { type: 'other_error', message: e.message }
-          error[:backtrace] = e.backtrace unless Rails.env.production?
           rack_response(error.to_json, 400)
         end
         # rescue document validation errors into detail json

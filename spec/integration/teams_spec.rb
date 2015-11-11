@@ -10,6 +10,7 @@ describe 'Teams', js: true, type: :feature do
     end
     context 'register' do
       it 'registers a team' do
+        expect(SlackRubyBot::Service).to receive(:start!).with('token')
         expect do
           page.fill_in 'token', with: 'token'
           page.click_button 'register'
@@ -28,6 +29,7 @@ describe 'Teams', js: true, type: :feature do
     context 'unregister' do
       it 'unregisters a team' do
         team = Fabricate(:team)
+        expect(SlackRubyBot::Service).to receive(:stop!).with(team.token)
         expect do
           page.fill_in 'token', with: team.token
           page.click_button 'unregister'
