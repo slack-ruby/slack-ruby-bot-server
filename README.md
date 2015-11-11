@@ -7,7 +7,7 @@ Slack Bot Server
 
 ### Wat?
 
-A [Grape](http://github.com/ruby-grape/grape) API serving a slack bot to multiple teams.
+A [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams.
 
 ![](images/demo.gif)
 
@@ -19,7 +19,7 @@ Run `bundle install` and `rackup`.
 
 Create a new bot integration. This is something done in Slack, under [integrations](https://artsy.slack.com/services). Create a [new bot](https://artsy.slack.com/services/new/bot), and note its API token.
 
-Navigate to http://localhost:9292 and register the team using the token. The bot will join your #general channel. Say hi to it.
+Navigate to [localhost:9292](http://localhost:9292) and register the team using a token. The bot will join your #general channel. Say "hi" to it.
 
 ### Copyright & License
 
