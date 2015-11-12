@@ -1,3 +1,5 @@
 require File.expand_path('../config/environment', __FILE__)
 
-run SlackBotServer::App.instance
+EM.run do
+  run SlackBotServer::App.instance
+end
