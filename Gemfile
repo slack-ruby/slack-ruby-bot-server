@@ -8,7 +8,11 @@ gem 'grape-swagger'
 gem 'grape-roar'
 gem 'mongoid'
 gem 'mongoid-scroll'
+gem 'slack-ruby-client', github: 'dblock/slack-ruby-client'
 gem 'slack-ruby-bot', github: 'dblock/slack-ruby-bot'
+gem 'eventmachine'
+gem 'faye-websocket'
+gem 'puma'
 
 group :development do
   gem 'rake'

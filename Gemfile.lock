@@ -1,13 +1,23 @@
 GIT
   remote: git://github.com/dblock/slack-ruby-bot.git
-  revision: 9f9cb934660d8f12dac78de06d2c9c845f4adc3e
+  revision: ea0eadbfecafad754c738e3330407861e2128700
   specs:
-    slack-ruby-bot (0.4.6)
+    slack-ruby-bot (0.5.0)
       activesupport
       giphy (~> 2.0.2)
       hashie
       slack-ruby-client
       websocket-driver (~> 0.5.4)
+
+GIT
+  remote: git://github.com/dblock/slack-ruby-client.git
+  revision: fc7a935342f0039f1ba5345cf97729fadac32287
+  specs:
+    slack-ruby-client (0.5.0)
+      faraday
+      faraday_middleware
+      json
+      websocket-driver
 
 GEM
   remote: http://rubygems.org/
@@ -167,6 +177,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (2.14.0)
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -211,12 +222,6 @@ GEM
       rubyzip (~> 1.0)
       websocket (~> 1.0)
     shellany (0.0.1)
-    slack-ruby-client (0.4.0)
-      eventmachine
-      faraday
-      faraday_middleware
-      faye-websocket
-      json
     slop (3.6.0)
     spoon (0.0.4)
       ffi
@@ -244,8 +249,10 @@ PLATFORMS
 DEPENDENCIES
   capybara
   database_cleaner
+  eventmachine
   fabrication
   faker
+  faye-websocket
   grape
   grape-roar
   grape-swagger
@@ -256,6 +263,7 @@ DEPENDENCIES
   json
   mongoid
   mongoid-scroll
+  puma
   rack
   rack-cors
   rack-test
@@ -264,6 +272,7 @@ DEPENDENCIES
   rubocop (= 0.35.0)
   selenium-webdriver
   slack-ruby-bot!
+  slack-ruby-client!
 
 BUNDLED WITH
    1.10.6

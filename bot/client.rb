@@ -2,14 +2,24 @@ module SlackRubyBot
   class Client < Slack::RealTime::Client
     # patch closing of socket not to stop EventMachine and try to restart
     def close(_event)
-      @socket = nil
-      restart!
+      super
+      restart! unless @stopping
+    end
+
+    def stop!
+      @stopping = true
+      super
+    end
+
+    def start!
+      @stopping = false
+      super
     end
 
     def restart!(wait = 1)
       EM.next_tick do
         begin
-          rtm_start!
+          start!
         rescue StandardError => e
           sleep wait
           logger.error "#{token[0..10]}***: #{e.message}, reconnecting in #{wait} second(s)."

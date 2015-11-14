@@ -11,10 +11,5 @@ Bundler.require :default, ENV['RACK_ENV']
   end
 end
 
-Mongoid.load! File.expand_path('../mongoid.yml', __FILE__), ENV['RACK_ENV']
-
-require 'service'
-require 'client'
-SlackRubyBot::Service.start_from_database!
-
+require 'slack_bot_server'
 require 'slack_bot_server_app'
