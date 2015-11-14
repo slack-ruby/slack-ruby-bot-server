@@ -1,9 +1,11 @@
 GIT
   remote: git://github.com/dblock/slack-ruby-bot.git
-  revision: ea0eadbfecafad754c738e3330407861e2128700
+  revision: c82bc7ff35be884111514484dce56cd1009a4d3c
   specs:
     slack-ruby-bot (0.5.0)
       activesupport
+      eventmachine
+      faye-websocket
       giphy (~> 2.0.2)
       hashie
       slack-ruby-client
@@ -11,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/dblock/slack-ruby-client.git
-  revision: fc7a935342f0039f1ba5345cf97729fadac32287
+  revision: e9ed5f107904f61a1b7a1fd306c8146f09b346a2
   specs:
     slack-ruby-client (0.5.0)
       faraday

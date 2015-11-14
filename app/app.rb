@@ -4,7 +4,7 @@ module SlackBotServer
       @filenames = ['', '.html', 'index.html', '/index.html']
 
       @rack_static = ::Rack::Static.new(
-        lambda { [404, {}, []] },
+        -> { [404, {}, []] },
         root: File.expand_path('../../public', __FILE__),
         urls: ['/']
       )
@@ -53,7 +53,7 @@ module SlackBotServer
       rc = Mongoid.default_client.command(ping: 1)
       return if rc && rc.ok?
       fail rc.documents.first['error'] || 'Unexpected error.'
-    rescue Exception => e
+    rescue StandardError => e
       warn "Error connecting to MongoDB: #{e.message}"
       raise e
     end

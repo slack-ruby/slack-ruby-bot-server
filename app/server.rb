@@ -1,5 +1,4 @@
 require 'service'
-require 'client'
 
 Mongoid.load! File.expand_path('../../config/mongoid.yml', __FILE__), ENV['RACK_ENV']
 
@@ -15,7 +14,7 @@ Thread.new do
     EM.run do
       SlackRubyBot::Service.start_from_database!
     end
-  rescue Exception => e
+  rescue StandardError => e
     logger.error e
     raise e
   end

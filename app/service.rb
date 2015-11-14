@@ -13,7 +13,7 @@ module SlackRubyBot
           end
           restart!(server)
         end
-      rescue Exception => e
+      rescue StandardError => e
         logger.error e
       end
 
@@ -25,7 +25,7 @@ module SlackRubyBot
             @services.delete(token)
           end
         end
-      rescue Exception => e
+      rescue StandardError => e
         logger.error e
       end
 
@@ -45,7 +45,7 @@ module SlackRubyBot
       def restart!(server, wait = 1)
         server.auth!
         server.start!
-      rescue Exception => e
+      rescue StandardError => e
         logger.error "#{server.token[0..10]}***: #{e.message}, restarting in #{wait} second(s)."
         sleep(wait)
         EM.next_tick do
