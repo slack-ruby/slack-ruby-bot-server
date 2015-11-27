@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/dblock/slack-ruby-bot.git
-  revision: c82bc7ff35be884111514484dce56cd1009a4d3c
+  revision: 68b537fa08160b4830e81a8c59131e5adebac30b
   specs:
     slack-ruby-bot (0.5.0)
       activesupport
@@ -8,12 +8,12 @@ GIT
       faye-websocket
       giphy (~> 2.0.2)
       hashie
-      slack-ruby-client
+      slack-ruby-client (>= 0.5.0)
       websocket-driver (~> 0.5.4)
 
 GIT
   remote: git://github.com/dblock/slack-ruby-client.git
-  revision: e9ed5f107904f61a1b7a1fd306c8146f09b346a2
+  revision: 9d9bfe0ec75b8c1dac3e5ac7e1a8c5049a73e732
   specs:
     slack-ruby-client (0.5.0)
       faraday
@@ -170,7 +170,7 @@ GEM
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oj (2.13.0)
+    oj (2.13.1)
     origin (2.1.1)
     parser (2.2.3.0)
       ast (>= 1.1, < 3.0)

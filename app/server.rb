@@ -9,6 +9,8 @@ def logger
   end
 end
 
+Thread.abort_on_exception = true
+
 Thread.new do
   begin
     EM.run do

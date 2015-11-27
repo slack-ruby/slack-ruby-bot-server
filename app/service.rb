@@ -44,7 +44,7 @@ module SlackRubyBot
 
       def restart!(server, wait = 1)
         server.auth!
-        server.start!
+        server.start_async
       rescue StandardError => e
         logger.error "#{server.token[0..10]}***: #{e.message}, restarting in #{wait} second(s)."
         sleep(wait)
