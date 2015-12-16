@@ -66,4 +66,21 @@ $(document).ready(function() {
 
   $('#register').click(registerTeam);
   $('#unregister').click(unregisterTeam);
+
+  // Slack OAuth
+
+  var code = $.url('?code')
+  if (code) {
+    $.ajax({
+      type: "POST",
+      url: "/api/oauth",
+      data: {
+        code: code
+      },
+      success: function(data) {
+        success('Team successfully registered, id=' + data.id);
+      },
+      error: error
+    });
+  }
 });

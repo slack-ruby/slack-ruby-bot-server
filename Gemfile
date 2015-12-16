@@ -18,6 +18,7 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rack'
   gem 'rubocop', '0.35.0'
+  gem 'foreman'
 end
 
 group :test do

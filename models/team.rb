@@ -6,4 +6,5 @@ class Team
   index({ token: 1 }, unique: true)
 
   validates_uniqueness_of :token
+  validates_presence_of :token
 end

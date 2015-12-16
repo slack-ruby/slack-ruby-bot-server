@@ -2,10 +2,15 @@
  <head>
   <title>Slack Bot Server</title>
   <script src="/scripts/jquery-1.7.1.min.js"></script>
+  <script src="/scripts/url.min.js"></script>
   <script src="/scripts/register.js"></script>
 </head>
  <body>
-  <h1>Register a Team</h1>
+  <h1>Add to Slack via OAuth</h1>
+  <p>
+    <a href="https://slack.com/oauth/authorize?scope=bot&client_id=4657200833.16807934339"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"></a>
+  </p>
+  <h1>Manually Register a Team</h1>
   <p id='registerForm'>
     Token: <input type='string' id='token' />
     <input type='button' id='register' value='Register' />

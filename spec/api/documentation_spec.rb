@@ -11,6 +11,7 @@ describe Api do
     it 'documents root level apis' do
       expect(subject['apis'].map { |api| api['path'] }).to eq([
         '/teams.{format}',
+        '/oauth.{format}',
         '/swagger_doc.{format}'
       ])
     end

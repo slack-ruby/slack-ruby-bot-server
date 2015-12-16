@@ -23,6 +23,12 @@ module Api
         }
       end
 
+      link :oauth do |opts|
+        {
+          href: "#{base_url(opts)}/api/oauth"
+        }
+      end
+
       private
 
       def base_url(opts)

@@ -13,6 +13,7 @@ module Api
       end
 
       mount Api::Endpoints::TeamsEndpoint
+      mount Api::Endpoints::OAuthEndpoint
 
       add_swagger_documentation
     end

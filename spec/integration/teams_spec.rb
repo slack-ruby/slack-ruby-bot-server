@@ -1,6 +1,17 @@
 require 'spec_helper'
 
 describe 'Teams', js: true, type: :feature do
+  context 'oauth' do
+    it 'registers a team' do
+      expect(SlackRubyBot::Service).to receive(:start!).with('token')
+      oauth_access = { 'bot' => { 'bot_access_token' => 'token' } }
+      allow_any_instance_of(Slack::Web::Client).to receive(:oauth_access).with(hash_including(code: 'code')).and_return(oauth_access)
+      expect do
+        visit '/?code=code'
+        expect(page.find('#messages')).to have_content 'Team successfully registered, id='
+      end.to change(Team, :count).by(1)
+    end
+  end
   context 'homepage' do
     before do
       visit '/'
