@@ -5,19 +5,19 @@ Slack Bot Server
 [![Dependency Status](https://gemnasium.com/dblock/slack-bot-server.svg)](https://gemnasium.com/dblock/slack-bot-server)
 [![Code Climate](https://codeclimate.com/github/dblock/slack-bot-server.svg)](https://codeclimate.com/github/dblock/slack-bot-server)
 
+### Try Me
+
+A demo version of this app is running on Heroku at [slack-bot-server.herokuapp.com](https://slack-bot-server.herokuapp.com). Use the _Add to Slack_ button. The bot will join your team as _@slackbotserver_. Invite it to a channel and say "hi" to it in a direct message or "@slackbotserver hi".
+
 ### What is this?
 
 A [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams. This is a boilerplate sample that combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo). Fork this project and roll out a Slack bot service to multiple teams without needing to create separate application instances. Your customers can use a Slack button to install your bot.
 
 ![](images/slackbutton.gif)
 
-Once a bot is registered, you can interact with it on your #general channel or invite it to another one.
+Once a bot is registered, you can invite to a channel with `/invite @slackbotserver` interact with it.
 
 ![](images/slackbotserver.gif)
-
-### See It
-
-A demo version is running on Heroku. Register your team at [slack-bot-server.herokuapp.com](https://slack-bot-server.herokuapp.com). Use the _Add to Slack_ button. The bot will join your team as _@slackbotserver_ and the #general channel. Say "hi" to it in a direct message or "@slackbotserver hi" the bot in #general.
 
 ### Run Your Own
 
