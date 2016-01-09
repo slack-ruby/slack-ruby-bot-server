@@ -8,7 +8,7 @@ gem 'grape-swagger'
 gem 'grape-roar'
 gem 'mongoid'
 gem 'mongoid-scroll'
-gem 'slack-ruby-bot', '~> 0.5.0'
+gem 'slack-ruby-bot', '~> 0.6.0'
 gem 'faye-websocket'
 gem 'puma'
 
