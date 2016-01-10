@@ -5,12 +5,11 @@ module Api
       include Rack::Test::Methods
 
       included do
-        def client(token = nil)
+        let(:client) do
           Hyperclient.new('http://example.org/api') do |client|
             client.headers = {
               'Content-Type' => 'application/json',
-              'Accept' => 'application/json,application/hal+json',
-              'Token' => token
+              'Accept' => 'application/json,application/hal+json'
             }
             client.connection(default: false) do |conn|
               conn.request :json
@@ -24,7 +23,7 @@ module Api
       end
 
       def app
-        SlackBotServer::App.instance
+        Api::Middleware.instance
       end
     end
   end

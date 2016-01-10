@@ -1,3 +1,5 @@
 Fabricator(:team) do
-  token { Faker::Lorem.characters(24) }
+  token { Fabricate.sequence(:team_token) { |i| "abc-#{i}" } }
+  team_id { Fabricate.sequence(:team_id) { |i| "T#{i}" } }
+  name { Faker::Lorem.word }
 end

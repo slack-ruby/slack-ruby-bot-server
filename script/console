@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Usage: script/console
+# Starts an IRB console with slack-bot-server loaded.
+
+exec bundle exec irb -I . -r "slack-bot-server"

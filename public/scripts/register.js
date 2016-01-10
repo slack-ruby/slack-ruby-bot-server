@@ -1,86 +1,50 @@
+var SlackBotServer = {};
+
 $(document).ready(function() {
 
-  var error = function(err) {
-    $('#registerForm').prop('disabled', false);
-    $('#messages').text(err.responseText || err);
-  };
-
-  var success = function(text) {
-    $('#registerForm').prop('disabled', false);
-    $('#messages').text(text);
-  };
-
-  var registerTeam = function() {
-    $.ajax({
-      type: "POST",
-      url: "/api/teams",
-      data: {
-        team: {
-          token: $('#token').val()
-        }
-      },
-      success: function(data) {
-        success('Team successfully registered, id=' + data.id);
-      },
-      error: error
+  SlackBotServer.message = function(text) {
+    $('#messages').fadeOut('slow', function() {
+      $('#messages').fadeIn('slow').html(text)
     });
   };
 
-  var findTeam = function(cb) {
-    $.ajax({
-      type: "GET",
-      url: "/api/teams",
-      beforeSend: function(request) {
-        request.setRequestHeader("Token", $('#token').val());
-      },
-      success: function(teams) {
-        if (teams._embedded.teams.length == 0) {
-          error("Invalid token or team not registered.");
-        } else {
-          cb(teams._embedded.teams[0]);
+  SlackBotServer.error = function(xhr) {
+    try {
+      var message;
+      if (xhr.responseText) {
+        var rc = JSON.parse(xhr.responseText);
+        if (rc && rc.message) {
+          message = rc.message;
+          if (message == 'invalid_code') {
+            message = 'The code returned from the OAuth workflow was invalid.'
+          } else if (message == 'code_already_used') {
+            message = 'The code returned from the OAuth workflow has already been used.'
+          }
         }
-      },
-      error: error
-    });
-  }
-
-  var unregisterTeam = function() {
-    findTeam(
-      function(team) {
-        $.ajax({
-          type: "DELETE",
-          url: "/api/teams/" + team.id,
-          beforeSend: function(request) {
-            $('#registerForm').prop('disabled', true);
-            $('#messages').text('Unregistering team ...');
-            request.setRequestHeader("Token", $('#token').val());
-          },
-          success: function(data) {
-            success('Team successfully unregistered.');
-          },
-          error: error
-        });
       }
-    );
-  };
 
-  $('#register').click(registerTeam);
-  $('#unregister').click(unregisterTeam);
+      SlackBotServer.message(message || xhr.statusText || xhr.responseText || 'Unexpected Error');
+
+    } catch(err) {
+      SlackBotServer.message(err.message);
+    }
+  };
 
   // Slack OAuth
-
   var code = $.url('?code')
   if (code) {
+    SlackBotServer.message('Working, please wait ...');
+    $('#register').hide();
     $.ajax({
       type: "POST",
-      url: "/api/oauth",
+      url: "/api/teams",
       data: {
         code: code
       },
       success: function(data) {
-        success('Team successfully registered, id=' + data.id);
+        SlackBotServer.message('Team successfully registered!<br><br>DM <b>@bot</b> or create a <b>#channel</b> and invite <b>@bot</b> to it.');
       },
-      error: error
+      error: SlackBotServer.error
     });
   }
 });

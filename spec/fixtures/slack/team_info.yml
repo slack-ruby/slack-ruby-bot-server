@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/team.info
+    body:
+      encoding: UTF-8
+      string: token=token
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.5.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Content-Security-Policy:
+      - referrer no-referrer;
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 17 Dec 2015 21:34:12 GMT
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Accepted-Oauth-Scopes:
+      - team:read,read
+      X-Content-Type-Options:
+      - nosniff
+      X-Oauth-Scopes:
+      - identify,read,post,client
+      X-Xss-Protection:
+      - '0'
+      Content-Length:
+      - '249'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"team":{"id":"T04KB5WQH","name":"dblock","domain":"dblockdotorg","email_domain":"dblock.org","icon":{"image_34":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-04-28\/4657218807_d480d2ee610d2e8aacfe_34.jpg","image_44":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-04-28\/4657218807_d480d2ee610d2e8aacfe_44.jpg","image_68":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-04-28\/4657218807_d480d2ee610d2e8aacfe_68.jpg","image_88":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-04-28\/4657218807_d480d2ee610d2e8aacfe_88.jpg","image_102":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-04-28\/4657218807_d480d2ee610d2e8aacfe_102.jpg","image_132":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-04-28\/4657218807_d480d2ee610d2e8aacfe_132.jpg","image_original":"https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-04-28\/4657218807_d480d2ee610d2e8aacfe_original.jpg"}}}'
+    http_version:
+  recorded_at: Thu, 17 Dec 2015 21:34:12 GMT
+recorded_with: VCR 3.0.0

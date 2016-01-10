@@ -1,6 +1,19 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    actionpack (4.2.5)
+      actionview (= 4.2.5)
+      activesupport (= 4.2.5)
+      rack (~> 1.6)
+      rack-test (~> 0.6.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionview (4.2.5)
+      activesupport (= 4.2.5)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
     activemodel (4.2.5)
       activesupport (= 4.2.5)
       builder (~> 3.1)
@@ -11,14 +24,14 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    ast (2.1.0)
+    ast (2.2.0)
     astrolabe (1.3.1)
       parser (~> 2.2)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    bson (3.2.6)
+    bson (4.0.0)
     builder (3.2.2)
     capybara (2.5.0)
       mime-types (>= 1.16)
@@ -26,17 +39,20 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    childprocess (0.5.8)
+    childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
-    coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     database_cleaner (1.5.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
     equalizer (0.0.11)
+    erubis (2.7.0)
     eventmachine (1.0.8)
+    excon (0.45.4)
     fabrication (2.14.1)
     faker (1.6.1)
       i18n (~> 0.5)
@@ -59,7 +75,6 @@ GEM
     ffi (1.9.10)
     foreman (0.78.0)
       thor (~> 0.19.1)
-    formatador (0.2.5)
     futuroscope (0.1.11)
     giphy (2.0.2)
       faraday (~> 0.9)
@@ -67,7 +82,7 @@ GEM
       faraday_middleware-parse_oj (~> 0.3)
       launchy (~> 2.4)
     gli (2.13.4)
-    grape (0.13.0)
+    grape (0.14.0)
       activesupport
       builder
       hashie (>= 2.1.0)
@@ -83,28 +98,23 @@ GEM
     grape-roar (0.3.0)
       grape
       roar (>= 1.0)
-    grape-swagger (0.10.2)
+    grape-swagger (0.10.4)
       grape (>= 0.8.0)
-      grape-entity
-    guard (2.13.0)
-      formatador (>= 0.2.4)
-      listen (>= 2.7, <= 4.0)
-      lumberjack (~> 1.0)
-      nenv (~> 0.1)
-      notiffany (~> 0.0)
-      pry (>= 0.9.12)
-      shellany (~> 0.0)
-      thor (>= 0.18.1)
-    guard-bundler (2.1.0)
-      bundler (~> 1.0)
-      guard (~> 2.2)
-      guard-compat (~> 1.1)
-    guard-compat (1.2.1)
-    guard-rack (2.1.1)
-      ffi
-      guard (~> 2.3)
-      spoon
+      grape-entity (< 0.5.0)
+    hashdiff (0.2.3)
     hashie (3.4.3)
+    heroku (3.42.27)
+      heroku-api (= 0.3.23)
+      launchy (= 2.4.3)
+      multi_json (= 1.11.2)
+      net-ssh (= 2.9.2)
+      net-ssh-gateway (= 1.2.0)
+      netrc (= 0.10.3)
+      rest-client (= 1.6.8)
+      rubyzip (= 1.1.7)
+    heroku-api (0.3.23)
+      excon (~> 0.44)
+      multi_json (~> 1.8)
     hyperclient (0.7.2)
       faraday
       faraday-digestauth
@@ -116,21 +126,19 @@ GEM
     i18n (0.7.0)
     ice_nine (0.11.1)
     json (1.8.3)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    listen (3.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-    lumberjack (1.0.9)
-    method_source (0.8.2)
-    mime-types (3.0)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2015.1120)
+    loofah (2.0.3)
+      nokogiri (>= 1.5.9)
+    mime-types (1.25.1)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
-    mongo (2.1.2)
-      bson (~> 3.0)
-    mongoid (5.0.1)
+    mongo (2.2.1)
+      bson (~> 4.0)
+    mongoid (5.0.2)
       activemodel (~> 4.0)
       mongo (~> 2.1)
       origin (~> 2.1)
@@ -142,25 +150,29 @@ GEM
       i18n
       mongoid (>= 3.0)
       mongoid-compatibility
+    mongoid-shell (0.4.1)
+      i18n
+      mongoid (>= 3.0.0)
+      mongoid-compatibility
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    nenv (0.2.0)
     net-http-digest_auth (1.4)
-    nokogiri (1.6.7)
+    net-ssh (2.9.2)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
+    netrc (0.10.3)
+    newrelic-slack-ruby-bot (0.1.0)
+      newrelic_rpm
+      slack-ruby-bot
+    newrelic_rpm (3.14.1.311)
+    nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
-    notiffany (0.0.8)
-      nenv (~> 0.1)
-      shellany (~> 0.0)
     oj (2.14.3)
     origin (2.1.1)
     parser (2.2.3.0)
       ast (>= 1.1, < 3.0)
     powerpack (0.1.1)
-    pry (0.10.3)
-      coderay (~> 1.1.0)
-      method_source (~> 0.8.1)
-      slop (~> 3.4)
     puma (2.15.3)
     rack (1.6.4)
     rack-accept (0.4.5)
@@ -168,15 +180,30 @@ GEM
     rack-cors (0.4.0)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
+    rack-rewrite (1.5.1)
+    rack-robotz (0.0.4)
+      rack
+    rack-server-pages (0.0.6)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails-deprecated_sanitizer (1.0.3)
+      activesupport (>= 4.2.0.alpha)
+    rails-dom-testing (1.0.7)
+      activesupport (>= 4.2.0.beta, < 5.0)
+      nokogiri (~> 1.6.0)
+      rails-deprecated_sanitizer (>= 1.0.1)
+    rails-html-sanitizer (1.0.2)
+      loofah (~> 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
-    rb-fsevent (0.9.6)
-    rb-inotify (0.9.5)
-      ffi (>= 0.5.0)
+    rdoc (4.2.1)
+      json (~> 1.4)
     representable (2.3.0)
       uber (~> 0.0.7)
+    rest-client (1.6.8)
+      mime-types (~> 1.16)
+      rdoc (>= 2.4.2)
     roar (1.0.4)
       representable (>= 2.0.1, < 2.4.0)
     rspec (3.4.0)
@@ -192,20 +219,21 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
-    rubocop (0.35.0)
+    rubocop (0.35.1)
       astrolabe (~> 1.3)
       parser (>= 2.2.3.0, < 3.0)
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.7)
+      tins (<= 1.6.0)
     ruby-progressbar (1.7.5)
     rubyzip (1.1.7)
+    safe_yaml (1.0.4)
     selenium-webdriver (2.48.1)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    shellany (0.0.1)
     slack-ruby-bot (0.6.0)
       activesupport
       faye-websocket
@@ -218,20 +246,23 @@ GEM
       gli
       json
       websocket-driver
-    slop (3.6.0)
-    spoon (0.0.4)
-      ffi
     thor (0.19.1)
     thread_safe (0.3.5)
+    tins (1.6.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.15)
     uri_template (0.7.0)
+    vcr (3.0.1)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    webmock (1.22.6)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket (1.2.2)
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
@@ -247,27 +278,31 @@ DEPENDENCIES
   database_cleaner
   fabrication
   faker
-  faye-websocket
   foreman
-  grape
+  grape (~> 0.14.0)
   grape-roar
   grape-swagger
-  guard
-  guard-bundler
-  guard-rack
+  heroku
   hyperclient
-  json
-  mongoid
+  kaminari (~> 0.16.1)
+  mongoid (~> 5.0.0)
   mongoid-scroll
+  mongoid-shell
+  newrelic-slack-ruby-bot
+  newrelic_rpm
   puma
-  rack
   rack-cors
+  rack-rewrite
+  rack-robotz
+  rack-server-pages
   rack-test
-  rake
+  rake (~> 10.4)
   rspec
-  rubocop (= 0.35.0)
+  rubocop (= 0.35.1)
   selenium-webdriver
   slack-ruby-bot (~> 0.6.0)
+  vcr
+  webmock
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

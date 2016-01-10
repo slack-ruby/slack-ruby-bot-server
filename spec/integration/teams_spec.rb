@@ -1,14 +1,23 @@
 require 'spec_helper'
 
 describe 'Teams', js: true, type: :feature do
-  context 'oauth' do
+  before do
+    ENV['SLACK_CLIENT_ID'] = 'client_id'
+    ENV['SLACK_CLIENT_SECRET'] = 'client_secret'
+  end
+  after do
+    ENV.delete 'SLACK_CLIENT_ID'
+    ENV.delete 'SLACK_CLIENT_SECRET'
+  end
+  context 'oauth', vcr: { cassette_name: 'auth_test' } do
     it 'registers a team' do
-      expect(SlackRubyBot::Service).to receive(:start!).with('token')
-      oauth_access = { 'bot' => { 'bot_access_token' => 'token' } }
+      allow_any_instance_of(Team).to receive(:ping!).and_return(ok: true)
+      expect(SlackBotServer::Service).to receive(:start!)
+      oauth_access = { 'bot' => { 'bot_access_token' => 'token' }, 'team_id' => 'team_id', 'team_name' => 'team_name' }
       allow_any_instance_of(Slack::Web::Client).to receive(:oauth_access).with(hash_including(code: 'code')).and_return(oauth_access)
       expect do
         visit '/?code=code'
-        expect(page.find('#messages')).to have_content 'Team successfully registered, id='
+        expect(page.find('#messages')).to have_content 'Team successfully registered!'
       end.to change(Team, :count).by(1)
     end
   end
@@ -19,47 +28,8 @@ describe 'Teams', js: true, type: :feature do
     it 'displays index.html page' do
       expect(title).to eq('Slack Bot Server')
     end
-    context 'register' do
-      it 'registers a team' do
-        expect(SlackRubyBot::Service).to receive(:start!).with('token')
-        expect do
-          page.fill_in 'token', with: 'token'
-          page.click_button 'register'
-          expect(page.find('#messages')).to have_content 'Team successfully registered, id='
-        end.to change(Team, :count).by(1)
-      end
-      it 'does not register with a duplicate token' do
-        team = Fabricate(:team)
-        expect do
-          page.fill_in 'token', with: team.token
-          page.click_button 'register'
-          expect(page.find('#messages')).to have_content 'Token is already taken.'
-        end.to_not change(Team, :count)
-      end
-    end
-    context 'unregister' do
-      it 'unregisters a team' do
-        team = Fabricate(:team)
-        expect(SlackRubyBot::Service).to receive(:stop!).with(team.token)
-        expect do
-          page.fill_in 'token', with: team.token
-          page.click_button 'unregister'
-          expect(page.find('#messages')).to have_content 'Team successfully unregistered.'
-        end.to change(Team, :count).by(-1)
-      end
-      it 'invalid token' do
-        page.fill_in 'token', with: 'token'
-        page.click_button 'unregister'
-        expect(page.find('#messages')).to have_content 'Invalid token or team not registered.'
-      end
-    end
-  end
-  context "page that doesn't exist" do
-    before :each do
-      visit '/invalid'
-    end
-    it 'displays 404 page' do
-      expect(title).to eq('Page Not Found')
+    it 'includes a link to add to slack with the client id' do
+      expect(find("a[href='https://slack.com/oauth/authorize?scope=bot&client_id=#{ENV['SLACK_CLIENT_ID']}']"))
     end
   end
 end
