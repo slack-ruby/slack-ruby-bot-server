@@ -1,5 +1,5 @@
 rvm:
-  - 2.2
+  - 2.2.4
 language: ruby
 cache: bundler
 services:

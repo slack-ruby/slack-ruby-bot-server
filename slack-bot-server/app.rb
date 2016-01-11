@@ -7,6 +7,7 @@ module SlackBotServer
       create_indexes!
       mark_teams_active!
       migrate_from_single_team!
+      update_team_name_and_id!
       purge_inactive_teams!
       configure_global_aliases!
     end
@@ -49,6 +50,18 @@ module SlackBotServer
 
     def mark_teams_active!
       Team.where(active: nil).update_all(active: true)
+    end
+
+    def update_team_name_and_id!
+      Team.active.where(team_id: nil).each do |team|
+        begin
+          auth = team.ping![:auth]
+          team.update_attributes!(team_id: auth['team_id'], name: auth['team'])
+        rescue StandardError => e
+          logger.warn "Error pinging team #{team.id}: #{e.message}."
+          team.set(active: false)
+        end
+      end
     end
 
     def migrate_from_single_team!
