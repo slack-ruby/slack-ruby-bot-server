@@ -35,7 +35,9 @@ Install [MongoDB](https://www.mongodb.org/downloads), required to store teams.
 
 Follow the instructions, note the app's client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app, for testing purposes use `http://localhost:9292`. If you deploy to Heroku set _SLACK_CLIENT_ID_ and _SLACK_CLIENT_SECRET_.
 
-Run `bundle install` and `foreman start`. Navigate to [localhost:9292](http://localhost:9292). Register using the Slack button.
+The Slack Client ID is currently contained as a string in /public/index.html, and you need to change that to your application's ID before you'll be able to register to your app. 
+
+Run `bundle install` and `foreman start`. Navigate to [localhost:9292](http://localhost:9292). Register using the Slack button.  If you end up registering against the demo application, you haven't made the change to /public/index.html.
 
 ### Examples Using Slack Bot Server
 
