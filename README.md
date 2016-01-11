@@ -5,7 +5,7 @@ Slack Bot Server
 [![Dependency Status](https://gemnasium.com/dblock/slack-bot-server.svg)](https://gemnasium.com/dblock/slack-bot-server)
 [![Code Climate](https://codeclimate.com/github/dblock/slack-bot-server.svg)](https://codeclimate.com/github/dblock/slack-bot-server)
 
-An opinionated boilerplate and demo for a complete Slack bot service with Slack button integration, in Ruby.
+An opinionated boilerplate and demo for a complete Slack bot service with Slack button integration, in Ruby. A good demo of a service built on top of this is [playplay.io](http://playplay.io).
 
 ### Try Me
 
@@ -35,7 +35,7 @@ Install [MongoDB](https://www.mongodb.org/downloads), required to store teams.
 
 Follow the instructions, note the app's client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app, for testing purposes use `http://localhost:9292`. For a local deployment create a `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it. Run `bundle install` and `foreman start`. Navigate to [localhost:9292](http://localhost:9292). Register using the Slack button.
 
-If you deploy to Heroku set _SLACK_CLIENT_ID_ and _SLACK_CLIENT_SECRET_ via `heroku config:add SLACK_CLIENT_ID=... SLACK_CLIENT_SECRET=...`.
+If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `heroku config:add SLACK_CLIENT_ID=... SLACK_CLIENT_SECRET=...`.
 
 ### Examples Using Slack Bot Server
 
