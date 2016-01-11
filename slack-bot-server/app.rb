@@ -5,6 +5,7 @@ module SlackBotServer
       check_mongodb_provider!
       check_database!
       create_indexes!
+      mark_teams_active!
       migrate_from_single_team!
       purge_inactive_teams!
       configure_global_aliases!
@@ -44,6 +45,10 @@ module SlackBotServer
 
     def create_indexes!
       ::Mongoid::Tasks::Database.create_indexes
+    end
+
+    def mark_teams_active!
+      Team.where(active: nil).update_all(active: true)
     end
 
     def migrate_from_single_team!
