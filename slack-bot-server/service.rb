@@ -12,7 +12,9 @@ module SlackBotServer
           LOCK.synchronize do
             @services[team.token] = server
           end
-          restart!(team, server)
+          EM.defer do
+            restart!(team, server)
+          end
         end
       rescue StandardError => e
         logger.error e
