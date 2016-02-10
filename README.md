@@ -40,8 +40,9 @@ If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `her
 ### Examples Using Slack Bot Server
 
 * [slack-gamebot](https://github.com/dblock/slack-gamebot), free service at [playplay.io](http://playplay.io)
-* [slack-shellbot](https://github.com/dblock/slack-shellbot), free service at [shlack.dblock.org](http://shlack.dblock.org)
-* [slack-metabot](https://github.com/dblock/slack-metabot), free service at [slack-metabot.dblock.org](http://slack-metabot.dblock.org)
+* [slack-shellbot](https://github.com/dblock/slack-shellbot), free service at [shell.playplay.io](http://shell.playplay.io)
+* [api-explorer](https://github.com/dblock/slack-api-explorer), free service at [api-explorer.playplay.io](http://api-explorer.playplay.io)
+* [slack-market](https://github.com/dblock/slack-market), free service at [market.playplay.io](http://market.playplay.io)
 
 ### Copyright & License
 
