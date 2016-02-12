@@ -21,7 +21,7 @@ test:
 production:
   clients:
     default:
-      uri: <%= ENV['MONGOHQ_URI'] || ENV['MONGOLAB_URI'] %>
+      uri: <%= ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGOLAB_URI'] %>
   options:
     raise_not_found_error: false
     use_utc: true
