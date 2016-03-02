@@ -91,6 +91,18 @@ describe Api::Endpoints::TeamsEndpoint do
           expect(json['message']).to eq "Team #{existing_team.name} is already registered."
         end
       end
+      it 'reactivates a deactivated team with a different code' do
+        existing_team = Fabricate(:team, token: 'old', team_id: 'team_id', active: false)
+        expect do
+          team = client.teams._post(code: 'code')
+          expect(team.team_id).to eq existing_team.team_id
+          expect(team.name).to eq existing_team.name
+          expect(team.active).to be true
+          team = Team.find(team.id)
+          expect(team.token).to eq 'token'
+          expect(team.active).to be true
+        end.to_not change(Team, :count)
+      end
     end
   end
 end

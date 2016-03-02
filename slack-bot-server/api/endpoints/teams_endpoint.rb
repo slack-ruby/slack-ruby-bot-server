@@ -44,14 +44,16 @@ module Api
             code: params[:code]
           )
 
-          team = Team.where(token: rc['bot']['bot_access_token']).first
+          token = rc['bot']['bot_access_token']
+          team = Team.where(token: token).first
+          team ||= Team.where(team_id: rc['team_id']).first
           if team && !team.active?
-            team.activate!
+            team.activate!(token)
           elsif team
             fail "Team #{team.name} is already registered."
           else
             team = Team.create!(
-              token: rc['bot']['bot_access_token'],
+              token: token,
               team_id: rc['team_id'],
               name: rc['team_name']
             )

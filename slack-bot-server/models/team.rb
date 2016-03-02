@@ -20,8 +20,8 @@ class Team
     update_attributes!(active: false)
   end
 
-  def activate!
-    update_attributes!(active: true)
+  def activate!(token)
+    update_attributes!(active: true, token: token)
   end
 
   def to_s
