@@ -34,7 +34,6 @@ module SlackBotServer
       end
 
       def start_from_database!
-        until EM.reactor_running?; end
         Team.active.each do |team|
           start!(team)
         end
