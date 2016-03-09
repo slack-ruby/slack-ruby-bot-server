@@ -2,8 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.2.4'
 
-gem 'slack-ruby-client', github: 'dblock/slack-ruby-client'
-gem 'slack-ruby-bot', github: 'dblock/slack-ruby-bot'
+gem 'slack-ruby-bot', '~> 0.7.0'
 gem 'mongoid', '~> 5.0.0'
 gem 'unicorn'
 gem 'grape', '~> 0.14.0'
