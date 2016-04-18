@@ -77,7 +77,6 @@ GEM
     foreman (0.78.0)
       thor (~> 0.19.1)
     futuroscope (0.1.11)
-    gctools (0.2.4)
     giphy (2.0.2)
       faraday (~> 0.9)
       faraday_middleware (~> 0.9)
@@ -286,7 +285,6 @@ DEPENDENCIES
   fabrication
   faker
   foreman
-  gctools
   grape (~> 0.15.0)
   grape-roar
   grape-swagger (~> 0.10.0)
