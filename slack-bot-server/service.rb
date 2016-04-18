@@ -67,8 +67,8 @@ module SlackBotServer
       end
 
       def reset!
-        @services.values.to_a.each do |team|
-          stop!(team)
+        @services.values.to_a.each do |server|
+          stop!(server.team)
         end
       end
     end
