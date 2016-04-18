@@ -1,5 +1,6 @@
 ### Changelog
 
+* 2016/4/18: Fixed `SlackBotServer#reset` - [@dblock](https://github.com/dblock).
 * 2016/4/18: Use Grape 0.15.x - [@dblock](https://github.com/dblock).
 * 2016/4/18: Removed OOB GC - [@dblock](https://github.com/dblock).
 * 2016/2/11: Use Unicorn instead of Puma - [@dblock](https://github.com/dblock).
