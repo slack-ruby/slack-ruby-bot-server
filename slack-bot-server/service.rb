@@ -35,6 +35,7 @@ module SlackBotServer
 
       def start_from_database!
         Team.active.each do |team|
+          sleep 0.25
           start!(team)
         end
       end
