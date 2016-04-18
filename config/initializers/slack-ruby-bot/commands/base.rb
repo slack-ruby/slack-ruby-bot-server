@@ -7,7 +7,7 @@ module SlackRubyBot
         def invoke(client, data)
           _invoke client, data
         rescue Mongoid::Errors::Validations => e
-          logger.info "#{name.demodulize.upcase}: #{client.owner}, error - #{e.document.errors.first[1]}"
+          logger.info "#{name.demodulize.upcase}: #{client.owner}, error - #{e.document.class}, #{e.document.errors.to_hash}"
           client.say(channel: data.channel, text: e.document.errors.first[1], gif: 'error')
           true
         rescue StandardError => e
