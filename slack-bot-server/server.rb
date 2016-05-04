@@ -15,7 +15,7 @@ module SlackBotServer
       # it would keep retrying without checking for account_inactive or such, we want to restart via service which will disable an inactive team
       EM.defer do
         logger.info "#{team.name}: socket closed, restarting ..."
-        SlackBotServer::Service.restart! team, self, wait
+        SlackBotServer::Service.instance.restart! team, self, wait
         client.owner = team
       end
     end
