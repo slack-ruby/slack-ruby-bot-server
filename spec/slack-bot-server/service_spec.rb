@@ -6,8 +6,6 @@ describe SlackBotServer::Service do
   let(:services) { SlackBotServer::Service.instance.instance_variable_get(:@services) }
   before do
     allow(SlackBotServer::Server).to receive(:new).with(team: team).and_return(server)
-    allow(EM).to receive(:next_tick).and_yield
-    allow(EM).to receive(:defer).and_yield
     allow(server).to receive(:stop!)
   end
   after do
