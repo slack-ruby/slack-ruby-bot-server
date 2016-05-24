@@ -5,7 +5,7 @@ Slack Bot Server
 [![Dependency Status](https://gemnasium.com/dblock/slack-bot-server.svg)](https://gemnasium.com/dblock/slack-bot-server)
 [![Code Climate](https://codeclimate.com/github/dblock/slack-bot-server.svg)](https://codeclimate.com/github/dblock/slack-bot-server)
 
-An opinionated boilerplate and demo for a complete Slack bot service with Slack button integration, in Ruby. A good demo of a service built on top of this is [playplay.io](http://playplay.io).
+An opinionated boilerplate and demo for a complete Slack bot service with Slack button integration, in Ruby. If you are not familiar with Slack bots or Slack API concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html). A good demo of a service built on top of this is [playplay.io](http://playplay.io).
 
 ### Try Me
 
