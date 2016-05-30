@@ -1,7 +1,4 @@
-require 'rubygems'
-require 'bundler'
-
-Bundler.setup :default, :development
+require_relative 'config/environment'
 
 unless ENV['RACK_ENV'] == 'production'
   require 'rspec/core'

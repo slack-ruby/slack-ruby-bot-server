@@ -1,3 +1,5 @@
+%w(rack/cors rack/robotz rack-rewrite rack-server-pages).each { |l| require l }
+
 module Api
   class Middleware
     def self.logger

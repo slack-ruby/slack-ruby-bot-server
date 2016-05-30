@@ -4,3 +4,6 @@
 .bundle
 log
 .env
+*.swp
+Gemfile.lock
+.ruby-version

@@ -1,6 +1,4 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
-require 'slack-bot-server'
+require_relative 'config/environment'
 
 if ENV['RACK_ENV'] == 'development'
   puts 'Loading NewRelic in developer mode ...'
