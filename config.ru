@@ -16,4 +16,4 @@ Thread.new do
   SlackBotServer::Service.instance.start_from_database!
 end
 
-run Api::Middleware.instance
+run SlackBotServer::Api::Middleware.instance
