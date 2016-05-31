@@ -1,4 +1,4 @@
-%w(rack/cors rack/robotz rack-rewrite rack-server-pages).each { |l| require l }
+%w(rack/cors rack-rewrite rack-server-pages).each { |l| require l }
 
 module SlackBotServer
   module Api
@@ -24,9 +24,13 @@ module SlackBotServer
             r302 %r{(\/[\w\/]*\/)(%7B|\{)?(.*)(%7D|\})}, '$1'
           end
 
-          use Rack::Robotz, 'User-Agent' => '*', 'Disallow' => '/'
-
-          use Rack::ServerPages
+          use Rack::ServerPages do |config|
+            config.view_path = [
+              'views', # relative to Dir.pwd
+              'public', # relative to Dir.pwd
+              File.expand_path(File.join(__dir__, '../../../public')) # built-in fallback
+            ]
+          end
 
           run Middleware.new
         end.to_app

@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-cors'
   spec.add_dependency 'kaminari', '~> 0.16.1'
   spec.add_dependency 'mongoid-scroll'
-  spec.add_dependency 'rack-robotz'
   spec.add_dependency 'rack-rewrite'
   spec.add_dependency 'rack-server-pages'
   spec.add_dependency 'foreman'
