@@ -2,6 +2,13 @@ module SlackBotServer
   class Service
     include SlackRubyBot::Loggable
 
+    def self.start!
+      Thread.new do
+        Thread.current.abort_on_exception = true
+        instance.start_from_database!
+      end
+    end
+
     def self.instance
       @instance ||= new
     end

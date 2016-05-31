@@ -9,11 +9,6 @@ end
 NewRelic::Agent.manual_start
 
 SlackBotServer::App.instance.prepare!
-
-Thread.abort_on_exception = true
-
-Thread.new do
-  SlackBotServer::Service.instance.start_from_database!
-end
+SlackBotServer::Service.start!
 
 run SlackBotServer::Api::Middleware.instance
