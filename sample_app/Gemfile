@@ -1,0 +1,4 @@
+source 'https://rubygems.org'
+
+gem 'slack_bot_server', github: 'dblock/slack-bot-server', branch: :master, require: false
+gem 'newrelic-slack-ruby-bot'
