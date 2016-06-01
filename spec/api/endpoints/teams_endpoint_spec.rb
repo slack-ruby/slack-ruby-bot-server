@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Api::Endpoints::TeamsEndpoint do
-  include Api::Test::EndpointTest
+describe SlackBotServer::Api::Endpoints::TeamsEndpoint do
+  include SlackBotServer::Api::Test::EndpointTest
 
   it_behaves_like 'a cursor api', Team
 

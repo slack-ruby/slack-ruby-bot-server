@@ -19,13 +19,12 @@ Once a bot is registered, you can invite to a channel with `/invite @slackbotser
 
 ### What is this?
 
-A [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams. This is a boilerplate that combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo).
-
-### How do I use this?
-
-Fork this project and roll out a Slack bot service to multiple teams without needing to create separate application instances. This boilerplate is a means to get you started, but you should also be able to take updates from upstream if you want. Your customers can use a Slack button to install your bot. You can start adding slack command handlers on top of this code.
+A [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams. This gem combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo).
+Your customers can use a Slack button to install the bot.
 
 ### Run Your Own
+
+You can use the [sample application](sample_app) to bootstrap your project and start adding slack command handlers on top of this code.
 
 Install [MongoDB](https://www.mongodb.org/downloads), required to store teams.
 
@@ -33,7 +32,7 @@ Install [MongoDB](https://www.mongodb.org/downloads), required to store teams.
 
 ![](images/new.png)
 
-Follow the instructions, note the app's client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app, for testing purposes use `http://localhost:9292`. For a local deployment create a `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it. Run `bundle install` and `foreman start`. Navigate to [localhost:9292](http://localhost:9292). Register using the Slack button.
+Follow the instructions, note the app's client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app, for testing purposes use `http://localhost:9292`. Edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it. Run `bundle install` and `foreman start`. Navigate to [localhost:9292](http://localhost:9292). Register using the Slack button.
 
 If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `heroku config:add SLACK_CLIENT_ID=... SLACK_CLIENT_SECRET=...`.
 

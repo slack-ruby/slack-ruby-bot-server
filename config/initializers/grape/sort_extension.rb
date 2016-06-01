@@ -1,12 +1,8 @@
 module Grape
-  module Extensions
-    module SortExtension
-      def sort(value)
-        route_setting :sort, sort: value
-        value
-      end
-
-      Grape::API.extend self
+  class API
+    def self.sort(value)
+      route_setting :sort, sort: value
+      value
     end
   end
 end

@@ -1,5 +1,6 @@
 ### Changelog
 
+* 2016/5/30: [#11](https://github.com/dblock/slack-bot-server/pull/11) Turn project into gem - [@tmsrjs](https://github.com/tmsrjs).
 * 2016/5/5: Use `celluloid-io` instead of `faye-websocket`, upgrade to slack-ruby-bot 0.8.0 - [@dblock](https://github.com/dblock).
 * 2016/4/18: Fixed `SlackBotServer#reset` - [@dblock](https://github.com/dblock).
 * 2016/4/18: Use Grape 0.15.x - [@dblock](https://github.com/dblock).
