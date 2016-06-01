@@ -1,4 +1,4 @@
-module SlackBotServer
+module SlackRubyBotServer
   module Api
     module Presenters
       module PaginatedPresenter

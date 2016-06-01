@@ -1,6 +1,6 @@
 %w(rack/cors rack-rewrite rack-server-pages).each { |l| require l }
 
-module SlackBotServer
+module SlackRubyBotServer
   module Api
     class Middleware
       def self.logger

@@ -13,7 +13,7 @@ common: &default_settings
   # dashboard page. If you want to map this instance into multiple
   # apps, like "AJAX Requests" and "All UI" then specify a semicolon
   # separated list of up to three distinct names, or a yaml list.
-  app_name: <%= ENV["NEW_RELIC_APP_NAME"] || 'SlackBotServer' %>
+  app_name: <%= ENV["NEW_RELIC_APP_NAME"] || 'SlackRubyBotServer' %>
 
   # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at

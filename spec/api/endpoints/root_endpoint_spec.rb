@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SlackBotServer::Api::Endpoints::RootEndpoint do
-  include SlackBotServer::Api::Test::EndpointTest
+describe SlackRubyBotServer::Api::Endpoints::RootEndpoint do
+  include SlackRubyBotServer::Api::Test::EndpointTest
 
   it 'hypermedia root' do
     get '/api'

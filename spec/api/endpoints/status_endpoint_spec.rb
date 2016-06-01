@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SlackBotServer::Api::Endpoints::StatusEndpoint do
-  include SlackBotServer::Api::Test::EndpointTest
+describe SlackRubyBotServer::Api::Endpoints::StatusEndpoint do
+  include SlackRubyBotServer::Api::Test::EndpointTest
 
   before do
     allow_any_instance_of(Team).to receive(:ping!).and_return(ok: 1)

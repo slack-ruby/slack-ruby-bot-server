@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SlackBotServer::Api do
-  include SlackBotServer::Api::Test::EndpointTest
+describe SlackRubyBotServer::Api do
+  include SlackRubyBotServer::Api::Test::EndpointTest
 
   context '404' do
     it 'returns a plain 404' do

@@ -1,19 +1,19 @@
-# Contributing to SlackBotServer
+# Contributing to SlackRubyBotServer
 
-This project is work of [many contributors](https://github.com/dblock/slack-bot-server/graphs/contributors).
+This project is work of [many contributors](https://github.com/dblock/slack-ruby-bot-server/graphs/contributors).
 
-You're encouraged to submit [pull requests](https://github.com/dblock/slack-bot-server/pulls), [propose features and discuss issues](https://github.com/dblock/slack-bot-server/issues).
+You're encouraged to submit [pull requests](https://github.com/dblock/slack-ruby-bot-server/pulls), [propose features and discuss issues](https://github.com/dblock/slack-ruby-bot-server/issues).
 
 In the examples below, substitute your Github username for `contributor` in URLs.
 
 ## Fork the Project
 
-Fork the [project on Github](https://github.com/dblock/slack-bot-server) and check out your copy.
+Fork the [project on Github](https://github.com/dblock/slack-ruby-bot-server) and check out your copy.
 
 ```
-git clone https://github.com/contributor/slack-bot-server.git
-cd slack-bot-server
-git remote add upstream https://github.com/dblock/slack-bot-server.git
+git clone https://github.com/contributor/slack-ruby-bot-server.git
+cd slack-ruby-bot-server
+git remote add upstream https://github.com/dblock/slack-ruby-bot-server.git
 ```
 
 ## Create a Topic Branch
@@ -84,7 +84,7 @@ git push origin my-feature-branch
 
 ## Make a Pull Request
 
-Go to https://github.com/contributor/slack-bot-server and select your feature branch.
+Go to https://github.com/contributor/slack-ruby-bot-server and select your feature branch.
 Click the 'Pull Request' button and fill out the form. Pull requests are usually reviewed within a few days.
 
 ## Rebase
@@ -102,7 +102,7 @@ git push origin my-feature-branch -f
 Update the [CHANGELOG](CHANGELOG.md) with the pull request number. A typical entry looks as follows.
 
 ```
-* [#123](https://github.com/dblock/slack-bot-server/pull/123): Reticulated splines - [@contributor](https://github.com/contributor).
+* [#123](https://github.com/dblock/slack-ruby-bot-server/pull/123): Reticulated splines - [@contributor](https://github.com/contributor).
 ```
 
 Amend your previous commit and force push the changes.

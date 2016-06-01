@@ -1,7 +1,7 @@
 {
 	"name": "Slack Bot Server",
 	"description": "A Slack bot server.",
-	"respository": "https://github.com/dblock/slack-bot-server",
+	"respository": "https://github.com/dblock/slack-ruby-bot-server",
 	"keywords": ["slack", "bots"],
 	"addons": [
 		"mongolab"

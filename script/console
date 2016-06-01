@@ -3,7 +3,7 @@
 require_relative '../config/environment'
 
 # Usage: script/console
-# Starts an IRB console with slack-bot-server loaded.
+# Starts an IRB console with slack-ruby-bot-server loaded.
 
 require 'irb'
 IRB.start

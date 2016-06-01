@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SlackBotServer::Api do
-  include SlackBotServer::Api::Test::EndpointTest
+describe SlackRubyBotServer::Api do
+  include SlackRubyBotServer::Api::Test::EndpointTest
 
   context 'swagger root' do
     subject do

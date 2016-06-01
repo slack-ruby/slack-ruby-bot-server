@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'slack_bot_server', path: '../'
+gem 'slack-ruby-bot-server', path: '../'
 gem 'newrelic-slack-ruby-bot'
 
 group :test do

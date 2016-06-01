@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SlackBotServer do
+describe SlackRubyBotServer do
   it 'has a version' do
-    expect(SlackBotServer::VERSION).to_not be nil
+    expect(SlackRubyBotServer::VERSION).to_not be nil
   end
 end

@@ -1,4 +1,4 @@
-module SlackBotServer
+module SlackRubyBotServer
   class Server < SlackRubyBot::Server
     attr_accessor :team
 
@@ -14,7 +14,7 @@ module SlackBotServer
       # when an integration is disabled, a live socket is closed, which causes the default behavior of the client to restart
       # it would keep retrying without checking for account_inactive or such, we want to restart via service which will disable an inactive team
       logger.info "#{team.name}: socket closed, restarting ..."
-      SlackBotServer::Service.instance.restart! team, self, wait
+      SlackRubyBotServer::Service.instance.restart! team, self, wait
       client.owner = team
     end
   end

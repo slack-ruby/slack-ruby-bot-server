@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] ||= 'development'
 
-require 'slack-bot-server'
+require 'slack-ruby-bot-server'
 
 require_relative 'commands'
 
@@ -14,7 +14,7 @@ end
 
 NewRelic::Agent.manual_start
 
-SlackBotServer::App.instance.prepare!
-SlackBotServer::Service.start!
+SlackRubyBotServer::App.instance.prepare!
+SlackRubyBotServer::Service.start!
 
-run SlackBotServer::Api::Middleware.instance
+run SlackRubyBotServer::Api::Middleware.instance

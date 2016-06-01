@@ -1,19 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'slack-bot-server/version'
+require 'slack-ruby-bot-server/version'
 
 Gem::Specification.new do |spec|
-  # "slack-bot-server" is already taken, but that's ok since this is going to be
-  # broken up into different projects according to
-  # https://github.com/dblock/slack-bot-server/issues/3
-  spec.name          = 'slack_bot_server'
-  spec.version       = SlackBotServer::VERSION
+  spec.name          = 'slack-ruby-bot-server'
+  spec.version       = SlackRubyBotServer::VERSION
   spec.authors       = ['Daniel Doubrovkine']
   spec.email         = ['dblock@dblock.org']
 
   spec.summary       = 'A Grape API serving a Slack bot to multiple teams.'
-  spec.homepage      = 'https://github.com/dblock/slack-bot-server'
+  spec.homepage      = 'https://github.com/dblock/slack-ruby-bot-server'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec)/}) }
   spec.require_paths = ['lib']

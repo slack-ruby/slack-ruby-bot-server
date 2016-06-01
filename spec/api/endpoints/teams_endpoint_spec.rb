@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe SlackBotServer::Api::Endpoints::TeamsEndpoint do
-  include SlackBotServer::Api::Test::EndpointTest
+describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
+  include SlackRubyBotServer::Api::Test::EndpointTest
 
   it_behaves_like 'a cursor api', Team
 
@@ -63,7 +63,7 @@ describe SlackBotServer::Api::Endpoints::TeamsEndpoint do
         ENV.delete('SLACK_CLIENT_SECRET')
       end
       it 'creates a team' do
-        expect(SlackBotServer::Service.instance).to receive(:start!)
+        expect(SlackRubyBotServer::Service.instance).to receive(:start!)
         expect do
           team = client.teams._post(code: 'code')
           expect(team.team_id).to eq 'team_id'
@@ -73,7 +73,7 @@ describe SlackBotServer::Api::Endpoints::TeamsEndpoint do
         end.to change(Team, :count).by(1)
       end
       it 'reactivates a deactivated team' do
-        expect(SlackBotServer::Service.instance).to receive(:start!)
+        expect(SlackRubyBotServer::Service.instance).to receive(:start!)
         existing_team = Fabricate(:team, token: 'token', active: false)
         expect do
           team = client.teams._post(code: 'code')
@@ -93,7 +93,7 @@ describe SlackBotServer::Api::Endpoints::TeamsEndpoint do
         end
       end
       it 'reactivates a deactivated team with a different code' do
-        expect(SlackBotServer::Service.instance).to receive(:start!)
+        expect(SlackRubyBotServer::Service.instance).to receive(:start!)
         existing_team = Fabricate(:team, token: 'old', team_id: 'team_id', active: false)
         expect do
           team = client.teams._post(code: 'code')
