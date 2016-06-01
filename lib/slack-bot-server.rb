@@ -4,7 +4,7 @@ require 'mongoid-scroll'
 require 'grape-swagger'
 require 'slack-ruby-bot'
 
-Dir[File.expand_path('../../config/initializers', __FILE__) + '/**/*.rb'].each do |file|
+Dir[File.expand_path('../config/initializers', __dir__) + '/**/*.rb'].each do |file|
   require file
 end
 
