@@ -15,9 +15,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'A Grape API serving a Slack bot to multiple teams.'
   spec.homepage      = 'https://github.com/dblock/slack-bot-server'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec)/}) }
   spec.require_paths = ['lib']
 
   spec.add_dependency 'slack-ruby-bot', '~> 0.8.0'
