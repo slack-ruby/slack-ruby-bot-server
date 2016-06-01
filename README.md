@@ -35,7 +35,7 @@ Follow the instructions, note the app's client ID and secret, give the bot a def
 
 If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `heroku config:add SLACK_CLIENT_ID=... SLACK_CLIENT_SECRET=...`.
 
-### Examples Using Slack Bot Server
+### Examples Using Slack Ruby Bot Server
 
 * [slack-gamebot](https://github.com/dblock/slack-gamebot), free service at [playplay.io](http://playplay.io)
 * [slack-shellbot](https://github.com/dblock/slack-shellbot), free service at [shell.playplay.io](http://shell.playplay.io)
