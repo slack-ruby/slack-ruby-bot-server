@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'commands/whoami'
 
-describe SlackBotServer::Commands::Whoami do
+describe Whoami do
   let(:team) { Fabricate(:team) }
   let(:app) { SlackBotServer::Server.new(team: team) }
   context 'whoami' do

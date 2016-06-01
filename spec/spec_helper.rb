@@ -1,15 +1,15 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+ENV['RACK_ENV'] = 'test'
 
-require 'fabrication'
-require 'faker'
 require 'hyperclient'
 require 'webmock/rspec'
 
-ENV['RACK_ENV'] = 'test'
+require 'slack-bot-server/rspec'
 
-require 'slack-ruby-bot/rspec'
-require 'slack-bot-server'
+SlackBotServer::Service.logger.level = Logger::WARN
 
-Dir[File.join(File.dirname(__FILE__), 'support', '**/*.rb')].each do |file|
+Mongo::Logger.logger.level = Logger::INFO
+Mongoid.load!(File.expand_path('../sample_app/config/mongoid.yml', __dir__), ENV['RACK_ENV'])
+
+Dir[File.join(__dir__, 'support', '**/*.rb')].each do |file|
   require file
 end
