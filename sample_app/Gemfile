@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'slack_bot_server', github: 'dblock/slack-bot-server', branch: :master, require: false
+gem 'slack_bot_server', path: '../'
 gem 'newrelic-slack-ruby-bot'
 
 group :test do
+  gem 'rake'
   gem 'rspec'
   gem 'fabrication'
   gem 'faker'
