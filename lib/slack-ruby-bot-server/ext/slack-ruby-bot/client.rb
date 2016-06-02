@@ -5,11 +5,6 @@ module SlackRubyBot
   end
 end
 
-Slack.configure do |config|
-  config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger::WARN
-end
-
 SlackRubyBot::Client.logger.level = Logger::WARN
 
 Slack::RealTime::Client.configure do |config|
