@@ -1,6 +1,7 @@
 Slack Ruby Bot Server
 =====================
 
+[![Gem Version](https://badge.fury.io/rb/slack-ruby-bot-server.svg)](https://badge.fury.io/rb/slack-ruby-bot-server)
 [![Build Status](https://travis-ci.org/dblock/slack-ruby-bot-server.svg?branch=master)](https://travis-ci.org/dblock/slack-ruby-bot-server)
 [![Code Climate](https://codeclimate.com/github/dblock/slack-ruby-bot-server.svg)](https://codeclimate.com/github/dblock/slack-ruby-bot-server)
 
