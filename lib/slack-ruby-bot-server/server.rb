@@ -1,3 +1,5 @@
+require_relative 'ext/slack-ruby-bot/client'
+
 module SlackRubyBotServer
   class Server < SlackRubyBot::Server
     attr_accessor :team

@@ -4,10 +4,7 @@ require 'mongoid-scroll'
 require 'grape-swagger'
 require 'slack-ruby-bot'
 
-Dir[File.expand_path('../config/initializers', __dir__) + '/**/*.rb'].each do |file|
-  require file
-end
-
+require 'slack-ruby-bot-server/ext'
 require 'slack-ruby-bot-server/version'
 require 'slack-ruby-bot-server/info'
 require 'slack-ruby-bot-server/models'
