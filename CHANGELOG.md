@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.2.0 (Next)
+
+* Your contribution here.
+
 #### 0.1.1 (6/4/2016)
 
 * [#14](https://github.com/dblock/slack-ruby-bot-server/pull/14): Moved config/initializers into the library - [@tmsrjs](https://github.com/tmsrjs).
