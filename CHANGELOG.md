@@ -1,10 +1,10 @@
 ### Changelog
 
-#### 0.2.0 (Next)
+#### 0.1.1 (6/4/2016)
 
-* Your contribution here.
+* [#14](https://github.com/dblock/slack-ruby-bot-server/pull/14): Moved config/initializers into the library - [@tmsrjs](https://github.com/tmsrjs).
 
-#### 0.1.0 (1/6/2016)
+#### 0.1.0 (6/1/2016)
 
 * Initial public release - [@dblock](https://github.com/dblock).
 * 2016/6/1: Renamed slack-bot-server to slack-ruby-bot-server - [@dblock](https://github.com/dblock).
