@@ -5,11 +5,11 @@ Slack Ruby Bot Server
 [![Build Status](https://travis-ci.org/dblock/slack-ruby-bot-server.svg?branch=master)](https://travis-ci.org/dblock/slack-ruby-bot-server)
 [![Code Climate](https://codeclimate.com/github/dblock/slack-ruby-bot-server.svg)](https://codeclimate.com/github/dblock/slack-ruby-bot-server)
 
-An opinionated boilerplate and demo for a complete Slack bot service with Slack button integration, in Ruby. If you are not familiar with Slack bots or Slack API concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html). A good demo of a service built on top of this is [playplay.io](http://playplay.io).
+A library that enables you to write a complete Slack bot service with Slack button integration, in Ruby. If you are not familiar with Slack bots or Slack API concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html). A good demo of a service built on top of this is [missingkidsbot.org](http://missingkidsbot.org).
 
 ### Try Me
 
-A demo version of this app is running on Heroku at [slack-ruby-bot-server.herokuapp.com](https://slack-ruby-bot-server.herokuapp.com). Use the _Add to Slack_ button. The bot will join your team as _@slackbotserver_.
+A demo version of the [sample app](sample_app) is running on Heroku at [slack-ruby-bot-server.herokuapp.com](https://slack-ruby-bot-server.herokuapp.com). Use the _Add to Slack_ button. The bot will join your team as _@slackbotserver_.
 
 ![](images/slackbutton.gif)
 
@@ -19,14 +19,13 @@ Once a bot is registered, you can invite to a channel with `/invite @slackbotser
 
 ### What is this?
 
-A [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams. This gem combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo).
-Your customers can use a Slack button to install the bot.
+A [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams. This gem combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo). Your customers can use a Slack button to install the bot.
 
 ### Run Your Own
 
 You can use the [sample application](sample_app) to bootstrap your project and start adding slack command handlers on top of this code.
 
-Install [MongoDB](https://www.mongodb.org/downloads), required to store teams.
+Install [MongoDB](https://www.mongodb.org/downloads), required to store teams. We would like your help with [supporting other databases](https://github.com/dblock/slack-ruby-bot-server/issues/12).
 
 [Create a New Application](https://api.slack.com/applications/new) on Slack.
 
@@ -38,10 +37,7 @@ If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `her
 
 ### Examples Using Slack Ruby Bot Server
 
-* [slack-gamebot](https://github.com/dblock/slack-gamebot), free service at [playplay.io](http://playplay.io)
-* [slack-shellbot](https://github.com/dblock/slack-shellbot), free service at [shell.playplay.io](http://shell.playplay.io)
-* [api-explorer](https://github.com/dblock/slack-api-explorer), free service at [api-explorer.playplay.io](http://api-explorer.playplay.io)
-* [slack-market](https://github.com/dblock/slack-market), free service at [market.playplay.io](http://market.playplay.io)
+* [slack-amber-alert](https://github.com/dblock/slack-amber-alert), free service at [missingkidsbot.org](http://www.missingkidsbot.org)
 
 ### Copyright & License
 
