@@ -3,6 +3,7 @@
 #### 0.2.0 (Next)
 
 * Relaxed dependency versions, notably enabling grape 0.16.2 and Swagger 0.21.0 that uses Swagger 2.0 spec - [@dblock](https://github.com/dblock).
+* [#21](https://github.com/dblock/slack-ruby-bot-server/issues/21): Fix: pass additional options through into `SlackRubyBot::Server` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.1.1 (6/4/2016)

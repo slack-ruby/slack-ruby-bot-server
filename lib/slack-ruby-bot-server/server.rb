@@ -5,10 +5,11 @@ module SlackRubyBotServer
     attr_accessor :team
 
     def initialize(attrs = {})
-      @team = attrs[:team]
+      attrs = attrs.dup
+      @team = attrs.delete(:team)
       raise 'Missing team' unless @team
-      options = { token: @team.token }
-      super(options)
+      attrs[:token] = @team.token
+      super(attrs)
       client.owner = @team
     end
 
