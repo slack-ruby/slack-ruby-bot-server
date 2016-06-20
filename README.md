@@ -37,7 +37,9 @@ If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `her
 
 ### Examples Using Slack Ruby Bot Server
 
-* [slack-amber-alert](https://github.com/dblock/slack-amber-alert), free service at [missingkidsbot.org](http://www.missingkidsbot.org)
+* [slack-amber-alert](https://github.com/dblock/slack-amber-alert), free service at [missingkidsbot.org](https://www.missingkidsbot.org)
+* [slack-gamebot](https://github.com/dblock/slack-gamebot), free service at [www.playplay.io](https://www.playplay.io)
+* [slack-market](https://github.com/dblock/slack-market), free service at [market.playplay.io](https://market.playplay.io)
 
 ### Copyright & License
 
