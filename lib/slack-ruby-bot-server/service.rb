@@ -19,7 +19,7 @@ module SlackRubyBotServer
     end
 
     def start!(team)
-      fail 'Token already known.' if @services.key?(team.token)
+      raise 'Token already known.' if @services.key?(team.token)
       logger.info "Starting team #{team}."
       server = SlackRubyBotServer::Server.new(team: team)
       @lock.synchronize do
@@ -32,7 +32,7 @@ module SlackRubyBotServer
 
     def stop!(team)
       @lock.synchronize do
-        fail 'Token unknown.' unless @services.key?(team.token)
+        raise 'Token unknown.' unless @services.key?(team.token)
         logger.info "Stopping team #{team}."
         @services[team.token].stop!
         @services.delete(team.token)

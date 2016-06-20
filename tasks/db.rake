@@ -14,7 +14,7 @@ namespace :db do
       logger.info("[#{Time.now}] db:heroku:backup started")
 
       # get heroku configuration info
-      app = args[:app] || fail('Missing app.')
+      app = args[:app] || raise('Missing app.')
       JSON.parse(`bundle exec heroku config --app #{app} --json`).each_pair do |k, v|
         ENV[k] = v
       end

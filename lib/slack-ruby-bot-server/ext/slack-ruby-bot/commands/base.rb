@@ -2,7 +2,7 @@ module SlackRubyBot
   module Commands
     class Base
       class << self
-        alias_method :_invoke, :invoke
+        alias _invoke invoke
 
         def invoke(client, data)
           _invoke client, data

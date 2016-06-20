@@ -18,8 +18,8 @@ shared_examples_for 'a cursor api' do |model|
 
     it 'returns a first page with a cursor' do
       response = client.send(model_ps, cursor_params.merge(size: 2))
-      expect(response._links.self._url).to eq "http://example.org/api/#{model_ps}?#{cursor_params.merge(size: 2).to_query}"
-      expect(response._links.next._url).to start_with "http://example.org/api/#{model_ps}?"
+      expect(response._links.self._url).to eq "http://example.org/api/#{model_ps}/?#{cursor_params.merge(size: 2).to_query}"
+      expect(response._links.next._url).to start_with "http://example.org/api/#{model_ps}/?"
       expect(response._links.next._url).to match(/cursor\=.*%3A\h*/)
     end
 

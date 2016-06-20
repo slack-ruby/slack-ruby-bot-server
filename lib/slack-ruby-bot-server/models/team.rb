@@ -2,7 +2,7 @@ class Team
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  SORT_ORDERS = ['created_at', '-created_at', 'updated_at', '-updated_at']
+  SORT_ORDERS = ['created_at', '-created_at', 'updated_at', '-updated_at'].freeze
 
   field :team_id, type: String
   field :name, type: String

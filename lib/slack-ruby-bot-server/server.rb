@@ -6,7 +6,7 @@ module SlackRubyBotServer
 
     def initialize(attrs = {})
       @team = attrs[:team]
-      fail 'Missing team' unless @team
+      raise 'Missing team' unless @team
       options = { token: @team.token }
       super(options)
       client.owner = @team

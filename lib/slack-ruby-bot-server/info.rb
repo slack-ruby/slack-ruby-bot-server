@@ -1,5 +1,5 @@
 module SlackRubyBotServer
-  INFO = <<-EOS
+  INFO = <<-EOS.freeze
 BotServer #{SlackRubyBotServer::VERSION}
 
 © 2016 Daniel Doubrovkine & Contributors, MIT License

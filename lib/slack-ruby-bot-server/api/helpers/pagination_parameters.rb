@@ -12,7 +12,7 @@ module SlackRubyBotServer
           mutually_exclusive :offset, :cursor
         end
 
-        ALL = %w(cursor size sort offset total_count)
+        ALL = %w(cursor size sort offset total_count).freeze
       end
     end
   end

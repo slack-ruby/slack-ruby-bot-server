@@ -32,13 +32,13 @@ module SlackRubyBotServer
 
     def check_mongodb_provider!
       return unless ENV['RACK_ENV'] == 'production'
-      fail "Missing ENV['MONGO_URL'], ENV['MONGOHQ_URI'] or ENV['MONGOLAB_URI']." unless ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGOLAB_URI']
+      raise "Missing ENV['MONGO_URL'], ENV['MONGOHQ_URI'] or ENV['MONGOLAB_URI']." unless ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGOLAB_URI']
     end
 
     def check_database!
       rc = Mongoid.default_client.command(ping: 1)
       return if rc && rc.ok?
-      fail rc.documents.first['error'] || 'Unexpected error.'
+      raise rc.documents.first['error'] || 'Unexpected error.'
     rescue Exception => e
       warn "Error connecting to MongoDB: #{e.message}"
       raise e

@@ -1,5 +1,5 @@
 class Help < SlackRubyBot::Commands::Base
-  HELP = <<-EOS
+  HELP = <<-EOS.freeze
 ```
 I am your friendly slack-ruby-bot-server, here to help.
 
