@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.2.1 (Next)
+
+* Your contribution here.
+
 #### 0.2.0 (6/21/2016)
 
 * Relaxed dependency versions, notably enabling grape 0.16.2 and Swagger 0.21.0 that uses Swagger 2.0 spec - [@dblock](https://github.com/dblock).
