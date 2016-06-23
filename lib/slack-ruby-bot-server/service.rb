@@ -9,19 +9,20 @@ module SlackRubyBotServer
       end
     end
 
-    def self.instance
-      @instance ||= new
+    def self.instance(options = {})
+      @instance ||= new(options)
     end
 
-    def initialize
+    def initialize(options)
       @lock = Mutex.new
       @services = {}
+      @options = { server_class: SlackRubyBotServer::Server }.merge(options)
     end
 
     def start!(team)
       raise 'Token already known.' if @services.key?(team.token)
       logger.info "Starting team #{team}."
-      server = SlackRubyBotServer::Server.new(team: team)
+      server = @options[:server_class].new(team: team)
       @lock.synchronize do
         @services[team.token] = server
       end
@@ -76,6 +77,11 @@ module SlackRubyBotServer
       @services.values.to_a.each do |server|
         stop!(server.team)
       end
+    end
+
+    def self.reset!
+      @instance.reset! if @instance
+      @instance = nil
     end
   end
 end
