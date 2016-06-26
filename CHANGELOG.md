@@ -2,7 +2,7 @@
 
 #### 0.3.0 (Next)
 
-* Specify the server class, default is `SlackRubyBotServer::Service.instance(server_class: SlackRubyBotServer::Server)` - [@dblock](https://github.com/dblock).
+* Specify the server class via `SlackRubyBotServer.configure`, default is `SlackRubyBotServer::Server` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.2.0 (6/21/2016)

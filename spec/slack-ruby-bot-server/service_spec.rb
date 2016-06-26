@@ -47,11 +47,17 @@ describe SlackRubyBotServer::Service do
         end
       end
     end
+    after do
+      SlackRubyBotServer.config.reset!
+    end
     it 'creates an instance of server class' do
       expect(server_class).to receive(:new).with(team: team).and_call_original
       allow_any_instance_of(server_class).to receive(:start_async)
       allow_any_instance_of(server_class).to receive(:stop!)
-      SlackRubyBotServer::Service.instance(server_class: server_class).start!(team)
+      SlackRubyBotServer.configure do |config|
+        config.server_class = server_class
+      end
+      SlackRubyBotServer::Service.instance.start!(team)
     end
   end
 end

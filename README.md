@@ -35,6 +35,28 @@ Follow the instructions, note the app's client ID and secret, give the bot a def
 
 If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `heroku config:add SLACK_CLIENT_ID=... SLACK_CLIENT_SECRET=...`.
 
+### Usage
+
+#### Server Class
+
+This library includes a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb) that creates multiple instances of a bot server class, [SlackRubyBotServer::Server](lib/slack-ruby-bot-server/server.rb), one per team. You can override the server class to handle additional events, and configure the service to use it.
+
+```ruby
+class MyServerClass < SlackRubyBotServer::Server
+  on :hello do |client, data|
+    # connected to Slack
+  end
+
+  on :channel_joined do |client, data|
+    # the bot joined a channel in data.channel['id']
+  end
+end
+
+SlackRubyBotServer.configure do |config|
+  config.server_class = MyServerClass
+end
+```
+
 ### Examples Using Slack Ruby Bot Server
 
 * [slack-amber-alert](https://github.com/dblock/slack-amber-alert), free service at [missingkidsbot.org](https://www.missingkidsbot.org)
