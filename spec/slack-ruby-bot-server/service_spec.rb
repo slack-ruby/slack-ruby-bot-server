@@ -65,8 +65,17 @@ describe SlackRubyBotServer::Service do
     before do
       @events = []
       SlackRubyBotServer::Service.instance.tap do |instance|
-        [:starting, :started, :stopping, :stopped].each do |event|
-          instance.on event do |_|
+        [:starting].each do |event|
+          instance.on event do |team, server, _e|
+            expect(team).to_not be_nil
+            expect(server).to be_nil
+            @events << event.to_s
+          end
+        end
+        [:started, :stopping, :stopped].each do |event|
+          instance.on event do |team, server, _e|
+            expect(team).to_not be_nil
+            expect(server).to_not be_nil
             @events << event.to_s
           end
         end
