@@ -60,7 +60,7 @@ module SlackRubyBotServer
               )
             end
 
-            Service.instance.start!(team)
+            Service.instance.create!(team)
             present team, with: Presenters::TeamPresenter
           end
         end

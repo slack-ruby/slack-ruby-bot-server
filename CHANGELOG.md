@@ -3,6 +3,7 @@
 #### 0.3.0 (Next)
 
 * Specify the server class via `SlackRubyBotServer.configure`, default is `SlackRubyBotServer::Server` - [@dblock](https://github.com/dblock).
+* Added service management lifecycle callbacks when a new team is registered, deactivated, etc - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.2.0 (6/21/2016)

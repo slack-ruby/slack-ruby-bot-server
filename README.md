@@ -35,11 +35,50 @@ Follow the instructions, note the app's client ID and secret, give the bot a def
 
 If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `heroku config:add SLACK_CLIENT_ID=... SLACK_CLIENT_SECRET=...`.
 
-### Usage
+### API
+
+This library implements a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb) that creates multiple instances of a bot server class, [SlackRubyBotServer::Server](lib/slack-ruby-bot-server/server.rb), one per team.
+
+#### Service Manager
+
+You can introduce custom behavior into the service lifecycle via callbacks. This can be useful when new team has been registered via the API or a team has been deactivated from Slack.
+
+```ruby
+instance = SlackRubyBotServer::Service.instance
+
+instance.on :created do |team|
+  # a new team has been registered
+end
+
+instance.on :deactivated do |team|
+  # an existing team has been deactivated in Slack
+end
+
+instance.on :error do |e|
+  # an error has occurred
+end
+```
+
+The following callbacks are supported. All callbacks receive a `team`, except `error`, which receives a `StandardError` object.
+
+-------------------------------------------------------
+error          | an error has occurred
+creating       | a new team is being registered
+created        | a new team has been registered
+booting        | the service is starting and is connecting a team to Slack
+booted         | the service is starting and has connected a team to Slack
+stopping       | the service is about to disconnect a team from Slack
+stopped        | the service has disconnected a team from Slack
+starting       | the service is (re)connecting a team to Slack
+started        | the service has (re)connected a team to Slack
+deactivating   | a team is being deactivated
+deactivated    | a team has been deactivated
+resetting      | the service is resetting, all teams being stopped
+reset          | the service has been reset, all teams have been stopped
 
 #### Server Class
 
-This library includes a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb) that creates multiple instances of a bot server class, [SlackRubyBotServer::Server](lib/slack-ruby-bot-server/server.rb), one per team. You can override the server class to handle additional events, and configure the service to use it.
+You can override the server class to handle additional events, and configure the service to use it.
 
 ```ruby
 class MyServerClass < SlackRubyBotServer::Server

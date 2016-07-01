@@ -58,6 +58,26 @@ describe SlackRubyBotServer::Service do
         config.server_class = server_class
       end
       SlackRubyBotServer::Service.instance.start!(team)
+      SlackRubyBotServer::Service.instance.stop!(team)
+    end
+  end
+  context 'callbacks' do
+    before do
+      @events = []
+      SlackRubyBotServer::Service.instance.tap do |instance|
+        [:starting, :started, :stopping, :stopped].each do |event|
+          instance.on event do |_|
+            @events << event.to_s
+          end
+        end
+      end
+    end
+    it 'invokes start and stop callbacks' do
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
+      SlackRubyBotServer::Service.instance.start!(team)
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
+      SlackRubyBotServer::Service.instance.stop!(team)
+      expect(@events).to eq %w(starting started stopping stopped)
     end
   end
 end
