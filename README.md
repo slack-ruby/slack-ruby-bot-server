@@ -7,6 +7,14 @@ Slack Ruby Bot Server
 
 A library that enables you to write a complete Slack bot service with Slack button integration, in Ruby. If you are not familiar with Slack bots or Slack API concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html). A good demo of a service built on top of this is [missingkidsbot.org](http://missingkidsbot.org).
 
+### What is this?
+
+A library that contains a [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams. This gem combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo). Your customers can use a Slack button to install the bot.
+
+### Stable Release
+
+You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v0.2.0](https://github.com/dblock/slack-ruby-bot-server/blob/v0.2.0/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+
 ### Try Me
 
 A demo version of the [sample app](sample_app) is running on Heroku at [slack-ruby-bot-server.herokuapp.com](https://slack-ruby-bot-server.herokuapp.com). Use the _Add to Slack_ button. The bot will join your team as _@slackbotserver_.
@@ -16,10 +24,6 @@ A demo version of the [sample app](sample_app) is running on Heroku at [slack-ru
 Once a bot is registered, you can invite to a channel with `/invite @slackbotserver` interact with it. DM "hi" to it, or say "@slackbotserver hi".
 
 ![](images/slackbotserver.gif)
-
-### What is this?
-
-A [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/dblock/slack-ruby-bot) to multiple teams. This gem combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/dblock/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo). Your customers can use a Slack button to install the bot.
 
 ### Run Your Own
 
@@ -74,7 +78,7 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 | started        | the service has (re)connected a team to Slack                    |
 | deactivating   | a team is being deactivated                                      |
 | deactivated    | a team has been deactivated                                      |
-| resetting      | the service is resetting, all teams being stopped                |  
+| resetting      | the service is resetting, all teams being stopped                |
 | reset          | the service has been reset, all teams have been stopped          |
 
 #### Server Class
