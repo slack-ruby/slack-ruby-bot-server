@@ -61,20 +61,21 @@ end
 
 The following callbacks are supported. All callbacks receive a `team`, except `error`, which receives a `StandardError` object.
 
--------------------------------------------------------
-error          | an error has occurred
-creating       | a new team is being registered
-created        | a new team has been registered
-booting        | the service is starting and is connecting a team to Slack
-booted         | the service is starting and has connected a team to Slack
-stopping       | the service is about to disconnect a team from Slack
-stopped        | the service has disconnected a team from Slack
-starting       | the service is (re)connecting a team to Slack
-started        | the service has (re)connected a team to Slack
-deactivating   | a team is being deactivated
-deactivated    | a team has been deactivated
-resetting      | the service is resetting, all teams being stopped
-reset          | the service has been reset, all teams have been stopped
+| callback       |  description                                                     |
+|:--------------:|:-----------------------------------------------------------------|
+| error          | an error has occurred                                            |
+| creating       | a new team is being registered                                   |
+| created        | a new team has been registered                                   |
+| booting        | the service is starting and is connecting a team to Slack        |
+| booted         | the service is starting and has connected a team to Slack        |
+| stopping       | the service is about to disconnect a team from Slack             |
+| stopped        | the service has disconnected a team from Slack                   |
+| starting       | the service is (re)connecting a team to Slack                    |
+| started        | the service has (re)connected a team to Slack                    |
+| deactivating   | a team is being deactivated                                      |
+| deactivated    | a team has been deactivated                                      |
+| resetting      | the service is resetting, all teams being stopped                |  
+| reset          | the service has been reset, all teams have been stopped          |
 
 #### Server Class
 
