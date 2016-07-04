@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.3.1 (Next)
+
+* Your contribution here.
+
 #### 0.3.0 (7/4/2016)
 
 * Specify the server class via `SlackRubyBotServer.configure`, default is `SlackRubyBotServer::Server` - [@dblock](https://github.com/dblock).
