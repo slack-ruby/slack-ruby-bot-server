@@ -41,7 +41,33 @@ If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `her
 
 ### API
 
-This library implements a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb) that creates multiple instances of a bot server class, [SlackRubyBotServer::Server](lib/slack-ruby-bot-server/server.rb), one per team.
+This library implements an app, [SlackRubyBotServer::App](lib/slack-ruby-bot-server/app.rb), a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb) that creates multiple instances of a bot server class, [SlackRubyBotServer::Server](lib/slack-ruby-bot-server/server.rb), one per team.
+
+#### App
+
+The app instance checks for a working MongoDB connection, ensures database indexes, performs database migrations, sets up bot aliases and log levels. You can introduce custom behavior into the app lifecycle by subclassing `SlackRubyBotServer::App` and creating an instance of the child class in `config.ru`.
+
+```ruby
+class MyApp < SlackRubyBotServer::App
+  def prepare!
+    super
+    deactivate_sleepy_teams!
+  end
+
+  private
+
+  def deactivate_sleepy_teams!
+    Team.active.each do |team|
+      next unless team.sleepy?
+      team.deactivate!
+    end
+  end
+end
+```
+
+```ruby
+MyApp.instance.prepare!
+```
 
 #### Service Manager
 
@@ -86,7 +112,7 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 You can override the server class to handle additional events, and configure the service to use it.
 
 ```ruby
-class MyServerClass < SlackRubyBotServer::Server
+class MyServer < SlackRubyBotServer::Server
   on :hello do |client, data|
     # connected to Slack
   end
@@ -97,7 +123,7 @@ class MyServerClass < SlackRubyBotServer::Server
 end
 
 SlackRubyBotServer.configure do |config|
-  config.server_class = MyServerClass
+  config.server_class = MyServer
 end
 ```
 

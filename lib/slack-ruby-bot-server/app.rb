@@ -13,7 +13,7 @@ module SlackRubyBotServer
     end
 
     def self.instance
-      @instance ||= SlackRubyBotServer::App.new
+      @instance ||= new
     end
 
     private

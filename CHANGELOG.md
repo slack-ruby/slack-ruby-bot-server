@@ -2,6 +2,7 @@
 
 #### 0.3.1 (Next)
 
+* [#22](https://github.com/dblock/slack-ruby-bot-server/issues/22): Subclassing `SlackRubyBotServer::App` creates an `.instance` of child class - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.3.0 (7/4/2016)
