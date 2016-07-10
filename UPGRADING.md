@@ -1,6 +1,38 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.3.1
+
+#### Remove Monkey-Patching of SlackRubyBotServer::App
+
+You no longer need to monkey-patch the app class. You can subclass it and invoke additional `prepare!` methods.
+
+```ruby
+class MyApp < SlackRubyBotServer::App
+  def prepare!
+    super
+    deactivate_sleepy_teams!
+  end
+
+  private
+
+  def deactivate_sleepy_teams!
+    Team.active.each do |team|
+      next unless team.sleepy?
+      team.deactivate!
+    end
+  end
+end
+```
+
+Make sure to create an `.instance` of the child class.
+
+```ruby
+MyApp.instance.prepare!
+```
+
+See [#22](https://github.com/dblock/slack-ruby-bot-server/issues/22) for additional information.
+
 ### Upgrading to >= 0.3.0
 
 #### Remove Monkey-Patching of SlackRubyBotServer::Server
