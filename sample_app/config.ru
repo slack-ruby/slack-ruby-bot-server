@@ -1,6 +1,6 @@
 ENV['RACK_ENV'] ||= 'development'
 
-require 'slack-ruby-bot-server'
+Bundler.require :default
 
 require_relative 'commands'
 
