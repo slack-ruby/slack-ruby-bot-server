@@ -21,18 +21,16 @@ describe SlackRubyBotServer::Service do
         allow(server).to receive(:start_async)
         SlackRubyBotServer::Service.instance.start!(team)
       end
-      it 'registers team service' do
-        expect(services.size).to eq 1
-        expect(services[team.token]).to eq server
+      it 'assigns team server' do
+        expect(team.server).to_not be nil
       end
-      it 'removes team service' do
+      it 'removes team server' do
         SlackRubyBotServer::Service.instance.stop!(team)
-        expect(services.size).to eq 0
+        expect(team.server).to be nil
       end
       it 'deactivates a team' do
         SlackRubyBotServer::Service.instance.deactivate!(team)
-        expect(team.reload.active).to be false
-        expect(services.size).to eq 0
+        expect(team.server).to be nil
       end
     end
   end
@@ -66,16 +64,16 @@ describe SlackRubyBotServer::Service do
       @events = []
       SlackRubyBotServer::Service.instance.tap do |instance|
         [:starting].each do |event|
-          instance.on event do |team, server, _e|
+          instance.on event do |team, _e|
             expect(team).to_not be_nil
-            expect(server).to be_nil
+            expect(team.server).to be_nil
             @events << event.to_s
           end
         end
         [:started, :stopping, :stopped].each do |event|
-          instance.on event do |team, server, _e|
+          instance.on event do |team, _e|
             expect(team).to_not be_nil
-            expect(server).to_not be_nil
+            expect(team.server).to_not be_nil
             @events << event.to_s
           end
         end

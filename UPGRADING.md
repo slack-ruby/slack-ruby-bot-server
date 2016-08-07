@@ -1,6 +1,23 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.4.0
+
+#### Changes in Callbacks
+
+The `SlackRubyBotServer::Service` class used to track services in a `Hash`. This is no longer the case. Callbacks no longer receive a server object for the team, but the latter is assigned as `team.server`.
+
+```ruby
+instance = SlackRubyBotServer::Service.instance
+
+instance.on :started do |team, error|
+  # a new team has been registered
+  # team.server is available
+end
+```
+
+The `reset` and `resetting` callbacks have also been removed.
+
 ### Upgrading to >= 0.3.1
 
 #### Remove Monkey-Patching of SlackRubyBotServer::App

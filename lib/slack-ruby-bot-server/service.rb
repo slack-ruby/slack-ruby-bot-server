@@ -14,8 +14,6 @@ module SlackRubyBotServer
     end
 
     def initialize
-      @lock = Mutex.new
-      @services = {}
       @callbacks = Hash.new { |h, k| h[k] = [] }
     end
 
@@ -25,88 +23,70 @@ module SlackRubyBotServer
 
     def create!(team)
       run_callbacks :creating, team
-      server = start!(team)
-      run_callbacks :created, team, server
+      start!(team)
+      run_callbacks :created, team
     end
 
     def start!(team)
-      raise 'Token already known.' if @services.key?(team.token)
       run_callbacks :starting, team
       logger.info "Starting team #{team}."
       server = SlackRubyBotServer::Config.server_class.new(team: team)
-      @lock.synchronize do
-        @services[team.token] = server
-      end
       start_server! team, server
-      run_callbacks :started, team, server
+      run_callbacks :started, team
       server
     rescue StandardError => e
-      run_callbacks :error, team, nil, e
+      run_callbacks :error, team, e
       logger.error e
     end
 
     def restart!(team, server, wait = 1)
-      run_callbacks :restarting, team, server
+      run_callbacks :restarting, team
       start_server! team, server, wait
-      run_callbacks :restarted, team, server
+      run_callbacks :restarted, team
     end
 
     def stop!(team)
       logger.info "Stopping team #{team}."
-      @lock.synchronize do
-        raise 'Token unknown.' unless @services.key?(team.token)
-        server = @services[team.token]
-        run_callbacks :stopping, team, server
-        server.stop!
-        @services.delete(team.token)
-        run_callbacks :stopped, team, server
-      end
+      run_callbacks :stopping, team
+      team.server.stop! if team.server
+      run_callbacks :stopped, team
     rescue StandardError => e
-      run_callbacks :error, team, @services[team.token], e
+      run_callbacks :error, team, e
       logger.error e
+    ensure
+      team.server = nil
     end
 
     def start_from_database!
       Team.active.each do |team|
         run_callbacks :booting, team
-        server = start!(team)
-        run_callbacks :booted, team, server
+        start!(team)
+        run_callbacks :booted, team
       end
     end
 
     def deactivate!(team)
-      @lock.synchronize do
-        raise 'Token unknown.' unless @services.key?(team.token)
-        server = @services[team.token]
-        run_callbacks :deactivating, team, server
-        team.deactivate!
-        @services.delete(team.token)
-        run_callbacks :deactivated, team, server
-      end
+      run_callbacks :deactivating, team
+      team.deactivate!
+      run_callbacks :deactivated, team
     rescue Mongoid::Errors::Validations => e
-      run_callbacks :error, team, @services[team.token], e
+      run_callbacks :error, team, e
       logger.error "#{team.name}: #{e.message}, error - #{e.document.class}, #{e.document.errors.to_hash}, ignored."
     rescue StandardError => e
-      run_callbacks :error, team, @services[team.token], e
+      run_callbacks :error, team, e
       logger.error "#{team.name}: #{e.class}, #{e.message}, ignored."
-    end
-
-    def reset!
-      run_callbacks :resetting
-      @services.values.to_a.each do |server|
-        stop!(server.team)
-      end
-      run_callbacks :reset
+    ensure
+      team.server = nil
     end
 
     def self.reset!
-      @instance.reset! if @instance
       @instance = nil
     end
 
     private
 
     def start_server!(team, server, wait = 1)
+      team.server = server
       server.start_async
     rescue StandardError => e
       run_callbacks :error, team, server, e
@@ -121,11 +101,11 @@ module SlackRubyBotServer
       end
     end
 
-    def run_callbacks(type, team = nil, server = nil, error = nil)
+    def run_callbacks(type, team = nil, error = nil)
       callbacks = @callbacks[type.to_s]
       return false unless callbacks
       callbacks.each do |c|
-        c.call team, server, error
+        c.call team, error
       end
       true
     rescue StandardError => e

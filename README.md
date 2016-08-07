@@ -76,15 +76,15 @@ You can introduce custom behavior into the service lifecycle via callbacks. This
 ```ruby
 instance = SlackRubyBotServer::Service.instance
 
-instance.on :created do |team, server, error|
+instance.on :created do |team, error|
   # a new team has been registered
 end
 
-instance.on :deactivated do |team, server, error|
+instance.on :deactivated do |team, error|
   # an existing team has been deactivated in Slack
 end
 
-instance.on :error do |team, server, error|
+instance.on :error do |team, error|
   # an error has occurred
 end
 ```
@@ -104,8 +104,6 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 | started        | the service has (re)connected a team to Slack                    |
 | deactivating   | a team is being deactivated                                      |
 | deactivated    | a team has been deactivated                                      |
-| resetting      | the service is resetting, all teams being stopped                |
-| reset          | the service has been reset, all teams have been stopped          |
 
 #### Server Class
 

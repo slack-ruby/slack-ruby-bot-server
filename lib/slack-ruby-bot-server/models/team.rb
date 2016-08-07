@@ -10,6 +10,8 @@ class Team
   field :token, type: String
   field :active, type: Boolean, default: true
 
+  attr_accessor :server # server at runtime
+
   scope :active, -> { where(active: true) }
 
   validates_uniqueness_of :token, message: 'has already been used'
