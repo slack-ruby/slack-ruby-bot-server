@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.4.1 (Next)
+
+* Your contribution here.
+
 #### 0.4.0 (8/29/2016)
 
 * [#25](https://github.com/slack-ruby/slack-ruby-bot-server/pull/25): Added [danger](http://danger.systems), PR linting - [@dblock](https://github.com/dblock).
