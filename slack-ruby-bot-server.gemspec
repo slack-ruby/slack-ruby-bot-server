@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['dblock@dblock.org']
 
   spec.summary       = 'A Grape API serving a Slack bot to multiple teams.'
-  spec.homepage      = 'https://github.com/dblock/slack-ruby-bot-server'
+  spec.homepage      = 'https://github.com/slack-ruby/slack-ruby-bot-server'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec)/}) }
   spec.require_paths = ['lib']

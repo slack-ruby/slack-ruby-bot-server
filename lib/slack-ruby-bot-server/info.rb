@@ -6,6 +6,6 @@ BotServer #{SlackRubyBotServer::VERSION}
 https://twitter.com/dblockdotorg
 
 Free Service at http://slack-ruby-bot-server.herokuapp.com
-Open-Source at https://github.com/dblock/slack-ruby-bot-server
+Open-Source at https://github.com/slack-ruby/slack-ruby-bot-server
   EOS
 end

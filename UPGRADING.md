@@ -54,7 +54,7 @@ Make sure to create an `.instance` of the child class.
 MyApp.instance.prepare!
 ```
 
-See [#22](https://github.com/dblock/slack-ruby-bot-server/issues/22) for additional information.
+See [#22](https://github.com/slack-ruby/slack-ruby-bot-server/issues/22) for additional information.
 
 ### Upgrading to >= 0.3.0
 
@@ -78,4 +78,4 @@ SlackRubyBotServer.configure do |config|
 end
 ```
 
-See [#18](https://github.com/dblock/slack-ruby-bot-server/issues/18) for more information.
+See [#18](https://github.com/slack-ruby/slack-ruby-bot-server/issues/18) for more information.
