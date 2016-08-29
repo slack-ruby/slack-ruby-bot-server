@@ -3,6 +3,12 @@ Upgrading Slack-Ruby-Bot-Server
 
 ### Upgrading to >= 0.4.0
 
+#### Add giphy to your Gemfile for GIF support
+
+The dependency on the `giphy` gem was dropped in slack-ruby-bot 0.9.0 and GIFs don't appear by default. If you want GIF support, add `gem 'giphy'` to your **Gemfile**.
+
+See [slack-ruby-bot#89](https://github.com/slack-ruby/slack-ruby-bot/pull/89) for more information.
+
 #### Changes in Callbacks
 
 The `SlackRubyBotServer::Service` class used to track services in a `Hash`. This is no longer the case. Callbacks no longer receive a server object for the team, but the latter is assigned as `team.server`.
