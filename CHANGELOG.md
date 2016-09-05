@@ -2,6 +2,7 @@
 
 #### 0.4.1 (Next)
 
+* [#28](https://github.com/slack-ruby/slack-ruby-bot-server/pull/28): Use slack-ruby-danger gem - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.4.0 (8/29/2016)

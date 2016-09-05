@@ -19,6 +19,8 @@ group :development, :test do
   gem 'hyperclient'
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'danger', '~> 3.1.1'
-  gem 'danger-changelog', '~> 0.1'
+end
+
+group :test do
+  gem 'slack-ruby-danger', '~> 0.1.0', require: false
 end
