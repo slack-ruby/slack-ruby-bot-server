@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
+  gem 'rack-server-pages', github: 'dblock/rack-server-pages', branch: 'next'
   gem 'bundler'
   gem 'rake'
   gem 'rspec'
