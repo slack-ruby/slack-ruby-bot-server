@@ -19,7 +19,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'hyperclient'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.5'
 end
 
 group :test do
