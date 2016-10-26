@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
+  gem 'rack-server-pages', github: 'dblock/rack-server-pages', branch: 'next'
   gem 'bundler'
   gem 'rake'
   gem 'rspec'
@@ -18,7 +19,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'hyperclient'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.5'
 end
 
 group :test do
