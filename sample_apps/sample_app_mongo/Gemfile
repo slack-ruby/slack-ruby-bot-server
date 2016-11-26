@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'slack-ruby-bot-server', path: '../'
+gem 'slack-ruby-bot-server', path: '../../'
 gem 'newrelic-slack-ruby-bot'
+
+gem 'mongoid'
+gem 'kaminari-mongoid'
+gem 'mongoid-scroll'
 
 group :test do
   gem 'rake'

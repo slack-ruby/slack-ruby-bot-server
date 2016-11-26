@@ -17,7 +17,11 @@ module SlackRubyBotServer
         private
 
         def ping
-          team = Team.asc(:_id).first
+          if ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGODB_URI'] || ENV['MONGOLAB_URI']
+            team = Team.asc(:_id).first
+          elsif
+            team = Team.last
+          end
           return unless team
           team.ping!
         end

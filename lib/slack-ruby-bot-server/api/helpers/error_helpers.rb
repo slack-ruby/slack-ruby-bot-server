@@ -13,16 +13,18 @@ module SlackRubyBotServer
             rack_response(error.to_json, 400)
           end
           # rescue document validation errors into detail json
-          rescue_from Mongoid::Errors::Validations do |e|
-            backtrace = e.backtrace[0..5].join("\n  ")
-            Middleware.logger.warn "#{e.class.name}: #{e.message}\n  #{backtrace}"
-            rack_response({
-              type: 'param_error',
-              message: e.document.errors.full_messages.uniq.join(', ') + '.',
-              detail: e.document.errors.messages.each_with_object({}) do |(k, v), h|
-                h[k] = v.uniq
-              end
-            }.to_json, 400)
+          if ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGODB_URI'] || ENV['MONGOLAB_URI']
+            rescue_from Mongoid::Errors::Validations do |e|
+              backtrace = e.backtrace[0..5].join("\n  ")
+              Middleware.logger.warn "#{e.class.name}: #{e.message}\n  #{backtrace}"
+              rack_response({
+                type: 'param_error',
+                message: e.document.errors.full_messages.uniq.join(', ') + '.',
+                detail: e.document.errors.messages.each_with_object({}) do |(k, v), h|
+                  h[k] = v.uniq
+                end
+              }.to_json, 400)
+            end
           end
           rescue_from Grape::Exceptions::Validation do |e|
             backtrace = e.backtrace[0..5].join("\n  ")
