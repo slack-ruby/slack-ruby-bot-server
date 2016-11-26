@@ -3,13 +3,6 @@ require 'active_record'
 
 class Team < ActiveRecord::Base
 
-  # field :team_id, type: String
-  # field :name, type: String
-  # field :domain, type: String
-  # field :token, type: String
-  # field :active, type: Boolean, default: true
-  #
-  # attr_accessor :server # server at runtime
   include CommonMethods
 
   def self.purge!
