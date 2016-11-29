@@ -1,4 +1,4 @@
-require_relative 'common_methods.rb'
+require_relative 'methods.rb'
 
 class Team
   include Mongoid::Document
@@ -10,7 +10,7 @@ class Team
   field :token, type: String
   field :active, type: Boolean, default: true
 
-  include CommonMethods
+  include Methods
 
   def self.purge!
     # destroy teams inactive for two weeks
