@@ -1,9 +1,9 @@
-require_relative 'common_methods.rb'
+require_relative 'methods.rb'
 require 'active_record'
 
 class Team < ActiveRecord::Base
 
-  include CommonMethods
+  include Methods
 
   def self.purge!
     # destroy teams inactive for two weeks
