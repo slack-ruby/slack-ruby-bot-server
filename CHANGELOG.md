@@ -4,6 +4,7 @@
 
 * [#28](https://github.com/slack-ruby/slack-ruby-bot-server/pull/28): Use slack-ruby-danger gem - [@dblock](https://github.com/dblock).
 * [#31](https://github.com/slack-ruby/slack-ruby-bot-server/pull/31): Adds MONGODB_URI as environment variable for MongoDB - [@corprew](https://github.com/corprew).
+* [#38](https://github.com/slack-ruby/slack-ruby-bot-server/pull/38): Add Postgres support, reference #7. - [@zachfeldman](https://github.com/zachfeldman).
 * Your contribution here.
 
 #### 0.4.0 (8/29/2016)

@@ -31,6 +31,8 @@ You can use the [sample application](sample_app) to bootstrap your project and s
 
 Install [MongoDB](https://www.mongodb.org/downloads), required to store teams. We would like your help with [supporting other databases](https://github.com/slack-ruby/slack-ruby-bot-server/issues/12).
 
+You can also use PostgreSQL. See the PostgreSQL example - ensure you've filled out postgresql.yml and have setup your database correctly (user with the right name and privileges according to the file).
+
 [Create a New Application](https://api.slack.com/applications/new) on Slack.
 
 ![](images/new.png)

@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  encoding: unicode
+
+development:
+  <<: *default
+  database: slack_ruby_bot_server_development
+  username: slack_ruby_bot_server
+  password:
+  host: localhost
+  port: 5432
+
+
+test:
+  <<: *default
+  database: slack_ruby_bot_server_test
+
+production:
+  <<: *default
+  database: slack_ruby_bot_server_production

@@ -17,15 +17,19 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'slack-ruby-bot'
   spec.add_dependency 'celluloid-io'
-  spec.add_dependency 'mongoid'
   spec.add_dependency 'unicorn'
   spec.add_dependency 'grape'
   spec.add_dependency 'grape-swagger'
   spec.add_dependency 'grape-roar'
   spec.add_dependency 'rack-cors'
-  spec.add_dependency 'kaminari-mongoid'
-  spec.add_dependency 'mongoid-scroll'
   spec.add_dependency 'rack-rewrite'
   spec.add_dependency 'rack-server-pages'
   spec.add_dependency 'foreman'
+
+  spec.add_development_dependency 'mongoid'
+  spec.add_development_dependency 'kaminari-mongoid'
+  spec.add_development_dependency 'mongoid-scroll'
+
+  spec.add_development_dependency 'pg'
+  spec.add_development_dependency 'activerecord'
 end
