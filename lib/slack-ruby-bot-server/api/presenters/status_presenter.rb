@@ -19,7 +19,7 @@ module SlackRubyBotServer
         def ping
           if SlackRubyBotServer::Config.mongo?
             team = Team.asc(:_id).first
-          elsif SlackRubyBotServer::Config.postgresql
+          elsif SlackRubyBotServer::Config.postgresql?
             team = Team.last
           end
           return unless team
