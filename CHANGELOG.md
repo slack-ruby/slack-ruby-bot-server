@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.5.1 (Next)
+
+* Your contribution here.
+
 #### 0.5.0 (2/9/2017)
 
 * [#43](https://github.com/slack-ruby/slack-ruby-bot-server/pull/43): Fix: `cannot load kaminari/grape` - [@dblock](https://github.com/dblock).
