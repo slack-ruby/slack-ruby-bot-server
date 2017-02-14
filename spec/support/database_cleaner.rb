@@ -7,7 +7,7 @@ RSpec.configure do |config|
   end
 
   config.after :suite do
-    Mongoid.purge!
+    Mongoid.purge! if defined?(Mongo)
   end
 
   config.around :each do |example|

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'rack-server-pages', github: 'dblock/rack-server-pages', branch: 'next'
+  gem 'rack-server-pages'
   gem 'bundler'
   gem 'rake'
   gem 'rspec'
@@ -20,6 +20,7 @@ group :development, :test do
   gem 'hyperclient'
   gem 'capybara'
   gem 'selenium-webdriver', '~> 2.5'
+  gem 'pg'
 end
 
 group :test do
