@@ -20,6 +20,7 @@ group :development, :test do
   gem 'hyperclient'
   gem 'capybara'
   gem 'selenium-webdriver', '~> 2.5'
+  gem 'pg'
 end
 
 group :test do
