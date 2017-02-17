@@ -29,9 +29,15 @@ Once a bot is registered, you can invite to a channel with `/invite @slackbotser
 
 You can use the [sample application](sample_app) to bootstrap your project and start adding slack command handlers on top of this code.
 
-Install [MongoDB](https://www.mongodb.org/downloads), required to store teams. We would like your help with [supporting other databases](https://github.com/slack-ruby/slack-ruby-bot-server/issues/12).
+### MongoDB
+
+Install [MongoDB](https://www.mongodb.org/downloads), required to store teams.
+
+### PostgreSQL
 
 You can also use PostgreSQL. See the PostgreSQL example - ensure you've filled out postgresql.yml and have setup your database correctly (user with the right name and privileges according to the file).
+
+### Usage
 
 [Create a New Application](https://api.slack.com/applications/new) on Slack.
 

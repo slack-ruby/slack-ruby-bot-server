@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'slack-ruby-bot-server', path: '../../'
 gem 'newrelic-slack-ruby-bot'
 
-gem 'rack-server-pages', github: 'dblock/rack-server-pages', branch: 'next'
+gem 'rack-server-pages'
 
 
 gem 'pg'

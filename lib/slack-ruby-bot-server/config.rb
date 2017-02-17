@@ -3,22 +3,28 @@ module SlackRubyBotServer
     extend self
 
     attr_accessor :server_class
-    attr_accessor :database
+    attr_accessor :database_adapter
 
     def reset!
       self.server_class = SlackRubyBotServer::Server
     end
 
-    def database
-      database ||= File.file?('config/mongoid.yml') ? :mongo : :postgresql
+    def database_adapter
+      database_adapter = if defined?(::Mongoid)
+                           :mongo
+                         elsif defined?(::Postgresql)
+                           :postgresql
+                         else
+                           nil
+                         end
     end
 
     def postgresql?
-      database == :postgresql
+      database_adapter == :postgresql
     end
 
     def mongo?
-      database == :mongo
+      database_adapter == :mongo
     end
 
     reset!

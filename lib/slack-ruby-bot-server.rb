@@ -9,13 +9,7 @@ require 'slack-ruby-bot-server/ext'
 require 'slack-ruby-bot-server/version'
 require 'slack-ruby-bot-server/info'
 
-if SlackRubyBotServer::Config.mongo?
-  require 'slack-ruby-bot-server/models/team/mongo.rb'
-  require 'kaminari/grape'
-  require 'mongoid-scroll'
-end
-
-require 'slack-ruby-bot-server/models/team/postgres.rb' if SlackRubyBotServer::Config.postgresql?
+require "config/databases/#{SlackRubyBotServer::Config.database_adapter.to_s}"
 
 require 'slack-ruby-bot-server/api'
 require 'slack-ruby-bot-server/app'

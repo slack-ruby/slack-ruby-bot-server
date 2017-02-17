@@ -10,7 +10,8 @@
 * [#43](https://github.com/slack-ruby/slack-ruby-bot-server/pull/43): Fix: `undefined method `[]' for nil:NilClass` in APIs - [@dblock](https://github.com/dblock).
 * [#28](https://github.com/slack-ruby/slack-ruby-bot-server/pull/28): Use slack-ruby-danger gem - [@dblock](https://github.com/dblock).
 * [#31](https://github.com/slack-ruby/slack-ruby-bot-server/pull/31): Adds MONGODB_URI as environment variable for MongoDB - [@corprew](https://github.com/corprew).
-* [#38](https://github.com/slack-ruby/slack-ruby-bot-server/pull/38): Add Postgres support, reference #7. - [@zachfeldman](https://github.com/zachfeldman).
+* [#38](https://github.com/slack-ruby/slack-ruby-bot-server/pull/38): Add Postgres support - [@zachfeldman](https://github.com/zachfeldman).
+* [#44](https://github.com/slack-ruby/slack-ruby-bot-server/pull/44): Add Postgres support with tests - [@spencerldixon](https://github.com/spencerldixon).
 * Your contribution here.
 
 #### 0.4.0 (8/29/2016)
