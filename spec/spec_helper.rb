@@ -11,8 +11,8 @@ require 'support/api/*.rb'
 
 SlackRubyBotServer::Service.logger.level = Logger::WARN
 
-if SlackRubyBotServer::Config.postgresql?
-  require 'spec/support/databases/postgresql'
-elsif SlackRubyBotServer::Config.mongo?
-  require 'spec/support/databases/mongo'
+if SlackRubyBotServer::Config.pg?
+  require 'spec/support/database_adapters/pg/*.rb'
+elsif SlackRubyBotServer::Config.mongoid?
+  require 'spec/support/database_adapters/mongoid/*.rb'
 end

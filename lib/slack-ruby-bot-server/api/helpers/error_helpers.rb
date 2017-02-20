@@ -13,7 +13,7 @@ module SlackRubyBotServer
             rack_response(error.to_json, 400)
           end
           # rescue document validation errors into detail json
-          if SlackRubyBotServer::Config.mongo?
+          if SlackRubyBotServer::Config.mongoid?
             rescue_from Mongoid::Errors::Validations do |e|
               backtrace = e.backtrace[0..5].join("\n  ")
               Middleware.logger.warn "#{e.class.name}: #{e.message}\n  #{backtrace}"

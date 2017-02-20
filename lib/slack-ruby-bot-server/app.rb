@@ -25,13 +25,13 @@ module SlackRubyBotServer
     end
 
     def silence_loggers!
-      return unless SlackRubyBotServer::Config.mongo?
+      return unless SlackRubyBotServer::Config.mongoid?
       Mongoid.logger.level = Logger::INFO
       Mongo::Logger.logger.level = Logger::INFO
     end
 
     def check_database!
-      if SlackRubyBotServer::Config.mongo?
+      if SlackRubyBotServer::Config.mongoid?
         begin
           rc = Mongoid.default_client.command(ping: 1)
           return if rc && rc.ok?
@@ -40,7 +40,7 @@ module SlackRubyBotServer
           warn "Error connecting to MongoDB: #{e.message}"
           raise e
         end
-      elsif SlackRubyBotServer::Config.postgresql?
+      elsif SlackRubyBotServer::Config.pg?
         begin
           ActiveRecord::Base.connection_pool.with_connection(&:active?) rescue false
           warn "Error connecting to PostgreSQL: ActiveRecord cannot connect." unless ActiveRecord::Base.connected?
@@ -52,9 +52,9 @@ module SlackRubyBotServer
     end
 
     def create_indexes!
-      if SlackRubyBotServer::Config.mongo?
+      if SlackRubyBotServer::Config.mongoid?
         ::Mongoid::Tasks::Database.create_indexes
-      elsif SlackRubyBotServer::Config.postgresql?
+      elsif SlackRubyBotServer::Config.pg?
         unless ActiveRecord::Base.connection.tables.include?('teams')
           ActiveRecord::Base.connection.create_table :teams do |t|
             t.string :team_id
