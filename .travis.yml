@@ -11,11 +11,9 @@ matrix:
       script:
         - bundle exec danger
     - rvm: 2.3.1
-        env:
-          - DATABASE_ADAPTER=pg
+      env: DATABASE_ADAPTER=pg
     - rvm: 2.3.1
-        env:
-          - DATABASE_ADAPTER=mongoid
+      env: DATABASE_ADAPTER=mongoid
 
 before_install:
   - "export DISPLAY=:99.0"
