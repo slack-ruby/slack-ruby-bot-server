@@ -11,9 +11,9 @@ module SlackRubyBotServer
 
     def database_adapter
       if defined?(::Mongoid)
-       :mongoid
+        :mongoid
       elsif defined?(::Postgresql)
-       :pg
+        :pg
       end
     end
 
