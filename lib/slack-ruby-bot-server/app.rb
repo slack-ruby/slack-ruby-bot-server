@@ -2,7 +2,6 @@ module SlackRubyBotServer
   class App
     def prepare!
       silence_loggers!
-      check_mongodb_provider!
       check_database!
       create_indexes!
       mark_teams_active!
@@ -26,28 +25,51 @@ module SlackRubyBotServer
     end
 
     def silence_loggers!
+      return unless SlackRubyBotServer::Config.mongoid?
       Mongoid.logger.level = Logger::INFO
       Mongo::Logger.logger.level = Logger::INFO
     end
 
-    def check_mongodb_provider!
-      return unless ENV['RACK_ENV'] == 'production'
-      unless ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGODB_URI'] || ENV['MONGOLAB_URI']
-        raise "Missing ENV['MONGO_URL'], ENV['MONGOHQ_URI'], ENV['MONGODB_URI'], or ENV['MONGOLAB_URI']."
+    def check_database!
+      if SlackRubyBotServer::Config.mongoid?
+        begin
+          rc = Mongoid.default_client.command(ping: 1)
+          return if rc && rc.ok?
+          raise rc.documents.first['error'] || 'Unexpected error.'
+        rescue Exception => e
+          warn "Error connecting to MongoDB: #{e.message}"
+          raise e
+        end
+      elsif SlackRubyBotServer::Config.pg?
+        begin
+          begin
+            ActiveRecord::Base.connection_pool.with_connection(&:active?)
+          rescue
+            false
+          end
+          warn 'Error connecting to PostgreSQL: ActiveRecord cannot connect.' unless ActiveRecord::Base.connected?
+        rescue Exception => e
+          warn "Error connecting to PostgreSQL: #{e.message}"
+          raise e
+        end
       end
     end
 
-    def check_database!
-      rc = Mongoid.default_client.command(ping: 1)
-      return if rc && rc.ok?
-      raise rc.documents.first['error'] || 'Unexpected error.'
-    rescue Exception => e
-      warn "Error connecting to MongoDB: #{e.message}"
-      raise e
-    end
-
     def create_indexes!
-      ::Mongoid::Tasks::Database.create_indexes
+      if SlackRubyBotServer::Config.mongoid?
+        ::Mongoid::Tasks::Database.create_indexes
+      elsif SlackRubyBotServer::Config.pg?
+        unless ActiveRecord::Base.connection.tables.include?('teams')
+          ActiveRecord::Base.connection.create_table :teams do |t|
+            t.string :team_id
+            t.string :name
+            t.string :domain
+            t.string :token
+            t.boolean :active
+            t.timestamps
+          end
+        end
+      end
     end
 
     def mark_teams_active!

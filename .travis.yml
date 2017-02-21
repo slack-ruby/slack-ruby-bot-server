@@ -11,13 +11,11 @@ matrix:
       script:
         - bundle exec danger
     - rvm: 2.3.1
-    - rvm: 2.3.0
-    - rvm: ruby-head
-    - rvm: jruby-head
-  allow_failures:
-    - rvm: ruby-head
-    - rvm: jruby-head
+      env: DATABASE_ADAPTER=pg
+    - rvm: 2.3.1
+      env: DATABASE_ADAPTER=mongoid
 
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+

@@ -15,7 +15,11 @@ module SlackRubyBotServer
         property :ping
 
         def ping
-          team = Team.asc(:_id).first
+          if SlackRubyBotServer::Config.mongoid?
+            team = Team.asc(:_id).first
+          elsif SlackRubyBotServer::Config.pg?
+            team = Team.last
+          end
           return unless team
           team.ping!
         end
