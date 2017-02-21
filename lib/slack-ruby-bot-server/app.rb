@@ -42,8 +42,12 @@ module SlackRubyBotServer
         end
       elsif SlackRubyBotServer::Config.pg?
         begin
-          ActiveRecord::Base.connection_pool.with_connection(&:active?) rescue false
-          warn "Error connecting to PostgreSQL: ActiveRecord cannot connect." unless ActiveRecord::Base.connected?
+          begin
+            ActiveRecord::Base.connection_pool.with_connection(&:active?)
+          rescue
+            false
+          end
+          warn 'Error connecting to PostgreSQL: ActiveRecord cannot connect.' unless ActiveRecord::Base.connected?
         rescue Exception => e
           warn "Error connecting to PostgreSQL: #{e.message}"
           raise e

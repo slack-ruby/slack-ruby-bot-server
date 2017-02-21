@@ -2,7 +2,6 @@ require_relative 'methods.rb'
 require 'active_record'
 
 class Team < ActiveRecord::Base
-
   include Methods
 
   def self.purge!

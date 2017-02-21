@@ -1,7 +1,7 @@
 ActiveRecord::Schema.define do
   self.verbose = false
 
-  create_table :teams, :force => true do |t|
+  create_table :teams, force: true do |t|
     t.integer :team_id
     t.string :name
     t.boolean :active
@@ -10,6 +10,4 @@ ActiveRecord::Schema.define do
 
     t.timestamps
   end
-
 end
-

@@ -2,7 +2,6 @@ module Methods
   extend ActiveSupport::Concern
 
   included do
-
     attr_accessor :server # server at runtime
 
     SORT_ORDERS = ['created_at', '-created_at', 'updated_at', '-updated_at'].freeze
