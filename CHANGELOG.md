@@ -2,6 +2,7 @@
 
 #### 0.5.1 (Next)
 
+* [#45](https://github.com/slack-ruby/slack-ruby-bot-server/pull/45): Updated grape-roar to 0.4.0 - [@swalberg](https://github.com/swalberg).
 * Your contribution here.
 
 #### 0.5.0 (2/9/2017)
