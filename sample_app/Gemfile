@@ -6,6 +6,7 @@ gem 'newrelic-slack-ruby-bot'
 group :test do
   gem 'rake'
   gem 'rspec'
+  gem 'rack-test'
   gem 'fabrication'
   gem 'faker'
   gem 'vcr'
