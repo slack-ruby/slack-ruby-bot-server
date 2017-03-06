@@ -3,6 +3,7 @@ $LOAD_PATH.unshift File.expand_path('..', __dir__)
 ENV['RACK_ENV'] = 'test'
 
 require 'slack-ruby-bot-server/rspec'
+require 'database_cleaner'
 
 Mongoid.load!(File.expand_path('../config/mongoid.yml', __dir__), ENV['RACK_ENV'])
 
