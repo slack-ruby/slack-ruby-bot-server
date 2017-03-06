@@ -9,7 +9,7 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
     let(:existing_team) { Fabricate(:team) }
     it 'returns a team' do
       team = client.team(id: existing_team.id)
-      expect(team.id).to eq existing_team.id.to_s
+      expect(team.id.to_s).to eq existing_team.id.to_s
       expect(team._links.self._url).to eq "http://example.org/api/teams/#{existing_team.id}"
     end
   end
@@ -34,7 +34,7 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
     let(:existing_team) { Fabricate(:team) }
     it 'returns a team' do
       team = client.team(id: existing_team.id)
-      expect(team.id).to eq existing_team.id.to_s
+      expect(team.id.to_s).to eq existing_team.id.to_s
     end
 
     it 'requires code' do

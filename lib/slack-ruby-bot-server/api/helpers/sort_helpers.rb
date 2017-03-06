@@ -37,7 +37,11 @@ module SlackRubyBotServer
         def sort(coll, options = {})
           sort_order = sort_order(options)
           unless sort_order.empty?
-            if coll.respond_to?(:asc) && coll.respond_to?(:desc)
+            if coll.respond_to?(:order)
+              sort_order.each do |s|
+                coll = coll.order(s[:column] => s[:direction])
+              end
+            elsif coll.respond_to?(:asc) && coll.respond_to?(:desc)
               sort_order.each do |s|
                 coll = coll.send(s[:direction], s[:column])
               end

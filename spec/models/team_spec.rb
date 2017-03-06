@@ -29,11 +29,11 @@ describe Team do
       expect do
         Team.purge!
       end.to change(Team, :count).by(-2)
-      expect(Team.find(active_team.id)).to eq active_team
-      expect(Team.find(inactive_team.id)).to eq inactive_team
-      expect(Team.find(inactive_team_a_week_ago.id)).to eq inactive_team_a_week_ago
-      expect(Team.find(inactive_team_two_weeks_ago.id)).to be nil
-      expect(Team.find(inactive_team_a_month_ago.id)).to be nil
+      expect(Team.where(id: active_team.id).first).to eq active_team
+      expect(Team.where(id: inactive_team.id).first).to eq inactive_team
+      expect(Team.where(id: inactive_team_a_week_ago.id).first).to eq inactive_team_a_week_ago
+      expect(Team.where(id: inactive_team_two_weeks_ago.id).first).to be nil
+      expect(Team.where(id: inactive_team_a_month_ago.id).first).to be nil
     end
   end
 end

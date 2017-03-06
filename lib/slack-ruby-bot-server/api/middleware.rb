@@ -1,4 +1,7 @@
-%w(rack/cors rack-rewrite rack-server-pages).each { |l| require l }
+require 'rack/cors'
+require 'rack-rewrite'
+require 'rack-server-pages'
+require 'otr-activerecord' if SlackRubyBotServer::Config.activerecord?
 
 module SlackRubyBotServer
   module Api
@@ -12,6 +15,8 @@ module SlackRubyBotServer
 
       def self.instance
         @instance ||= Rack::Builder.new do
+          use OTR::ActiveRecord::ConnectionManagement if SlackRubyBotServer::Config.activerecord?
+
           use Rack::Cors do
             allow do
               origins '*'

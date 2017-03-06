@@ -15,7 +15,13 @@ module SlackRubyBotServer
         property :ping
 
         def ping
-          team = Team.asc(:_id).first
+          if SlackRubyBotServer::Config.mongoid?
+            team = Team.asc(:_id).first
+          elsif SlackRubyBotServer::Config.activerecord?
+            team = Team.last
+          else
+            raise 'Unsupported database driver.'
+          end
           return unless team
           team.ping!
         end

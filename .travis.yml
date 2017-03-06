@@ -2,22 +2,21 @@ language: ruby
 
 cache: bundler
 
-services:
-  - mongodb
-
 matrix:
   include:
     - rvm: 2.3.1
       script:
         - bundle exec danger
     - rvm: 2.3.1
-    - rvm: 2.3.0
-    - rvm: ruby-head
-    - rvm: jruby-head
-  allow_failures:
-    - rvm: ruby-head
-    - rvm: jruby-head
+      env: DATABASE_ADAPTER=activerecord
+      services:
+        - postgresql
+    - rvm: 2.3.1
+      env: DATABASE_ADAPTER=mongoid
+      services:
+        - mongodb
 
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+
