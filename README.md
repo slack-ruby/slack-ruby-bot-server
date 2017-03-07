@@ -31,11 +31,11 @@ You can use the [sample application](sample_app) to bootstrap your project and s
 
 ### MongoDB
 
-Use MongoDB with [Mongoid](https://github.com/mongodb/mongoid) as ODM. Configure the database connection in `mongoid.yml`. See the [MongoDB example](sample_apps/sample_app_mongoid) for more information.
+Use MongoDB with [Mongoid](https://github.com/mongodb/mongoid) as ODM. Configure the database connection in `mongoid.yml`. Add the `mongoid` gem in your Gemfile. See the [MongoDB example](sample_apps/sample_app_mongoid) for more information.
 
 ### ActiveRecord
 
-Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Configure the database connection in `postgresql.yml`. See the [ActiveRecord example](sample_apps/sample_app_activerecord) for more information.
+Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Add the `activerecord`, `pg`, `otr-activerecord` and `cursor_pagination` gems to your Gemfile. Configure the database connection in `postgresql.yml`. See the [ActiveRecord example](sample_apps/sample_app_activerecord) for more information.
 
 ### Usage
 
