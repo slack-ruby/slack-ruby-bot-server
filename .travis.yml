@@ -22,4 +22,4 @@ before_install:
 
 script:
   - bundle exec rake
-  - pushd sample_apps/sample_app_$DATABASE_ADAPTER && bundle && bundle exec rake && popd
+  - BUNDLE_GEMFILE=Gemfile && cd sample_apps/sample_app_$DATABASE_ADAPTER && bundle && bundle exec rake
