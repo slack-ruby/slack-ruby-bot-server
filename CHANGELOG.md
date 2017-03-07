@@ -10,7 +10,7 @@
 #### 0.5.0 (2/9/2017)
 
 * [#43](https://github.com/slack-ruby/slack-ruby-bot-server/pull/43): Fix: `cannot load kaminari/grape` - [@dblock](https://github.com/dblock).
-* [#43](https://github.com/slack-ruby/slack-ruby-bot-server/pull/43): Fix: `undefined method `[]' for nil:NilClass` in APIs - [@dblock](https://github.com/dblock).
+* [#43](https://github.com/slack-ruby/slack-ruby-bot-server/pull/43): Fix: `undefined method '[]' for nil:NilClass` in APIs - [@dblock](https://github.com/dblock).
 * [#28](https://github.com/slack-ruby/slack-ruby-bot-server/pull/28): Use slack-ruby-danger gem - [@dblock](https://github.com/dblock).
 * [#31](https://github.com/slack-ruby/slack-ruby-bot-server/pull/31): Adds MONGODB_URI as environment variable for MongoDB - [@corprew](https://github.com/corprew).
 
