@@ -5,6 +5,8 @@ gem 'newrelic-slack-ruby-bot'
 gem 'rack-server-pages'
 gem 'pg'
 gem 'activerecord'
+gem 'rack-test'
+gem 'otr-activerecord'
 
 group :test do
   gem 'rake'
