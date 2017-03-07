@@ -1,12 +1,16 @@
 source 'https://rubygems.org'
 
+gem 'pg'
+gem 'activerecord', require: 'active_record'
 gem 'slack-ruby-bot-server', path: '../../'
 gem 'newrelic-slack-ruby-bot'
 gem 'rack-server-pages'
-gem 'pg'
-gem 'activerecord'
 gem 'rack-test'
 gem 'otr-activerecord'
+
+group :development, :test do
+  gem 'standalone_migrations'
+end
 
 group :test do
   gem 'rake'

@@ -1,6 +1,31 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.6.0
+
+#### Mongoid and ActiveRecord support
+
+Version 0.6.0 supports both Mongoid and ActiveRecord. The `mongoid` gem is no longer a dependency, so you must manually add the gems in your Gemfile.
+
+##### Mongoid
+
+```
+gem 'mongoid'
+gem 'slack-ruby-bot-server'
+```
+
+##### ActiveRecord (with PostgreSQL)
+
+```
+gem 'pg'
+gem 'activerecord', require: 'active_record'
+gem 'slack-ruby-bot-server'
+```
+
+The order matters, and the driver is required _first_, otherwise you will get a `One of "mongoid" or "activerecord" is required.` error.
+
+See [#48](https://github.com/slack-ruby/slack-ruby-bot-server/pull/48) for more information.
+
 ### Upgrading to >= 0.4.0
 
 #### Add giphy to your Gemfile for GIF support
