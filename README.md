@@ -17,7 +17,7 @@ You're reading the documentation for the **next** release of slack-ruby-bot-serv
 
 ### Try Me
 
-A demo version of the [sample app](sample_app) is running on Heroku at [slack-ruby-bot-server.herokuapp.com](https://slack-ruby-bot-server.herokuapp.com). Use the _Add to Slack_ button. The bot will join your team as _@slackbotserver_.
+A demo version of the [sample app with mongoid](sample_apps/sample_app_mongoid) is running on Heroku at [slack-ruby-bot-server.herokuapp.com](https://slack-ruby-bot-server.herokuapp.com). Use the _Add to Slack_ button. The bot will join your team as _@slackbotserver_.
 
 ![](images/slackbutton.gif)
 
@@ -27,7 +27,7 @@ Once a bot is registered, you can invite to a channel with `/invite @slackbotser
 
 ### Run Your Own
 
-You can use the [sample application](sample_app) to bootstrap your project and start adding slack command handlers on top of this code. A database is required to store teams.
+You can use one of the [sample applications](sample_apps) to bootstrap your project and start adding slack command handlers on top of this code. A database is required to store teams.
 
 ### MongoDB
 
@@ -38,7 +38,7 @@ gem 'mongoid'
 gem 'slack-ruby-bot-server'
 ```
 
-See the [MongoDB example](sample_apps/sample_app_mongoid) for more information.
+See the [sample app using Mongoid](sample_apps/sample_app_mongoid) for more information.
 
 ### ActiveRecord
 
@@ -52,7 +52,7 @@ gem 'otr-activerecord'
 gem 'cursor_pagination'
 ```
 
-See the [ActiveRecord example](sample_apps/sample_app_activerecord) for more information.
+See the [sample app using ActiveRecord](sample_apps/sample_app_activerecord) for more information.
 
 ### Usage
 
