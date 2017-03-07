@@ -1,10 +1,8 @@
 module SlackRubyBotServer
   class App
     def prepare!
-      silence_loggers!
-      check_mongodb_provider!
       check_database!
-      create_indexes!
+      init_database!
       mark_teams_active!
       migrate_from_single_team!
       update_team_name_and_id!
@@ -25,29 +23,12 @@ module SlackRubyBotServer
       end
     end
 
-    def silence_loggers!
-      Mongoid.logger.level = Logger::INFO
-      Mongo::Logger.logger.level = Logger::INFO
-    end
-
-    def check_mongodb_provider!
-      return unless ENV['RACK_ENV'] == 'production'
-      unless ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGODB_URI'] || ENV['MONGOLAB_URI']
-        raise "Missing ENV['MONGO_URL'], ENV['MONGOHQ_URI'], ENV['MONGODB_URI'], or ENV['MONGOLAB_URI']."
-      end
-    end
-
     def check_database!
-      rc = Mongoid.default_client.command(ping: 1)
-      return if rc && rc.ok?
-      raise rc.documents.first['error'] || 'Unexpected error.'
-    rescue Exception => e
-      warn "Error connecting to MongoDB: #{e.message}"
-      raise e
+      SlackRubyBotServer::DatabaseAdapter.check!
     end
 
-    def create_indexes!
-      ::Mongoid::Tasks::Database.create_indexes
+    def init_database!
+      SlackRubyBotServer::DatabaseAdapter.init!
     end
 
     def mark_teams_active!

@@ -26,7 +26,7 @@ module SlackRubyBotServer
           get do
             teams = Team.all
             teams = teams.active if params[:active]
-            teams = paginate_and_sort_by_cursor(teams, default_sort_order: '-_id')
+            teams = paginate_and_sort_by_cursor(teams, default_sort_order: '-id')
             present teams, with: Presenters::TeamsPresenter
           end
 

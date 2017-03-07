@@ -17,7 +17,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'slack-ruby-bot'
   spec.add_dependency 'celluloid-io'
-  spec.add_dependency 'mongoid'
   spec.add_dependency 'unicorn'
   spec.add_dependency 'grape'
   spec.add_dependency 'grape-swagger'

@@ -8,28 +8,41 @@ module SlackRubyBotServer
         # returns a hash:
         #   results: (paginated collection subset)
         #   next: (cursor to the next page)
-        def paginate_by_cursor(coll, &_block)
-          raise 'Both cursor and offset parameters are present, these are mutually exclusive.' if params.key?(:offset) && params.key?(:cursor)
-          results = { results: [], next: nil }
-          size = (params[:size] || 10).to_i
-          if params.key?(:offset)
-            skip = params[:offset].to_i
-            coll = coll.skip(skip)
+        if SlackRubyBotServer::Config.mongoid?
+          def paginate_by_cursor(coll, _options)
+            raise 'Both cursor and offset parameters are present, these are mutually exclusive.' if params.key?(:offset) && params.key?(:cursor)
+            results = { results: [], next: nil }
+            coll = coll.skip(params[:offset].to_i) if params.key?(:offset)
+            size = (params[:size] || 10).to_i
+            coll = coll.limit(size)
+            coll.scroll(params[:cursor]) do |record, next_cursor|
+              results[:results] << record if record
+              results[:next] = next_cursor.to_s
+              break if results[:results].count >= size
+            end
+            results[:total_count] = coll.count if params[:total_count] && coll.respond_to?(:count)
+            results
           end
-          # some items may be skipped with a block
-          query = block_given? ? coll : coll.limit(size)
-          query.scroll(params[:cursor]) do |record, next_cursor|
-            record = yield(record) if block_given?
-            results[:results] << record if record
-            results[:next] = next_cursor.to_s
-            break if results[:results].count >= size
+        elsif SlackRubyBotServer::Config.activerecord?
+          def paginate_by_cursor(coll, options)
+            raise 'Both cursor and offset parameters are present, these are mutually exclusive.' if params.key?(:offset) && params.key?(:cursor)
+            results = { results: [], next: nil }
+            size = (params[:size] || 10).to_i
+            results[:total_count] = coll.count(:all) if params[:total_count]
+            coll = coll.offset(params[:offset].to_i) if params.key?(:offset)
+            sort_options = {}
+            sort_order(options).each do |order|
+              sort_options[order[:column]] = { reverse: true } if order[:direction] == :desc
+            end
+            coll = coll.cursor(params[:cursor], columns: sort_options).per(size)
+            results[:results] = coll.to_a
+            results[:next] = coll.next_cursor.to_s unless coll.last_page?
+            results
           end
-          results[:total_count] = coll.count if params[:total_count] && coll.respond_to?(:count)
-          results
         end
 
-        def paginate_and_sort_by_cursor(coll, options = {}, &block)
-          Hashie::Mash.new(paginate_by_cursor(sort(coll, options), &block))
+        def paginate_and_sort_by_cursor(coll, options = {})
+          Hashie::Mash.new(paginate_by_cursor(sort(coll, options), options))
         end
       end
     end

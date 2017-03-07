@@ -1,0 +1,3 @@
+db_config = YAML.load(File.read(File.expand_path('../../../sample_apps/sample_app_activerecord/config/postgresql.yml', __dir__)))[ENV['RACK_ENV']]
+ActiveRecord::Tasks::DatabaseTasks.create(db_config)
+ActiveRecord::Base.establish_connection(db_config)

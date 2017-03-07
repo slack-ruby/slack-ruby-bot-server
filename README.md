@@ -27,9 +27,17 @@ Once a bot is registered, you can invite to a channel with `/invite @slackbotser
 
 ### Run Your Own
 
-You can use the [sample application](sample_app) to bootstrap your project and start adding slack command handlers on top of this code.
+You can use the [sample application](sample_app) to bootstrap your project and start adding slack command handlers on top of this code. A database is required to store teams.
 
-Install [MongoDB](https://www.mongodb.org/downloads), required to store teams. We would like your help with [supporting other databases](https://github.com/slack-ruby/slack-ruby-bot-server/issues/12).
+### MongoDB
+
+Use MongoDB with [Mongoid](https://github.com/mongodb/mongoid) as ODM. Configure the database connection in `mongoid.yml`. See the [MongoDB example](sample_apps/sample_app_mongoid) for more information.
+
+### ActiveRecord
+
+Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Configure the database connection in `postgresql.yml`. See the [ActiveRecord example](sample_apps/sample_app_activerecord) for more information.
+
+### Usage
 
 [Create a New Application](https://api.slack.com/applications/new) on Slack.
 
