@@ -1,11 +1,10 @@
 ### Changelog
 
-#### 0.6.0 (Next)
+#### 0.6.0 (3/12/2017)
 
 * [#38](https://github.com/slack-ruby/slack-ruby-bot-server/issues/7): Added ActiveRecord support - [@zachfeldman](https://github.com/zachfeldman), [@spencerldixon](https://github.com/spencerldixon), [@dblock](https://github.com/dblock).
 * [#45](https://github.com/slack-ruby/slack-ruby-bot-server/pull/45): Updated grape-roar to 0.4.0 - [@swalberg](https://github.com/swalberg).
 * [#49](https://github.com/slack-ruby/slack-ruby-bot-server/pull/49): Run tests in the sample apps part of CI - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 #### 0.5.0 (2/9/2017)
 
