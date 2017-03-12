@@ -35,6 +35,8 @@ Use MongoDB with [Mongoid](https://github.com/mongodb/mongoid) as ODM. Configure
 
 ```
 gem 'mongoid'
+gem 'kaminari-mongoid'
+gem 'mongoid-scroll'
 gem 'slack-ruby-bot-server'
 ```
 
