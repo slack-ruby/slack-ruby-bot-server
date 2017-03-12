@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.6.1 (Next)
+
+* Your contribution here.
+
 #### 0.6.0 (3/12/2017)
 
 * [#38](https://github.com/slack-ruby/slack-ruby-bot-server/issues/7): Added ActiveRecord support - [@zachfeldman](https://github.com/zachfeldman), [@spencerldixon](https://github.com/spencerldixon), [@dblock](https://github.com/dblock).
