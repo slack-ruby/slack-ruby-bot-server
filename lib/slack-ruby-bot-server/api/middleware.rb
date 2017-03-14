@@ -1,7 +1,7 @@
 require 'rack/cors'
 require 'rack-rewrite'
 require 'rack-server-pages'
-require 'otr-activerecord' if SlackRubyBotServer::Config.activerecord?
+require 'otr-activerecord' if SlackRubyBotServer::Config.activerecord? && !defined?(::Rails)
 
 module SlackRubyBotServer
   module Api
