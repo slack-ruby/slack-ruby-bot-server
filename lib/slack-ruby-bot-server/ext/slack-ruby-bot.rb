@@ -1,3 +1,2 @@
-%w(client commands/base).each do |ext|
-  require_relative "slack-ruby-bot/#{ext}"
-end
+require_relative 'slack-ruby-bot/client'
+require_relative "#{SlackRubyBotServer::Config.database_adapter}/slack-ruby-bot/commands/base"
