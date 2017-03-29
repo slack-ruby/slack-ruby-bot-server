@@ -1,8 +1,7 @@
 ### Changelog
 
-#### 0.6.1 (Next)
+#### 0.6.1 (3/29/2017)
 
-* Your contribution here.
 * [#54](https://github.com/slack-ruby/slack-ruby-bot-server/pull/54): Removing one more Mongoid dependency when rescuing from _invoke - [@alexagranov](https://github.com/alexagranov).
 * [#53](https://github.com/slack-ruby/slack-ruby-bot-server/pull/53): No need for `otr-activerecord` if using activerecord under Rails - [@alexagranov](https://github.com/alexagranov).
 
