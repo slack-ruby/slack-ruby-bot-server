@@ -5,7 +5,7 @@ require 'rspec/core'
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = FileList['spec/**/*_spec.rb']
+  spec.pattern = FileList['spec/**/*_spec.rb'].exclude(%r{ext\/(?!#{ENV['DATABASE_ADAPTER']})})
 end
 
 require 'rubocop/rake_task'
