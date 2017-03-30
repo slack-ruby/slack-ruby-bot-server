@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.6.2 (Next)
+
+* Your contribution here.
+
 #### 0.6.1 (3/29/2017)
 
 * [#54](https://github.com/slack-ruby/slack-ruby-bot-server/pull/54): Removing one more Mongoid dependency when rescuing from _invoke - [@alexagranov](https://github.com/alexagranov).
