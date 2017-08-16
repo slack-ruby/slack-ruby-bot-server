@@ -34,8 +34,8 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'hyperclient'
-  gem 'capybara'
-  gem 'selenium-webdriver', '~> 2.5'
+  gem 'capybara', '~> 2.15.1'
+  gem 'selenium-webdriver', '~> 3.4.4'
 end
 
 group :test do
