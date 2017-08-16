@@ -7,8 +7,8 @@ when 'mongoid' then
   gem 'mongoid-scroll'
 when 'activerecord' then
   gem 'pg'
-  gem 'activerecord'
-  gem 'otr-activerecord'
+  gem 'activerecord', '~> 5.0.0'
+  gem 'otr-activerecord', '~> 1.2.1'
   gem 'cursor_pagination'
 when nil then
   warn "Missing ENV['DATABASE_ADAPTER']."
