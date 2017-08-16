@@ -7,8 +7,8 @@ when 'mongoid' then
   gem 'mongoid-scroll'
 when 'activerecord' then
   gem 'pg'
-  gem 'activerecord'
-  gem 'otr-activerecord'
+  gem 'activerecord', '~> 5.0.0'
+  gem 'otr-activerecord', '~> 1.2.1'
   gem 'cursor_pagination'
 when nil then
   warn "Missing ENV['DATABASE_ADAPTER']."
@@ -34,8 +34,8 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'hyperclient'
-  gem 'capybara'
-  gem 'selenium-webdriver', '~> 2.5'
+  gem 'capybara', '~> 2.15.1'
+  gem 'selenium-webdriver', '~> 3.4.4'
 end
 
 group :test do

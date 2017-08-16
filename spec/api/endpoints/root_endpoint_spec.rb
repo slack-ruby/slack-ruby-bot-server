@@ -26,9 +26,4 @@ describe SlackRubyBotServer::Api::Endpoints::RootEndpoint do
     expect(last_response.status).to eq 302
     expect(last_response.headers['Location']).to eq '/api/teams/'
   end
-  it 'rewrites unencoded HAL links to make them clickable' do
-    get '/api/teams/%7B?cursor,size}'
-    expect(last_response.status).to eq 302
-    expect(last_response.headers['Location']).to eq '/api/teams/'
-  end
 end
