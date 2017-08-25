@@ -15,7 +15,9 @@ module SlackRubyBotServer
 
       def self.instance
         @instance ||= Rack::Builder.new do
-          use OTR::ActiveRecord::ConnectionManagement if SlackRubyBotServer::Config.activerecord?
+          if SlackRubyBotServer::Config.activerecord? && defined?(::OTR)
+            use OTR::ActiveRecord::ConnectionManagement
+          end
 
           use Rack::Cors do
             allow do
