@@ -4,7 +4,7 @@
 
 * [#60](https://github.com/slack-ruby/slack-ruby-bot-server/pull/60): Log caught Standard::Error backtrace at debug-level - [@alexagranov](https://github.com/alexagranov).
 * [#65](https://github.com/slack-ruby/slack-ruby-bot-server/pull/65): Updated Capybara and selenium-webdriver - [@dblock](https://github.com/dblock).
-* [#67](https://github.com/slack-ruby/slack-ruby-bot-server/pull/67): Only load the OTR::ActiveRecord::ConnectionManagement middleware when the OTR module is included. This module isn't needed when using Rails.
+* [#67](https://github.com/slack-ruby/slack-ruby-bot-server/pull/67): Only load the OTR::ActiveRecord::ConnectionManagement middleware when the OTR module is included. This module isn't needed when using Rails - [@darbyfrey](https://github.com/darbyfrey).
 * Your contribution here.
 
 #### 0.6.1 (3/29/2017)
