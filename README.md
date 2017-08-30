@@ -166,13 +166,14 @@ You can see a sample implementation in [slack-sup#3a497b](https://github.com/dbl
 ### Examples Using Slack Ruby Bot Server
 
 * [slack-amber-alert](https://github.com/dblock/slack-amber-alert), free service at [missingkidsbot.org](https://www.missingkidsbot.org)
+* [slack-sup](https://github.com/dblock/slack-sup), free service at [sup.playplay.io](https://sup.playplay.io)
 * [slack-gamebot](https://github.com/dblock/slack-gamebot), free service at [www.playplay.io](https://www.playplay.io)
 * [slack-market](https://github.com/dblock/slack-market), free service at [market.playplay.io](https://market.playplay.io)
-* [slack-shallbot](https://github.com/slack-ruby/slack-shellbot), free service at [shell.playplay.io](https://shell.playplay.io)
+* [slack-shellbot](https://github.com/slack-ruby/slack-shellbot), free service at [shell.playplay.io](https://shell.playplay.io)
 * [slack-api-explorer](https://github.com/slack-ruby/slack-api-explorer), free service at [api-explorer.playplay.io](https://shell.playplay.io)
 
 ### Copyright & License
 
-Copyright [Daniel Doubrovkine](http://code.dblock.org), 2015-2016
+Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2017
 
 [MIT License](LICENSE)
