@@ -152,6 +152,17 @@ SlackRubyBotServer.configure do |config|
 end
 ```
 
+### Access Tokens
+
+By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) stores a `bot_access_token` that grants a certain amount of privileges to the bot user as described in [Slack OAuth Docs](https://api.slack.com/docs/oauth). You may not want a bot user at all, or may require different auth scopes, such as `users.profile:read` to access user profile information via `Slack::Web::Client#users_profile_get`. To obtain the non-bot access token make the following changes.
+
+1) Configure your app to require additional scopes in Slack API under _OAuth_, _Permissions_
+2) Add `access_token` and, optionally, `scope` to your `Team` model
+3) Change the _Add to Slack_ buttons to require the additional scope, eg. `https://slack.com/oauth/authorize?scope=bot,users.profile:read&client_id=...`
+4) Store the access token returned from `Slack::Web::Client#oauth_access` and scope when creating a team in your `Teams` API endpoint.
+
+You can see a sample implementation in [slack-sup#3a497b](https://github.com/dblock/slack-sup/commit/3a497b436d25d3a7738562655cda64b180ae0096).
+
 ### Examples Using Slack Ruby Bot Server
 
 * [slack-amber-alert](https://github.com/dblock/slack-amber-alert), free service at [missingkidsbot.org](https://www.missingkidsbot.org)
