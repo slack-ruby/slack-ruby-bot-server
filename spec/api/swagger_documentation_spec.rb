@@ -9,7 +9,11 @@ describe SlackRubyBotServer::Api do
       JSON.parse(last_response.body)
     end
     it 'documents root level apis' do
-      expect(subject['paths'].keys).to eq ['/api/status', '/api/teams/{id}', '/api/teams']
+      expect(subject['paths'].keys.sort).to eq [
+        '/api/status',
+        '/api/teams/{id}',
+        '/api/teams'
+      ].sort
     end
   end
 
@@ -19,7 +23,10 @@ describe SlackRubyBotServer::Api do
       JSON.parse(last_response.body)
     end
     it 'documents teams apis' do
-      expect(subject['paths'].keys).to eq ['/api/teams/{id}', '/api/teams']
+      expect(subject['paths'].keys.sort).to eq [
+        '/api/teams/{id}',
+        '/api/teams'
+      ].sort
     end
   end
 end

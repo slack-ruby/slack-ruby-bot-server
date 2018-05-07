@@ -11,6 +11,6 @@ end
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new
 
-task default: [:rubocop, :spec]
+task default: %i[rubocop spec]
 
 import 'tasks/db.rake'

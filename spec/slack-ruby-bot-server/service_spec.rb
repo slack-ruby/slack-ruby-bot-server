@@ -70,7 +70,7 @@ describe SlackRubyBotServer::Service do
             @events << event.to_s
           end
         end
-        [:started, :stopping, :stopped].each do |event|
+        %i[started stopping stopped].each do |event|
           instance.on event do |team, _e|
             expect(team).to_not be_nil
             expect(team.server).to_not be_nil
@@ -84,7 +84,7 @@ describe SlackRubyBotServer::Service do
       SlackRubyBotServer::Service.instance.start!(team)
       allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
       SlackRubyBotServer::Service.instance.stop!(team)
-      expect(@events).to eq %w(starting started stopping stopped)
+      expect(@events).to eq %w[starting started stopping stopped]
     end
   end
 end
