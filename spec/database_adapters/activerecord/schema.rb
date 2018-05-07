@@ -1,3 +1,5 @@
+require_relative 'activerecord'
+
 ActiveRecord::Schema.define do
   self.verbose = false
 

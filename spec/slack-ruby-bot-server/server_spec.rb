@@ -8,7 +8,7 @@ describe SlackRubyBotServer::Server do
       SlackRubyBotServer::Server.new(
         team: team,
         send_gifs: false,
-        aliases: %w(foo bar)
+        aliases: %w[foo bar]
       )
     end
     before do
@@ -22,7 +22,7 @@ describe SlackRubyBotServer::Server do
       expect(subject.send(:client).token).to eq 'token'
     end
     it 'sets aliases' do
-      expect(subject.send(:client).aliases).to eq %w(foo bar)
+      expect(subject.send(:client).aliases).to eq %w[foo bar]
       expect(subject.send(:client).names).to include 'foo'
     end
   end

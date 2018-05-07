@@ -1,19 +1,19 @@
 source 'https://rubygems.org'
 
 gem 'mongoid'
-gem 'slack-ruby-bot-server', path: '../../'
 gem 'newrelic-slack-ruby-bot'
+gem 'slack-ruby-bot-server', path: '../../'
 
 gem 'kaminari-mongoid'
 gem 'mongoid-scroll'
 
 group :test do
-  gem 'rake'
-  gem 'rspec'
+  gem 'database_cleaner'
   gem 'fabrication'
   gem 'faker'
+  gem 'rack-test'
+  gem 'rake'
+  gem 'rspec'
   gem 'vcr'
   gem 'webmock'
-  gem 'database_cleaner'
-  gem 'rack-test'
 end

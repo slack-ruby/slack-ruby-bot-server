@@ -1,23 +1,23 @@
 source 'https://rubygems.org'
 
-gem 'pg'
 gem 'activerecord', '~> 5.0.0', require: 'active_record'
-gem 'slack-ruby-bot-server', path: '../../'
 gem 'newrelic-slack-ruby-bot'
+gem 'otr-activerecord', '~> 1.2.1'
+gem 'pg'
 gem 'rack-server-pages'
 gem 'rack-test'
-gem 'otr-activerecord', '~> 1.2.1'
+gem 'slack-ruby-bot-server', path: '../../'
 
 group :development, :test do
-  gem 'standalone_migrations'
+  gem 'standalone_migrations', '~> 5.2'
 end
 
 group :test do
-  gem 'rake'
-  gem 'rspec'
+  gem 'database_cleaner'
   gem 'fabrication'
   gem 'faker'
+  gem 'rake'
+  gem 'rspec'
   gem 'vcr'
   gem 'webmock'
-  gem 'database_cleaner'
 end

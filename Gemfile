@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 
 case ENV['DATABASE_ADAPTER']
 when 'mongoid' then
-  gem 'mongoid'
   gem 'kaminari-mongoid'
+  gem 'mongoid'
   gem 'mongoid-scroll'
 when 'activerecord' then
-  gem 'pg'
   gem 'activerecord', '~> 5.0.0'
   gem 'otr-activerecord', '~> 1.2.1'
-  gem 'cursor_pagination'
+  gem 'cursor_pagination' # rubocop:disable Bundler/OrderedGems
+  gem 'pg'
 when nil then
   warn "Missing ENV['DATABASE_ADAPTER']."
 else
@@ -19,23 +19,23 @@ end
 gemspec
 
 group :development, :test do
-  gem 'rack-server-pages'
   gem 'bundler'
-  gem 'rake'
-  gem 'rspec'
-  gem 'rubocop', '0.40.0'
   gem 'byebug'
-  gem 'mongoid-shell'
-  gem 'heroku'
-  gem 'rack-test'
-  gem 'webmock'
-  gem 'vcr'
+  gem 'capybara', '~> 2.15.1'
+  gem 'database_cleaner'
   gem 'fabrication'
   gem 'faker'
-  gem 'database_cleaner'
+  gem 'heroku'
   gem 'hyperclient'
-  gem 'capybara', '~> 2.15.1'
+  gem 'mongoid-shell'
+  gem 'rack-server-pages'
+  gem 'rack-test'
+  gem 'rake'
+  gem 'rspec'
+  gem 'rubocop', '0.55.0'
   gem 'selenium-webdriver', '~> 3.4.4'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :test do

@@ -6,7 +6,7 @@ require 'active_record'
 require 'database_cleaner'
 require 'slack-ruby-bot-server/rspec'
 
-db_config = YAML.load(File.read(File.expand_path('../config/postgresql.yml', __dir__)))[ENV['RACK_ENV']]
+db_config = YAML.safe_load(File.read(File.expand_path('../config/postgresql.yml', __dir__)), [], [], true)[ENV['RACK_ENV']]
 ActiveRecord::Tasks::DatabaseTasks.create(db_config)
 ActiveRecord::Base.establish_connection(db_config)
 
