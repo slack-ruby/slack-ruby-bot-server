@@ -57,7 +57,7 @@ module SlackRubyBotServer
 
     def restart!
       logger.warn "RESTART: #{owner}"
-      driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'bot offline'))
+      driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'bot offline')) if driver
       terminate
     end
 
