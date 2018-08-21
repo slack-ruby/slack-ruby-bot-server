@@ -10,7 +10,6 @@ module SlackRubyBotServer
       @options = options
       @client = client
       @error_count = 0
-      logger.level = Logger::INFO
     end
 
     def start!
@@ -22,8 +21,11 @@ module SlackRubyBotServer
     private
 
     def check!
-      return if online?
-      down!
+      if online?
+        @error_count = 0
+      else
+        down!
+      end
     rescue StandardError => e
       case e.message
       when 'account_inactive', 'invalid_auth' then
@@ -60,7 +62,7 @@ module SlackRubyBotServer
     end
 
     def ping_interval
-      options[:ping_interval] || 3 * 60
+      options[:ping_interval] || 60
     end
 
     def retries_left?
