@@ -1,7 +1,7 @@
 namespace :db do
   def logger
     @logger ||= begin
-      $stdout.sync = true
+      STDOUT.sync = true
       Logger.new(STDOUT)
     end
   end
