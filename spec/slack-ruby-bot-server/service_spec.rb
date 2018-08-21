@@ -59,6 +59,21 @@ describe SlackRubyBotServer::Service do
       SlackRubyBotServer::Service.instance.stop!(team)
     end
   end
+  context 'overriding ping' do
+    after do
+      SlackRubyBotServer.config.reset!
+    end
+    it 'creates an instance of server class' do
+      expect(SlackRubyBotServer::Server).to receive(:new).with(team: team, ping: { retry_interval: 42 }).and_call_original
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
+      SlackRubyBotServer.configure do |config|
+        config.ping = { retry_interval: 42 }
+      end
+      SlackRubyBotServer::Service.instance.start!(team)
+      SlackRubyBotServer::Service.instance.stop!(team)
+    end
+  end
   context 'callbacks' do
     before do
       @events = []

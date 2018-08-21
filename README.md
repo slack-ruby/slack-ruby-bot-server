@@ -154,7 +154,19 @@ end
 
 #### Ping Worker
 
-Each `SlackRubyBotServer::Server` instance will start a ping worker that will periodically check the online status of the bot and will forcefully close the connection if the bot goes offline, causing an automatic reconnect.
+Each `SlackRubyBotServer::Server` instance will start a ping worker that will periodically check the online status of the bot via the Slack web [auth.test](https://api.slack.com/methods/auth.test) and [users.getPresence](https://api.slack.com/methods/users.getPresence) APIs, and will forcefully close the connection if the bot goes offline, causing an automatic reconnect.
+
+You can configure the ping interval, number of retries before restart, and disable the ping worker entirely.
+
+```ruby
+SlackRubyBotServer.configure do |config|
+  config.ping = {
+    enabled: true, # set to false to disable the ping worker
+    ping_interval: 30, # interval in seconds
+    retry_count: 3 # number of unsuccessful retries until a restart
+  }
+end
+```
 
 ### Access Tokens
 

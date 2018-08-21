@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe SlackRubyBotServer::Ping do
   let(:team) { Team.new(token: 'token') }
-  let(:server) { SlackRubyBotServer::Server.new(team: team) }
-  let(:client) { server.send(:client) }
   let(:options) { {} }
+  let(:server) { SlackRubyBotServer::Server.new({ team: team }.merge(options)) }
+  let(:client) { server.send(:client) }
 
   subject do
-    SlackRubyBotServer::Ping.new(client, options)
+    server.send(:create_ping)
   end
 
   context 'with defaults' do
@@ -77,7 +77,7 @@ describe SlackRubyBotServer::Ping do
 
   context 'with options' do
     context 'ping interval' do
-      let(:options) { { ping_interval: 42 } }
+      let(:options) { { ping: { ping_interval: 42 } } }
 
       it 'is used' do
         expect(subject.send(:ping_interval)).to eq 42
@@ -87,7 +87,7 @@ describe SlackRubyBotServer::Ping do
     end
 
     context 'retry count' do
-      let(:options) { { retry_count: 42 } }
+      let(:options) { { ping: { retry_count: 42 } } }
 
       it 'is set' do
         expect(subject.send(:retry_count)).to eq 42
@@ -95,6 +95,32 @@ describe SlackRubyBotServer::Ping do
 
       it 'adjusts retries left' do
         expect(subject.send(:retries_left)).to eq 42
+      end
+    end
+
+    context 'enabled' do
+      context 'nil' do
+        let(:options) { { ping: { enabled: nil } } }
+
+        it 'does not create a worker' do
+          expect(subject).to be_nil
+        end
+      end
+
+      context 'false' do
+        let(:options) { { ping: { enabled: false } } }
+
+        it 'does not create a worker' do
+          expect(subject).to be_nil
+        end
+      end
+
+      context 'true' do
+        let(:options) { { ping: { enabled: true } } }
+
+        it 'creates a worker' do
+          expect(subject).to_not be_nil
+        end
       end
     end
   end
