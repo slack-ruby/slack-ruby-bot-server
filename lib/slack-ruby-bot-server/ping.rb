@@ -15,11 +15,7 @@ module SlackRubyBotServer
 
     def start!
       every ping_interval do
-        begin
-          check!
-        rescue StandardError => e
-          logger.warn "Error pinging team #{owner.id}: #{e.message}."
-        end
+        check!
       end
     end
 
@@ -28,6 +24,14 @@ module SlackRubyBotServer
     def check!
       return if online?
       down!
+    rescue StandardError => e
+      case e.message
+      when 'account_inactive', 'invalid_auth' then
+        logger.warn "Error pinging team #{owner.id}: #{e.message}, terminating."
+        terminate
+      else
+        logger.warn "Error pinging team #{owner.id}: #{e.message}."
+      end
     end
 
     def offline?
@@ -72,11 +76,11 @@ module SlackRubyBotServer
     end
 
     def socket
-      client.instance_variable_get(:@socket)
+      client.instance_variable_get(:@socket) if client
     end
 
     def driver
-      socket&.instance_variable_get(:@driver)
+      socket.instance_variable_get(:@driver) if socket
     end
 
     def logger
