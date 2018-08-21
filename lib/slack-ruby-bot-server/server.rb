@@ -10,7 +10,7 @@ module SlackRubyBotServer
       raise 'Missing team' unless @team
       attrs[:token] = @team.token
       super(attrs)
-      client.owner = @team
+      open!
     end
 
     def restart!(wait = 1)
@@ -18,7 +18,16 @@ module SlackRubyBotServer
       # it would keep retrying without checking for account_inactive or such, we want to restart via service which will disable an inactive team
       logger.info "#{team.name}: socket closed, restarting ..."
       SlackRubyBotServer::Service.instance.restart! team, self, wait
+      open!
+    end
+
+    private
+
+    def open!
       client.owner = team
+      client.on :open do |_event|
+        SlackRubyBotServer::Ping.new(client).start!
+      end
     end
   end
 end
