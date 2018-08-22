@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.7.1 (Next)
+
+* Your contribution here.
+
 #### 0.7.0 (8/22/2018)
 
 * [#60](https://github.com/slack-ruby/slack-ruby-bot-server/pull/60): Log caught Standard::Error backtrace at debug-level - [@alexagranov](https://github.com/alexagranov).
