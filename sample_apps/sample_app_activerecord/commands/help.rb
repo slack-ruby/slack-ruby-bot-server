@@ -10,7 +10,7 @@ help               - get this helpful message
 whoami             - print your username
 
 ```
-EOS
+  EOS
   def self.call(client, data, _match)
     client.say(channel: data.channel, text: [HELP, SlackRubyBotServer::INFO].join("\n"))
     client.say(channel: data.channel, gif: 'help')
