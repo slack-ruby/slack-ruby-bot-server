@@ -152,6 +152,22 @@ SlackRubyBotServer.configure do |config|
 end
 ```
 
+#### Ping Worker
+
+Each `SlackRubyBotServer::Server` instance will start a ping worker that will periodically check the online status of the bot via the Slack web [auth.test](https://api.slack.com/methods/auth.test) and [users.getPresence](https://api.slack.com/methods/users.getPresence) APIs, and will forcefully close the connection if the bot goes offline, causing an automatic reconnect.
+
+You can configure the ping interval, number of retries before restart, and disable the ping worker entirely.
+
+```ruby
+SlackRubyBotServer.configure do |config|
+  config.ping = {
+    enabled: true, # set to false to disable the ping worker
+    ping_interval: 30, # interval in seconds
+    retry_count: 3 # number of unsuccessful retries until a restart
+  }
+end
+```
+
 ### Access Tokens
 
 By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) stores a `bot_access_token` that grants a certain amount of privileges to the bot user as described in [Slack OAuth Docs](https://api.slack.com/docs/oauth). You may not want a bot user at all, or may require different auth scopes, such as `users.profile:read` to access user profile information via `Slack::Web::Client#users_profile_get`. To obtain the non-bot access token make the following changes.

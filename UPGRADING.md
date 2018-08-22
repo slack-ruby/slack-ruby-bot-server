@@ -1,6 +1,24 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.7.0
+
+#### New Ping Worker
+
+Version 0.7.0 will automatically start a ping worker that checks for the bot's online status and forcefully terminate and restart disconnected bots. Set the ping `enabled` option to `false` to disable this behavior.
+
+```ruby
+SlackRubyBotServer.configure do |config|
+  config.ping = {
+    enabled: false
+  }
+end
+```
+
+If you are currently using a custom ping worker as suggested in [slack-ruby-client#208](https://github.com/slack-ruby/slack-ruby-client/issues/208), delete it.
+
+See [#74](https://github.com/slack-ruby/slack-ruby-bot-server/pull/74) for more information.
+
 ### Upgrading to >= 0.6.0
 
 #### Mongoid and ActiveRecord support

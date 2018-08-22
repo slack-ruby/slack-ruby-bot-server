@@ -8,7 +8,7 @@ module SlackRubyBotServer
     class Middleware
       def self.logger
         @logger ||= begin
-          $stdout.sync = true
+          STDOUT.sync = true
           Logger.new(STDOUT)
         end
       end
