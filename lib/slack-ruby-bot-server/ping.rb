@@ -1,7 +1,5 @@
 module SlackRubyBotServer
   class Ping
-    include Celluloid
-
     attr_reader :client
     attr_reader :options
     attr_reader :error_count
@@ -13,8 +11,11 @@ module SlackRubyBotServer
     end
 
     def start!
-      every ping_interval do
-        check!
+      ::Async::Reactor.run do |task|
+        loop do
+          task.sleep ping_interval
+          break unless check!
+        end
       end
     end
 
@@ -23,6 +24,7 @@ module SlackRubyBotServer
     def check!
       if online?
         @error_count = 0
+        true
       else
         down!
       end
@@ -30,9 +32,10 @@ module SlackRubyBotServer
       case e.message
       when 'account_inactive', 'invalid_auth' then
         logger.warn "Error pinging team #{owner.id}: #{e.message}, terminating."
-        terminate
+        false
       else
         logger.warn "Error pinging team #{owner.id}: #{e.message}."
+        true
       end
     end
 
@@ -51,14 +54,14 @@ module SlackRubyBotServer
     def down!
       logger.warn "DOWN: #{owner}, #{retries_left} #{retries_left == 1 ? 'retry' : 'retries'} left"
       @error_count += 1
-      return if retries_left?
+      return true if retries_left?
       restart!
+      false
     end
 
     def restart!
       logger.warn "RESTART: #{owner}"
-      driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'bot offline')) if driver
-      terminate
+      driver.close if driver
     end
 
     def ping_interval

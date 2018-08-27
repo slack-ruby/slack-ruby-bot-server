@@ -1,7 +1,8 @@
 ### Changelog
 
-#### 0.7.1 (Next)
+#### 0.8.0 (Next)
 
+* [#75](https://github.com/slack-ruby/slack-ruby-bot-server/pull/75): Default to `async-websocket` instead of `celluloid-io` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.7.0 (8/22/2018)
