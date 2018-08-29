@@ -12,14 +12,23 @@ module SlackRubyBotServer
 
     def start!
       ::Async::Reactor.run do |task|
-        loop do
-          task.sleep ping_interval
-          break unless check!
-        end
+        run(task)
       end
     end
 
     private
+
+    def run(task)
+      logger.debug "PING: #{owner}, every #{ping_interval} second(s)"
+      loop do
+        task.sleep ping_interval
+        break unless check!
+      end
+      logger.debug "PING: #{owner}, done."
+    rescue StandardError => e
+      logger.error e
+      raise e
+    end
 
     def check!
       if online?
@@ -62,6 +71,8 @@ module SlackRubyBotServer
     def restart!
       logger.warn "RESTART: #{owner}"
       driver.close if driver
+    rescue StandardError => e
+      logger.warn "Error restarting team #{owner.id}: #{e.message}."
     end
 
     def ping_interval
