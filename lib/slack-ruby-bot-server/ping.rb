@@ -1,3 +1,5 @@
+require 'active_support/core_ext/string/filters'
+
 module SlackRubyBotServer
   class Ping
     attr_reader :client
@@ -43,7 +45,8 @@ module SlackRubyBotServer
         logger.warn "Error pinging team #{owner.id}: #{e.message}, terminating."
         false
       else
-        logger.warn "Error pinging team #{owner.id}: #{e.message}."
+        message = e.message.truncate(24, separator: "\n", omission: '...')
+        logger.warn "Error pinging team #{owner.id}: #{message}."
         true
       end
     end
@@ -69,7 +72,7 @@ module SlackRubyBotServer
     end
 
     def restart!
-      logger.warn "RESTART: #{owner}"
+      logger.warn "RESTART: #{owner}, #{driver}"
       driver.close if driver
     rescue StandardError => e
       logger.warn "Error restarting team #{owner.id}: #{e.message}."
