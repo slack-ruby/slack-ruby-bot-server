@@ -16,9 +16,6 @@ else
   warn "Invalid ENV['DATABASE_ADAPTER']: #{ENV['DATABASE_ADAPTER']}."
 end
 
-gem 'slack-ruby-bot', github: 'dblock/slack-ruby-bot', branch: 'async'
-gem 'slack-ruby-client', github: 'dblock/slack-ruby-client', branch: 'async'
-
 gemspec
 
 group :development, :test do

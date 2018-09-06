@@ -72,8 +72,14 @@ module SlackRubyBotServer
     end
 
     def restart!
-      logger.warn "RESTART: #{owner}, #{driver}"
-      driver.close if driver
+      logger.warn "RESTART: #{owner}"
+      begin
+        connection.close
+      rescue Async::Wrapper::Cancelled
+        # ignore, from connection.close
+      end
+      driver.close
+      driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'bot offline'))
     rescue StandardError => e
       logger.warn "Error restarting team #{owner.id}: #{e.message}."
     end
@@ -100,6 +106,10 @@ module SlackRubyBotServer
 
     def driver
       socket.instance_variable_get(:@driver) if socket
+    end
+
+    def connection
+      driver.instance_variable_get(:@socket) if driver
     end
 
     def logger

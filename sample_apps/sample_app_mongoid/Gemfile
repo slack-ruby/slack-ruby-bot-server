@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'mongoid'
 gem 'newrelic-slack-ruby-bot'
 gem 'slack-ruby-bot-server', path: '../../'
-gem 'slack-ruby-client', github: 'dblock/slack-ruby-client', branch: 'async'
 
 gem 'kaminari-mongoid'
 gem 'mongoid-scroll'
