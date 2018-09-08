@@ -3,6 +3,7 @@
 #### 0.8.0 (Next)
 
 * [#75](https://github.com/slack-ruby/slack-ruby-bot-server/pull/75): Default to `async-websocket` instead of `celluloid-io` - [@dblock](https://github.com/dblock).
+* [#76](https://github.com/slack-ruby/slack-ruby-bot-server/pull/76): Adjust wait time on restart on Slack::Web::Api::Errors::TooManyRequestsError - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.7.0 (8/22/2018)

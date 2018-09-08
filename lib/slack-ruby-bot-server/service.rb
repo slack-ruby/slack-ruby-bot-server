@@ -97,6 +97,7 @@ module SlackRubyBotServer
         logger.error "#{team.name}: #{e.message}, team will be deactivated."
         deactivate!(team)
       else
+        wait = e.retry_after if e.is_a?(Slack::Web::Api::Errors::TooManyRequestsError)
         logger.error "#{team.name}: #{e.message}, restarting in #{wait} second(s)."
         sleep(wait)
         start_server! team, server, [wait * 2, 60].min
