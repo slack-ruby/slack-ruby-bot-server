@@ -1,6 +1,14 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.8.0
+
+### Different Asynchronous I/O Library
+
+The library now uses [async-websocket](https://github.com/socketry/async-websocket) instead of [celluloid-io](https://github.com/celluloid/celluloid-io). If your application is built on Celluloid you may need to make changes and use `Async::Reactor.run` and the likes.
+
+See [#75](https://github.com/slack-ruby/slack-ruby-bot-server/pull/75) for more information.
+
 ### Upgrading to >= 0.7.0
 
 #### New Ping Worker

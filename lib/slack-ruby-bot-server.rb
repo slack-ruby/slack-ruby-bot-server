@@ -1,4 +1,4 @@
-require 'celluloid/current'
+require 'async/websocket'
 
 require 'grape-swagger'
 require 'slack-ruby-bot'

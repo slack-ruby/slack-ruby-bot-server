@@ -12,7 +12,7 @@ describe SlackRubyBotServer::Ping do
 
   context 'with defaults' do
     before do
-      allow(subject.wrapped_object).to receive(:every).and_yield
+      allow_any_instance_of(Async::Task).to receive(:sleep)
     end
 
     it 'defaults retry count' do
@@ -28,14 +28,14 @@ describe SlackRubyBotServer::Ping do
     end
 
     it 'checks for connection' do
-      expect(subject.wrapped_object).to receive(:check!)
+      expect(subject).to receive(:check!).and_return(false)
       subject.start!
     end
 
     context 'after a failed check' do
       before do
-        allow(subject.wrapped_object).to receive(:online?).and_return(false)
-        subject.start!
+        allow(subject).to receive(:online?).and_return(false)
+        subject.send(:check!)
       end
 
       it 'decrements retries left' do
@@ -48,8 +48,8 @@ describe SlackRubyBotServer::Ping do
 
       context 'after a successful check' do
         before do
-          allow(subject.wrapped_object).to receive(:online?).and_return(true)
-          subject.start!
+          allow(subject).to receive(:online?).and_return(true)
+          subject.send(:check!)
         end
 
         it 're-increments retries left' do
@@ -63,15 +63,14 @@ describe SlackRubyBotServer::Ping do
     end
 
     it 'terminates the ping worker after account_inactive' do
-      allow(subject.wrapped_object).to receive(:online?).and_raise('account_inactive')
-      expect(subject.wrapped_object).to receive(:terminate)
+      allow(subject).to receive(:online?).and_raise('account_inactive')
       subject.start!
     end
 
     it 'terminates after a number of retries' do
-      allow(subject.wrapped_object).to receive(:online?).and_return(false)
-      expect(subject.wrapped_object).to receive(:terminate)
-      3.times { subject.start! }
+      allow(subject).to receive(:online?).and_return(false)
+      expect(subject).to receive(:check!).exactly(3).times.and_call_original
+      subject.start!
     end
   end
 
@@ -80,8 +79,9 @@ describe SlackRubyBotServer::Ping do
       let(:options) { { ping: { ping_interval: 42 } } }
 
       it 'is used' do
+        expect_any_instance_of(Async::Task).to receive(:sleep).with(42)
         expect(subject.send(:ping_interval)).to eq 42
-        expect(subject.wrapped_object).to receive(:every).with(42)
+        expect(subject).to receive(:check!).and_return(false)
         subject.start!
       end
     end
