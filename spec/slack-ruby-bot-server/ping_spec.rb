@@ -60,6 +60,21 @@ describe SlackRubyBotServer::Ping do
           expect(subject.send(:error_count)).to eq 0
         end
       end
+
+      context 'after two more failed checks' do
+        before do
+          allow(subject).to receive(:online?).and_return(false).twice
+          2.times { subject.send(:check!) }
+        end
+
+        it 'does not decrement retries left below zero' do
+          expect(subject.send(:retries_left)).to eq 0
+        end
+
+        it 'sets error count' do
+          expect(subject.send(:error_count)).to eq 3
+        end
+      end
     end
 
     it 'terminates the ping worker after account_inactive' do
@@ -67,9 +82,21 @@ describe SlackRubyBotServer::Ping do
       subject.start!
     end
 
-    it 'terminates after a number of retries' do
+    it 'restarts and terminates after a number of retries' do
       allow(subject).to receive(:online?).and_return(false)
       expect(subject).to receive(:check!).exactly(3).times.and_call_original
+      expect(subject).to receive(:restart!).and_call_original
+      expect(subject).to receive(:close_connection).and_call_original
+      expect(subject).to receive(:close_driver).and_call_original
+      expect(subject).to receive(:emit_close).and_call_original
+      subject.start!
+    end
+
+    it 'does not terminate upon a failed restart' do
+      allow(subject).to receive(:online?).and_return(false)
+      allow(subject).to receive(:close_connection) { raise 'error closing connection' }
+      expect(subject).to receive(:check!).exactly(3).times.and_call_original
+      expect(subject).to receive(:check!).and_return(false)
       subject.start!
     end
   end

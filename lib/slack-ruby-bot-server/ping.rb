@@ -68,20 +68,43 @@ module SlackRubyBotServer
       @error_count += 1
       return true if retries_left?
       restart!
-      false
     end
 
     def restart!
       logger.warn "RESTART: #{owner}"
-      begin
-        connection.close
-      rescue Async::Wrapper::Cancelled
-        # ignore, from connection.close
-      end
-      driver.close
-      driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'bot offline'))
+      close_connection
+      close_driver
+      emit_close
+      false
     rescue StandardError => e
       logger.warn "Error restarting team #{owner.id}: #{e.message}."
+      true
+    end
+
+    def close_connection
+      return unless connection
+      connection.close
+    rescue Async::Wrapper::Cancelled
+      # ignore, from connection.close
+    rescue StandardError => e
+      logger.warn "Error closing connection for #{owner.id}: #{e.message}."
+      raise e
+    end
+
+    def close_driver
+      return unless driver
+      driver.close
+    rescue StandardError => e
+      logger.warn "Error closing driver for #{owner.id}: #{e.message}."
+      raise e
+    end
+
+    def emit_close
+      return unless driver
+      driver.emit(:close, WebSocket::Driver::CloseEvent.new(1001, 'bot offline'))
+    rescue StandardError => e
+      logger.warn "Error sending :close event to driver for #{owner.id}: #{e.message}."
+      raise e
     end
 
     def ping_interval
@@ -89,11 +112,11 @@ module SlackRubyBotServer
     end
 
     def retries_left?
-      retries_left >= 0
+      retry_count - error_count >= 0
     end
 
     def retries_left
-      retry_count - error_count
+      [0, retry_count - error_count].max
     end
 
     def retry_count
