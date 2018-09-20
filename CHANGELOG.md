@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.8.2 (Next)
+
+* Your contribution here.
+
 #### 0.8.1 (2018/9/20)
 
 * [#79](https://github.com/slack-ruby/slack-ruby-bot-server/pull/79): Fix: ping worker terminates on a failed restart - [@dblock](https://github.com/dblock).
