@@ -72,7 +72,7 @@ This library implements an app, [SlackRubyBotServer::App](lib/slack-ruby-bot-ser
 
 #### App
 
-The app instance checks for a working MongoDB connection, ensures database indexes, performs database migrations, sets up bot aliases and log levels. You can introduce custom behavior into the app lifecycle by subclassing `SlackRubyBotServer::App` and creating an instance of the child class in `config.ru`.
+The app instance checks for a working database connection, ensures indexes, performs migrations, sets up bot aliases and log levels. You can introduce custom behavior into the app lifecycle by subclassing `SlackRubyBotServer::App` and creating an instance of the child class in `config.ru`.
 
 ```ruby
 class MyApp < SlackRubyBotServer::App
@@ -181,15 +181,16 @@ You can see a sample implementation in [slack-sup#3a497b](https://github.com/dbl
 
 ### Examples Using Slack Ruby Bot Server
 
-* [slack-amber-alert](https://github.com/dblock/slack-amber-alert), free service at [missingkidsbot.org](https://www.missingkidsbot.org)
 * [slack-sup](https://github.com/dblock/slack-sup), free service at [sup.playplay.io](https://sup.playplay.io)
 * [slack-gamebot](https://github.com/dblock/slack-gamebot), free service at [www.playplay.io](https://www.playplay.io)
 * [slack-market](https://github.com/dblock/slack-market), free service at [market.playplay.io](https://market.playplay.io)
 * [slack-shellbot](https://github.com/slack-ruby/slack-shellbot), free service at [shell.playplay.io](https://shell.playplay.io)
 * [slack-api-explorer](https://github.com/slack-ruby/slack-api-explorer), free service at [api-explorer.playplay.io](https://shell.playplay.io)
+* [slack-strava](https://github.com/dblock/slack-strava), free service at [slava.playplay.io](https://slava.playplay.io)
+* [slack-arena](https://github.com/dblock/slack-arena), free service at [arena.playplay.io](https://arena.playplay.io)
 
 ### Copyright & License
 
-Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2017
+Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2018
 
 [MIT License](LICENSE)
