@@ -72,7 +72,7 @@ This library implements an app, [SlackRubyBotServer::App](lib/slack-ruby-bot-ser
 
 #### App
 
-The app instance checks for a working MongoDB connection, ensures database indexes, performs database migrations, sets up bot aliases and log levels. You can introduce custom behavior into the app lifecycle by subclassing `SlackRubyBotServer::App` and creating an instance of the child class in `config.ru`.
+The app instance checks for a working database connection, ensures indexes, performs migrations, sets up bot aliases and log levels. You can introduce custom behavior into the app lifecycle by subclassing `SlackRubyBotServer::App` and creating an instance of the child class in `config.ru`.
 
 ```ruby
 class MyApp < SlackRubyBotServer::App
