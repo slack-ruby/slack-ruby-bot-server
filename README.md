@@ -191,6 +191,6 @@ You can see a sample implementation in [slack-sup#3a497b](https://github.com/dbl
 
 ### Copyright & License
 
-Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2017
+Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2018
 
 [MIT License](LICENSE)
