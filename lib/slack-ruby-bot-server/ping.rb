@@ -72,9 +72,9 @@ module SlackRubyBotServer
 
     def restart!
       logger.warn "RESTART: #{owner}"
-      close_connection
       close_driver
       emit_close
+      close_connection
       false
     rescue StandardError => e
       logger.warn "Error restarting team #{owner.id}: #{e.message}."
