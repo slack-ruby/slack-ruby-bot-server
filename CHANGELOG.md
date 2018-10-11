@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.8.3 (Next)
+
+* Your contribution here.
+
 #### 0.8.2 (2018/10/11)
 
 * [#80](https://github.com/slack-ruby/slack-ruby-bot-server/pull/80): Fix: closed stream when closing connection in ping worker - [@dblock](https://github.com/dblock).
