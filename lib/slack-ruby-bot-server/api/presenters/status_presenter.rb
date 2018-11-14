@@ -16,9 +16,9 @@ module SlackRubyBotServer
 
         def ping
           if SlackRubyBotServer::Config.mongoid?
-            team = Team.asc(:_id).first
+            team = SlackRubyBotServer::Team.asc(:_id).first
           elsif SlackRubyBotServer::Config.activerecord?
-            team = Team.last
+            team = SlackRubyBotServer::Team.last
           else
             raise 'Unsupported database driver.'
           end
@@ -27,11 +27,11 @@ module SlackRubyBotServer
         end
 
         def teams_count
-          Team.count
+          SlackRubyBotServer::Team.count
         end
 
         def active_teams_count
-          Team.active.count
+          SlackRubyBotServer::Team.active.count
         end
 
         def base_url(opts)

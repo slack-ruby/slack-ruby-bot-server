@@ -13,7 +13,7 @@ module SlackRubyBotServer
             requires :id, type: String, desc: 'Team ID.'
           end
           get ':id' do
-            team = Team.find(params[:id]) || error!('Not Found', 404)
+            team = SlackRubyBotServer::Team.find(params[:id]) || error!('Not Found', 404)
             present team, with: Presenters::TeamPresenter
           end
 
@@ -22,9 +22,9 @@ module SlackRubyBotServer
             optional :active, type: Boolean, desc: 'Return active teams only.'
             use :pagination
           end
-          sort Team::SORT_ORDERS
+          sort SlackRubyBotServer::Team::SORT_ORDERS
           get do
-            teams = Team.all
+            teams = SlackRubyBotServer::Team.all
             teams = teams.active if params[:active]
             teams = paginate_and_sort_by_cursor(teams, default_sort_order: '-id')
             present teams, with: Presenters::TeamsPresenter
@@ -46,14 +46,14 @@ module SlackRubyBotServer
             )
 
             token = rc['bot']['bot_access_token']
-            team = Team.where(token: token).first
-            team ||= Team.where(team_id: rc['team_id']).first
+            team = SlackRubyBotServer::Team.where(token: token).first
+            team ||= SlackRubyBotServer::Team.where(team_id: rc['team_id']).first
             if team && !team.active?
               team.activate!(token)
             elsif team
               raise "Team #{team.name} is already registered."
             else
-              team = Team.create!(
+              team = SlackRubyBotServer::Team.create!(
                 token: token,
                 team_id: rc['team_id'],
                 name: rc['team_name']

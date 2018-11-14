@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe SlackRubyBotServer::Ping do
-  let(:team) { Team.new(token: 'token') }
+  let(:team) { SlackRubyBotServer::Team.new(token: 'token') }
   let(:options) { {} }
   let(:server) { SlackRubyBotServer::Server.new({ team: team }.merge(options)) }
   let(:client) { server.send(:client) }

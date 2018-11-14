@@ -13,7 +13,7 @@ describe SlackRubyBotServer::App do
   end
   context '#purge_inactive_teams!' do
     it 'purges teams' do
-      expect(Team).to receive(:purge!)
+      expect(SlackRubyBotServer::Team).to receive(:purge!)
       subject.send(:purge_inactive_teams!)
     end
   end

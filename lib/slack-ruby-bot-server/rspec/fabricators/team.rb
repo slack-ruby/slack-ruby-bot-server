@@ -1,4 +1,4 @@
-Fabricator(:team) do
+Fabricator(:team, from: 'SlackRubyBotServer::Team') do
   token { Fabricate.sequence(:team_token) { |i| "abc-#{i}" } }
   team_id { Fabricate.sequence(:team_id) { |i| "T#{i}" } }
   name { Faker::Lorem.word }

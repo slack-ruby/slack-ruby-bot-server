@@ -91,7 +91,7 @@ class MyApp < SlackRubyBotServer::App
   private
 
   def deactivate_sleepy_teams!
-    Team.active.each do |team|
+    SlackRubyBotServer::Team.active.each do |team|
       next unless team.sleepy?
       team.deactivate!
     end
