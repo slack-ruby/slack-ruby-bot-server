@@ -2,6 +2,8 @@ require_relative 'methods'
 
 module SlackRubyBotServer
   class Team < ActiveRecord::Base
+    self.table_name = SlackRubyBotServer::Config.teams_table
+
     include Methods
 
     def self.purge!

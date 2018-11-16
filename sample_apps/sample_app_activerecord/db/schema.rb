@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20_170_307_164_946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
-  create_table 'teams', force: :cascade do |t|
+  create_table SlackRubyBotServer::Config.teams_table, force: :cascade do |t|
     t.string   'team_id'
     t.string   'name'
     t.boolean  'active', default: true
