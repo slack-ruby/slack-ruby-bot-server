@@ -16,3 +16,7 @@ SlackRubyBotServer::Service.logger.level = Logger::WARN
 Dir[File.join(__dir__, 'database_adapters', SlackRubyBotServer::Config.database_adapter.to_s, '**/*.rb')].each do |file|
   require file
 end
+
+Dir[File.join(__dir__, 'ext', SlackRubyBotServer::Config.database_adapter.to_s, '**/*.rb')].each do |file|
+  require file
+end
