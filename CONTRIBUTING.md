@@ -10,7 +10,7 @@ In the examples below, substitute your Github username for `contributor` in URLs
 
 Fork the [project on Github](https://github.com/slack-ruby/slack-ruby-bot-server) and check out your copy.
 
-```
+```bash
 git clone https://github.com/contributor/slack-ruby-bot-server.git
 cd slack-ruby-bot-server
 git remote add upstream https://github.com/slack-ruby/slack-ruby-bot-server.git
@@ -20,7 +20,7 @@ git remote add upstream https://github.com/slack-ruby/slack-ruby-bot-server.git
 
 Make sure your fork is up-to-date and create a topic branch for your feature or bug fix.
 
-```
+```bash
 git checkout master
 git pull upstream master
 git checkout -b my-feature-branch
@@ -30,9 +30,28 @@ git checkout -b my-feature-branch
 
 Ensure that you can build the project and run tests.
 
-```
+```bash
+export DATABASE_ADAPTER='activerecord'
 bundle install
 bundle exec rake
+```
+
+## Run Tests
+
+Run tests before making changes and then run tests after major commits. 
+Make sure to test both ActiveRecord and Mongoid.
+
+```bash
+export DATABASE_ADAPTER='activerecord'
+bundle install
+bundle exec rspec
+```
+
+Test the sample apps
+
+```bash
+cd sample_apps/sample_app_active_record
+ln -s ../../lib .
 ```
 
 ## Write Tests
@@ -64,21 +83,21 @@ Make it look like every other line, including your name and link to your Github 
 
 Make sure git knows your name and email address:
 
-```
+```bash
 git config --global user.name "Your Name"
 git config --global user.email "contributor@example.com"
 ```
 
 Writing good commit logs is important. A commit log should describe what changed and why.
 
-```
+```bash
 git add ...
 git commit
 ```
 
 ## Push
 
-```
+```bash
 git push origin my-feature-branch
 ```
 
@@ -91,7 +110,7 @@ Click the 'Pull Request' button and fill out the form. Pull requests are usually
 
 If you've been working on a change for a while, rebase with upstream/master.
 
-```
+```bash
 git fetch upstream
 git rebase upstream/master
 git push origin my-feature-branch -f
@@ -107,7 +126,7 @@ Update the [CHANGELOG](CHANGELOG.md) with the pull request number. A typical ent
 
 Amend your previous commit and force push the changes.
 
-```
+```bash
 git commit --amend
 git push origin my-feature-branch -f
 ```
