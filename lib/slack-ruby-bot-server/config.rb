@@ -17,7 +17,7 @@ module SlackRubyBotServer
                               else
                                 raise 'One of "mongoid" or "activerecord" is required.'
                               end
-      self.teams = {name:"teams"} # the ActiveRecord table name
+      self.teams = { name: 'teams' } # the ActiveRecord table name
     end
 
     def activerecord?
