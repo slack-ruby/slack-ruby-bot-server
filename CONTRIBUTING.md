@@ -31,7 +31,7 @@ git checkout -b my-feature-branch
 Ensure that you can build the project and run tests.
 
 ```bash
-export DATABASE_ADAPTER='activerecord'
+export DATABASE_ADAPTER=activerecord
 bundle install
 bundle exec rake
 ```
@@ -42,17 +42,12 @@ Run tests before making changes and then run tests after major commits.
 Make sure to test both ActiveRecord and Mongoid.
 
 ```bash
-export DATABASE_ADAPTER='activerecord'
+export DATABASE_ADAPTER=activerecord
 bundle install
 bundle exec rspec
 ```
 
 Test the sample apps
-
-```bash
-cd sample_apps/sample_app_active_record
-ln -s ../../lib .
-```
 
 ## Write Tests
 

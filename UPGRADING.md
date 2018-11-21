@@ -1,6 +1,10 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.8.3
+
+To avoid name collisions, `Team` has been renamed `SlackRubyBot::Team`, if you modify the class `Team` add `Team = SlackRubyBot::Team` before the code. 
+
 ### Upgrading to >= 0.8.0
 
 ### Different Asynchronous I/O Library
