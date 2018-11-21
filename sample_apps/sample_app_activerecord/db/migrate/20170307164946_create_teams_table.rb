@@ -1,6 +1,6 @@
 class CreateTeamsTable < ActiveRecord::Migration[5.0]
   def change
-    create_table SlackRubyBotServer::Config.teams_table, force: true do |t|
+    create_table SlackRubyBotServer::Config.teams[:name], force: true do |t|
       t.string :team_id
       t.string :name
       t.boolean :active, default: true
