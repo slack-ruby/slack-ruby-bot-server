@@ -2,6 +2,7 @@
 
 #### 0.8.3 (Next)
 
+* [#88](https://github.com/slack-ruby/slack-ruby-bot-server/issues/88): Fix: compatibility with Grape 1.2.x - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.8.2 (2018/10/11)
