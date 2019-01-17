@@ -13,7 +13,7 @@ A library that contains a [Grape](http://github.com/ruby-grape/grape) API servin
 
 ### Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v0.8.2](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v0.8.2/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v0.8.3](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v0.8.3/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ### Try Me
 
