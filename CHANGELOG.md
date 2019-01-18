@@ -2,6 +2,7 @@
 
 #### 0.8.4 (Next)
 
+* [#83](https://github.com/slack-ruby/slack-ruby-bot-server/pull/83): Prevents name collision for Teams, allow configuration of ActiveRecord table name - [@leechou](https://github.com/leechou).
 * Your contribution here.
 
 #### 0.8.3 (2019/01/17)

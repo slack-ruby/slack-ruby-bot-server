@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/environment'
+require 'bundler'
+
+Bundler.require
 
 # Usage: script/console
 # Starts an IRB console with slack-ruby-bot-server loaded.

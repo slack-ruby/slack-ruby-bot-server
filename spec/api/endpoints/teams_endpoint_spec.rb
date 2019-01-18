@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
   include SlackRubyBotServer::Api::Test::EndpointTest
 
-  it_behaves_like 'a cursor api', Team
+  it_behaves_like 'a cursor api', SlackRubyBotServer::Team
 
   context 'team' do
     let(:existing_team) { Fabricate(:team) }
@@ -68,9 +68,9 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           team = client.teams._post(code: 'code')
           expect(team.team_id).to eq 'team_id'
           expect(team.name).to eq 'team_name'
-          team = Team.find(team.id)
+          team = SlackRubyBotServer::Team.find(team.id)
           expect(team.token).to eq 'token'
-        end.to change(Team, :count).by(1)
+        end.to change(SlackRubyBotServer::Team, :count).by(1)
       end
       it 'reactivates a deactivated team' do
         expect(SlackRubyBotServer::Service.instance).to receive(:start!)
@@ -80,10 +80,10 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           expect(team.team_id).to eq existing_team.team_id
           expect(team.name).to eq existing_team.name
           expect(team.active).to be true
-          team = Team.find(team.id)
+          team = SlackRubyBotServer::Team.find(team.id)
           expect(team.token).to eq 'token'
           expect(team.active).to be true
-        end.to_not change(Team, :count)
+        end.to_not change(SlackRubyBotServer::Team, :count)
       end
       it 'returns a useful error when team already exists' do
         existing_team = Fabricate(:team, token: 'token')
@@ -100,10 +100,10 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           expect(team.team_id).to eq existing_team.team_id
           expect(team.name).to eq existing_team.name
           expect(team.active).to be true
-          team = Team.find(team.id)
+          team = SlackRubyBotServer::Team.find(team.id)
           expect(team.token).to eq 'token'
           expect(team.active).to be true
-        end.to_not change(Team, :count)
+        end.to_not change(SlackRubyBotServer::Team, :count)
       end
     end
   end

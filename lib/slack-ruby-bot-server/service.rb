@@ -60,7 +60,7 @@ module SlackRubyBotServer
     end
 
     def start_from_database!
-      Team.active.each do |team|
+      SlackRubyBotServer::Team.active.each do |team|
         run_callbacks :booting, team
         start!(team)
         run_callbacks :booted, team

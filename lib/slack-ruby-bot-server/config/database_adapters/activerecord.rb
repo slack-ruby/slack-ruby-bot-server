@@ -11,8 +11,8 @@ module SlackRubyBotServer
     end
 
     def self.init!
-      return if ActiveRecord::Base.connection.tables.include?('teams')
-      ActiveRecord::Base.connection.create_table :teams do |t|
+      return if ActiveRecord::Base.connection.tables.include?(SlackRubyBotServer::Config.teams[:name].to_s)
+      ActiveRecord::Base.connection.create_table SlackRubyBotServer::Config.teams[:name] do |t|
         t.string :team_id
         t.string :name
         t.string :domain

@@ -1,6 +1,10 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.8.3
+
+To avoid name collisions, `Team` has been renamed `SlackRubyBotServer::Team`, if you modify the class `Team` add `Team = SlackRubyBotServer::Team` before the code. 
+
 ### Upgrading to >= 0.8.0
 
 ### Different Asynchronous I/O Library
@@ -91,7 +95,7 @@ class MyApp < SlackRubyBotServer::App
   private
 
   def deactivate_sleepy_teams!
-    Team.active.each do |team|
+    SlackRubyBotServer::Team.active.each do |team|
       next unless team.sleepy?
       team.deactivate!
     end

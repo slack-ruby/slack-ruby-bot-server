@@ -4,7 +4,7 @@ describe SlackRubyBotServer::Api::Endpoints::StatusEndpoint do
   include SlackRubyBotServer::Api::Test::EndpointTest
 
   before do
-    allow_any_instance_of(Team).to receive(:ping!).and_return(ok: 1)
+    allow_any_instance_of(SlackRubyBotServer::Team).to receive(:ping!).and_return(ok: 1)
   end
 
   context 'status' do

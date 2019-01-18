@@ -1,6 +1,6 @@
 shared_examples_for 'a cursor api' do |model|
-  let(:model_s) { model.name.underscore.to_sym }
-  let(:model_ps) { model.name.underscore.pluralize.to_sym }
+  let(:model_s) { :team }
+  let(:model_ps) { :teams }
   context model.name do
     let(:cursor_params) { @cursor_params || {} }
 

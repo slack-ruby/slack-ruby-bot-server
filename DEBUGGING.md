@@ -20,6 +20,6 @@ heroku run script/console --app=...
 
 Running `script/console` attached to terminal... up, run.7593
 
-2.2.1 > Team.count
+2.2.1 > SlackRubyBotServer::Team.count
 => 3
 ```

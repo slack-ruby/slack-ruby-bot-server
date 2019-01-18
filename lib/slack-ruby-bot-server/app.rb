@@ -32,11 +32,11 @@ module SlackRubyBotServer
     end
 
     def mark_teams_active!
-      Team.where(active: nil).update_all(active: true)
+      SlackRubyBotServer::Team.where(active: nil).update_all(active: true)
     end
 
     def update_team_name_and_id!
-      Team.active.where(team_id: nil).each do |team|
+      SlackRubyBotServer::Team.active.where(team_id: nil).each do |team|
         begin
           auth = team.ping![:auth]
           team.update_attributes!(team_id: auth['team_id'], name: auth['team'])
@@ -50,13 +50,13 @@ module SlackRubyBotServer
     def migrate_from_single_team!
       return unless ENV.key?('SLACK_API_TOKEN')
       logger.info 'Migrating from env SLACK_API_TOKEN ...'
-      team = Team.find_or_create_from_env!
+      team = SlackRubyBotServer::Team.find_or_create_from_env!
       logger.info "Automatically migrated team: #{team}."
       logger.warn "You should unset ENV['SLACK_API_TOKEN']."
     end
 
     def purge_inactive_teams!
-      Team.purge!
+      SlackRubyBotServer::Team.purge!
     end
 
     def configure_global_aliases!
