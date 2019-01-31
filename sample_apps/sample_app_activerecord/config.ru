@@ -4,8 +4,15 @@ Bundler.require :default
 
 require_relative 'commands'
 require 'yaml'
+require 'erb'
 
-ActiveRecord::Base.establish_connection(YAML.load_file('config/postgresql.yml')[ENV['RACK_ENV']])
+ActiveRecord::Base.establish_connection(
+  YAML.safe_load(
+    ERB.new(
+      File.read('config/postgresql.yml')
+    ).result
+  )[ENV['RACK_ENV']]
+)
 
 NewRelic::Agent.manual_start
 
