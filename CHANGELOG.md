@@ -1,7 +1,8 @@
 ### Changelog
 
-#### 0.8.4 (Next)
+#### 0.9.0 (Next)
 
+* [#93](https://github.com/slack-ruby/slack-ruby-bot-server/pull/93): Removed ping worker in favor of slack-ruby-client lower level ping - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.8.3 (2019/01/17)

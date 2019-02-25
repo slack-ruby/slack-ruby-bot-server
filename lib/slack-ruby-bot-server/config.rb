@@ -3,11 +3,9 @@ module SlackRubyBotServer
     extend self
 
     attr_accessor :server_class
-    attr_accessor :ping
     attr_accessor :database_adapter
 
     def reset!
-      self.ping = nil
       self.server_class = SlackRubyBotServer::Server
       self.database_adapter = if defined?(::Mongoid)
                                 :mongoid
