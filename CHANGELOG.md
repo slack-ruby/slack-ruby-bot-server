@@ -1,11 +1,10 @@
 ### Changelog
 
-#### 0.9.0 (Next)
+#### 0.9.0 (2019/2/25)
 
 * [#93](https://github.com/slack-ruby/slack-ruby-bot-server/pull/93): Removed ping worker in favor of slack-ruby-client lower level ping - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
-#### 0.8.3 (2019/01/17)
+#### 0.8.3 (2019/1/17)
 
 * [#88](https://github.com/slack-ruby/slack-ruby-bot-server/issues/88): Fix: compatibility with Grape 1.2.x - [@dblock](https://github.com/dblock).
 

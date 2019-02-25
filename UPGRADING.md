@@ -7,7 +7,7 @@ Upgrading Slack-Ruby-Bot-Server
 
 The ping worker that was added in 0.7.0 has been removed in favor of a lower level implementation in slack-ruby-client. Remove any references to `ping` options.
 
-See [slack-ruby-client#226](https://github.com/slack-ruby/slack-ruby-client/pull/226) for more information.
+See [slack-ruby-client#226](https://github.com/slack-ruby/slack-ruby-client/pull/226) and [#93](https://github.com/slack-ruby/slack-ruby-bot-server/pull/93) for more information.
 
 ### Upgrading to >= 0.8.0
 
