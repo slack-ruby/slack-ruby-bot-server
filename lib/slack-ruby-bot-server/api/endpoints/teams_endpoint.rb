@@ -33,6 +33,7 @@ module SlackRubyBotServer
           desc 'Create a team using an OAuth token.'
           params do
             requires :code, type: String
+            optional :state, type: String
           end
           post do
             client = Slack::Web::Client.new
@@ -59,6 +60,8 @@ module SlackRubyBotServer
                 name: rc['team_name']
               )
             end
+
+            team.state = params[:state] if params[:state]
 
             Service.instance.create!(team)
             present team, with: Presenters::TeamPresenter

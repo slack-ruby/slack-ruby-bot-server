@@ -10,6 +10,8 @@ class Team
   field :token, type: String
   field :active, type: Boolean, default: true
 
+  field :state, type: String
+
   include Methods
 
   def self.purge!
