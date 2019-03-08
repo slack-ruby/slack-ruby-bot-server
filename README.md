@@ -132,6 +132,22 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 | deactivating   | a team is being deactivated                                      |
 | deactivated    | a team has been deactivated                                      |
 
+
+The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows for an optional `state` parameter that will be returned on completion of the request. You can access this value in the `creating` and `created` callbacks (to check for forgery attacks for instance).
+```
+auth = OpenSSL::HMAC.hexdigest("SHA256", "key", "data")
+```
+```
+<a href="https://slack.com/oauth/authorize?scope=bot&client_id=<%= ENV['SLACK_CLIENT_ID'] %>&state=#{auth)"> ... </a>
+```
+```ruby
+instance = SlackRubyBotServer::Service.instance
+instance.on :creating do |team, error|
+  raise "Unauthorized response" unless team.state == auth
+end
+```
+
+
 #### Server Class
 
 You can override the server class to handle additional events, and configure the service to use it.
