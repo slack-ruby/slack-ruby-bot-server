@@ -21,10 +21,10 @@ module SlackRubyBotServer
       @callbacks[type.to_s] << block
     end
 
-    def create!(team)
-      run_callbacks :creating, team
+    def create!(team, options = {})
+      run_callbacks :creating, team, nil, options
       start!(team)
-      run_callbacks :created, team
+      run_callbacks :created, team, nil, options
     end
 
     def start!(team)
@@ -103,11 +103,11 @@ module SlackRubyBotServer
       end
     end
 
-    def run_callbacks(type, team = nil, error = nil)
+    def run_callbacks(type, team = nil, error = nil, options = {})
       callbacks = @callbacks[type.to_s]
       return false unless callbacks
       callbacks.each do |c|
-        c.call team, error
+        c.call team, error, options
       end
       true
     rescue StandardError => e

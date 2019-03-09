@@ -103,15 +103,15 @@ You can introduce custom behavior into the service lifecycle via callbacks. This
 ```ruby
 instance = SlackRubyBotServer::Service.instance
 
-instance.on :created do |team, error|
+instance.on :created do |team, error, options|
   # a new team has been registered
 end
 
-instance.on :deactivated do |team, error|
+instance.on :deactivated do |team, error, options|
   # an existing team has been deactivated in Slack
 end
 
-instance.on :error do |team, error|
+instance.on :error do |team, error, options|
   # an error has occurred
 end
 ```
@@ -133,17 +133,17 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 | deactivated    | a team has been deactivated                                      |
 
 
-The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows for an optional `state` parameter that will be returned on completion of the request. You can access this value in the `creating` and `created` callbacks (to check for forgery attacks for instance).
-```
+The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows for an optional `state` parameter that will be returned on completion of the request. The `creating` and `created` callbacks include an options hash where this value can be accessed (to check for forgery attacks for instance).
+```ruby
 auth = OpenSSL::HMAC.hexdigest("SHA256", "key", "data")
 ```
-```
+```html
 <a href="https://slack.com/oauth/authorize?scope=bot&client_id=<%= ENV['SLACK_CLIENT_ID'] %>&state=#{auth)"> ... </a>
 ```
 ```ruby
 instance = SlackRubyBotServer::Service.instance
-instance.on :creating do |team, error|
-  raise "Unauthorized response" unless team.state == auth
+instance.on :creating do |team, error, options|
+  raise "Unauthorized response" unless options[:state] == auth
 end
 ```
 

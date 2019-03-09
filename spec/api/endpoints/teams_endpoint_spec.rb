@@ -45,13 +45,6 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
       end
     end
 
-    it 'exposes optional state parameter' do
-      expect do
-        team = client.teams._post(code: 'code', state: 'property')
-        expect(team.state).to eq 'property'
-      end
-    end
-
     context 'register' do
       before do
         oauth_access = { 'bot' => { 'bot_access_token' => 'token' }, 'team_id' => 'team_id', 'team_name' => 'team_name' }
@@ -79,6 +72,12 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           expect(team.token).to eq 'token'
         end.to change(Team, :count).by(1)
       end
+
+      it 'includes optional state parameter' do
+        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
+        client.teams._post(code: 'code', state: 'property')
+      end
+
       it 'reactivates a deactivated team' do
         expect(SlackRubyBotServer::Service.instance).to receive(:start!)
         existing_team = Fabricate(:team, token: 'token', active: false)
