@@ -61,9 +61,9 @@ module SlackRubyBotServer
               )
             end
 
-            state = params.key?(:state) ? { state: params[:state] } : {}
+            options = params.slice(:state)
 
-            Service.instance.create!(team, state)
+            Service.instance.create!(team, options)
             present team, with: Presenters::TeamPresenter
           end
         end
