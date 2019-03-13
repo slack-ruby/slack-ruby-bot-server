@@ -4,6 +4,8 @@
 
 * Your contribution here.
 
+* [#95](https://github.com/slack-ruby/slack-ruby-bot-server/pull/95): Expose the optional `state` parameter that is returned from the Add to Slack button - [@aok-solutions](https://github.com/aok-solutions).
+
 #### 0.9.0 (2019/2/25)
 
 * [#93](https://github.com/slack-ruby/slack-ruby-bot-server/pull/93): Removed ping worker in favor of slack-ruby-client lower level ping - [@dblock](https://github.com/dblock).

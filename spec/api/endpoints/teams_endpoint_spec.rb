@@ -72,6 +72,12 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           expect(team.token).to eq 'token'
         end.to change(Team, :count).by(1)
       end
+
+      it 'includes optional state parameter' do
+        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
+        client.teams._post(code: 'code', state: 'property')
+      end
+
       it 'reactivates a deactivated team' do
         expect(SlackRubyBotServer::Service.instance).to receive(:start!)
         existing_team = Fabricate(:team, token: 'token', active: false)
