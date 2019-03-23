@@ -9,6 +9,9 @@ class Team
   field :domain, type: String
   field :token, type: String
   field :active, type: Boolean, default: true
+  field :bot_user_id, type: String
+  field :activated_user_id, type: String
+  field :activated_user_access_token, type: String
 
   include Methods
 

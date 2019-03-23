@@ -1,7 +1,8 @@
 ### Changelog
 
-#### 0.9.1 (Next)
+#### 0.10.0 (Next)
 
+* [#96](https://github.com/slack-ruby/slack-ruby-bot-server/pull/96): Added `Team#bot_user_id`, `activated_user_id` and `activated_user_access_token` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 * [#95](https://github.com/slack-ruby/slack-ruby-bot-server/pull/95): Expose the optional `state` parameter that is returned from the Add to Slack button - [@aok-solutions](https://github.com/aok-solutions).

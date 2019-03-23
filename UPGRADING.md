@@ -1,9 +1,35 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.10.0
+
+#### New Team Fields
+
+The following fields have been added to `Team`.
+
+* `bot_user_id`: the bot `user_id` during installation
+* `activated_user_id`: the installing Slack user `user_id`
+* `activated_user_access_token`: the installing Slack user `access_token`
+
+No action is required for Mongoid.
+
+If you're using ActiveRecord, create a migration similar to [sample_apps/sample_app_activerecord/db/migrate/20190323181453_add_activated_fields.rb](sample_apps/sample_app_activerecord/db/migrate/20190323181453_add_activated_fields.rb) to add these fields.
+
+```ruby
+class AddActivatedFields < ActiveRecord::Migration[5.0]
+  def change
+    add_column :teams, :bot_user_id, :string
+    add_column :teams, :activated_user_id, :string
+    add_column :teams, :activated_user_access_token, :string
+  end
+end
+```
+
+See [#96](https://github.com/slack-ruby/slack-ruby-bot-server/pull/96) for more information.
+
 ### Upgrading to >= 0.9.0
 
-### Removed Ping Worker
+#### Removed Ping Worker
 
 The ping worker that was added in 0.7.0 has been removed in favor of a lower level implementation in slack-ruby-client. Remove any references to `ping` options.
 
@@ -11,7 +37,7 @@ See [slack-ruby-client#226](https://github.com/slack-ruby/slack-ruby-client/pull
 
 ### Upgrading to >= 0.8.0
 
-### Different Asynchronous I/O Library
+#### Different Asynchronous I/O Library
 
 The library now uses [async-websocket](https://github.com/socketry/async-websocket) instead of [celluloid-io](https://github.com/celluloid/celluloid-io). If your application is built on Celluloid you may need to make changes and use `Async::Reactor.run` and the likes.
 

@@ -47,7 +47,16 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
 
     context 'register' do
       before do
-        oauth_access = { 'bot' => { 'bot_access_token' => 'token' }, 'team_id' => 'team_id', 'team_name' => 'team_name' }
+        oauth_access = {
+          'bot' => {
+            'bot_access_token' => 'token',
+            'bot_user_id' => 'bot_user_id'
+          },
+          'access_token' => 'access_token',
+          'user_id' => 'user_id',
+          'team_id' => 'team_id',
+          'team_name' => 'team_name'
+        }
         ENV['SLACK_CLIENT_ID'] = 'client_id'
         ENV['SLACK_CLIENT_SECRET'] = 'client_secret'
         allow_any_instance_of(Slack::Web::Client).to receive(:oauth_access).with(
@@ -70,6 +79,9 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           expect(team.name).to eq 'team_name'
           team = Team.find(team.id)
           expect(team.token).to eq 'token'
+          expect(team.activated_user_access_token).to eq 'access_token'
+          expect(team.activated_user_id).to eq 'user_id'
+          expect(team.bot_user_id).to eq 'bot_user_id'
         end.to change(Team, :count).by(1)
       end
 
@@ -89,6 +101,9 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           team = Team.find(team.id)
           expect(team.token).to eq 'token'
           expect(team.active).to be true
+          expect(team.activated_user_access_token).to eq 'access_token'
+          expect(team.activated_user_id).to eq 'user_id'
+          expect(team.bot_user_id).to eq 'bot_user_id'
         end.to_not change(Team, :count)
       end
       it 'returns a useful error when team already exists' do
@@ -109,6 +124,9 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           team = Team.find(team.id)
           expect(team.token).to eq 'token'
           expect(team.active).to be true
+          expect(team.activated_user_access_token).to eq 'access_token'
+          expect(team.activated_user_id).to eq 'user_id'
+          expect(team.bot_user_id).to eq 'bot_user_id'
         end.to_not change(Team, :count)
       end
     end

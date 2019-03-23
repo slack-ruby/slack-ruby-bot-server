@@ -6,9 +6,12 @@ ActiveRecord::Schema.define do
   create_table :teams, force: true do |t|
     t.string :team_id
     t.string :name
-    t.boolean :active, default: true
     t.string :domain
     t.string :token
+    t.string :bot_user_id
+    t.string :activated_user_id
+    t.string :activated_user_access_token
+    t.boolean :active, default: true
 
     t.timestamps
   end
