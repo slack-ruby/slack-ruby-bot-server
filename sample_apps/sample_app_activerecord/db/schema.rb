@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_170_307_164_946) do
+ActiveRecord::Schema.define(version: 20_190_323_181_453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(version: 20_170_307_164_946) do
     t.boolean  'active', default: true
     t.string   'domain'
     t.string   'token'
-    t.datetime 'created_at',                null: false
-    t.datetime 'updated_at',                null: false
+    t.datetime 'created_at',                                 null: false
+    t.datetime 'updated_at',                                 null: false
+    t.string   'bot_user_id'
+    t.string   'activated_user_id'
+    t.string   'activated_user_access_token'
   end
 end

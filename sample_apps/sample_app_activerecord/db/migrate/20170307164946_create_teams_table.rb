@@ -6,7 +6,6 @@ class CreateTeamsTable < ActiveRecord::Migration[5.0]
       t.boolean :active, default: true
       t.string :domain
       t.string :token
-
       t.timestamps
     end
   end
