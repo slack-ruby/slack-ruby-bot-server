@@ -10,7 +10,7 @@ module SlackRubyBotServer
     end
 
     def self.instance
-      @instance ||= new
+      @instance ||= SlackRubyBotServer::Config.service_class.new
     end
 
     def initialize

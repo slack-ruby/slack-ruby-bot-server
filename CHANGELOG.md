@@ -2,6 +2,7 @@
 
 #### 0.10.0 (Next)
 
+* [#97](https://github.com/slack-ruby/slack-ruby-bot-server/pull/97): Added `Config#service_class` to override the `SlackRubyBotServer::Service.instance` singleton - [@dblock](https://github.com/dblock).
 * [#96](https://github.com/slack-ruby/slack-ruby-bot-server/pull/96): Added `Team#bot_user_id`, `activated_user_id` and `activated_user_access_token` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
