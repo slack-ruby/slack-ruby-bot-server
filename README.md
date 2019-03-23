@@ -147,7 +147,6 @@ instance.on :creating do |team, error, options|
 end
 ```
 
-
 #### Server Class
 
 You can override the server class to handle additional events, and configure the service to use it.
@@ -166,6 +165,25 @@ end
 SlackRubyBotServer.configure do |config|
   config.server_class = MyServer
 end
+```
+
+#### Service Class
+
+You can override the service class to handle additional methods.
+
+```ruby
+class MyService < SlackRubyBotServer::Service
+  def url
+    'https://www.example.com'
+  end
+end
+
+SlackRubyBotServer.configure do |config|
+  config.service_class = MyService
+end
+
+SlackRubyBotServer::Service.instance # MyService
+SlackRubyBotServer::Service.instance.url # https://www.example.com
 ```
 
 ### Access Tokens

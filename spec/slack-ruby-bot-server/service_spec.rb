@@ -87,4 +87,23 @@ describe SlackRubyBotServer::Service do
       expect(@events).to eq %w[starting started stopping stopped]
     end
   end
+  context 'overriding service_class' do
+    let(:service_class) do
+      Class.new(SlackRubyBotServer::Service) do
+        def url
+          'https://www.example.com'
+        end
+      end
+    end
+    after do
+      SlackRubyBotServer.config.reset!
+    end
+    it 'creates an instance of service class' do
+      SlackRubyBotServer.configure do |config|
+        config.service_class = service_class
+      end
+      expect(SlackRubyBotServer::Service.instance).to be_a service_class
+      expect(SlackRubyBotServer::Service.instance.url).to eq 'https://www.example.com'
+    end
+  end
 end
