@@ -6,6 +6,7 @@ gem 'slack-ruby-bot-server', path: '../../'
 
 gem 'kaminari-mongoid'
 gem 'mongoid-scroll'
+gem 'unicorn'
 
 group :test do
   gem 'database_cleaner'

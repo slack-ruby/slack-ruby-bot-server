@@ -2,6 +2,7 @@
 
 #### 0.10.1 (Next)
 
+* [#98](https://github.com/slack-ruby/slack-ruby-bot-server/pull/98): Removed `unicorn` from gem dependencies - [@dblock](https://github.com/dblock).
 * [#90](https://github.com/slack-ruby/slack-ruby-bot-server/pull/90): Update ActiveRecord sample app to support ENV variables in `postgresql.yml` - [@ashkan18](https://github.com/ashkan18).
 * Your contribution here.
 
