@@ -3,7 +3,6 @@ module SlackRubyBotServer
     def prepare!
       check_database!
       init_database!
-      mark_teams_active!
       purge_inactive_teams!
       configure_global_aliases!
     end
@@ -27,10 +26,6 @@ module SlackRubyBotServer
 
     def init_database!
       SlackRubyBotServer::DatabaseAdapter.init!
-    end
-
-    def mark_teams_active!
-      Team.where(active: nil).update_all(active: true)
     end
 
     def purge_inactive_teams!

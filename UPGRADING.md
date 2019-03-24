@@ -3,9 +3,9 @@ Upgrading Slack-Ruby-Bot-Server
 
 ### Upgrading to >= 0.10.1
 
-#### Migration from SLACK_API_TOKEN
+#### Removed Legacy Migrations
 
-The code to automatically migrate from a legacy SLACK_API_TOKEN has been removed.
+Several legacy migrations have been removed, including the code to automatically create a team from a legacy `SLACK_API_TOKEN`, setting `Team#active`, `name` and `team_id`.
 
 See [#101](https://github.com/slack-ruby/slack-ruby-bot-server/pull/101) for more information.
 
