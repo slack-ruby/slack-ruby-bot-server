@@ -10,7 +10,7 @@ ActiveRecord::Base.establish_connection(
   YAML.safe_load(
     ERB.new(
       File.read('config/postgresql.yml')
-    ).result
+    ).result, [], [], true
   )[ENV['RACK_ENV']]
 )
 

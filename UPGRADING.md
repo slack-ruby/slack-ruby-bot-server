@@ -1,6 +1,14 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 0.10.1
+
+#### Unicorn Dependency
+
+The dependency on `unicorn` has been removed from gemspec. Use `unicorn` or `puma` or another application server as you see fit by explicitly adding a dependency in your Gemfile.
+
+See [#98](https://github.com/slack-ruby/slack-ruby-bot-server/pull/98) for more information.
+
 ### Upgrading to >= 0.10.0
 
 #### New Team Fields
