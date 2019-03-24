@@ -1,11 +1,9 @@
 ### Changelog
 
-#### 0.10.0 (Next)
+#### 0.10.0 (2019/3/23)
 
 * [#97](https://github.com/slack-ruby/slack-ruby-bot-server/pull/97): Added `Config#service_class` to override the `SlackRubyBotServer::Service.instance` singleton - [@dblock](https://github.com/dblock).
 * [#96](https://github.com/slack-ruby/slack-ruby-bot-server/pull/96): Added `Team#bot_user_id`, `activated_user_id` and `activated_user_access_token` - [@dblock](https://github.com/dblock).
-* Your contribution here.
-
 * [#95](https://github.com/slack-ruby/slack-ruby-bot-server/pull/95): Expose the optional `state` parameter that is returned from the Add to Slack button - [@aok-solutions](https://github.com/aok-solutions).
 
 #### 0.9.0 (2019/2/25)
