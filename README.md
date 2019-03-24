@@ -147,6 +147,10 @@ instance.on :creating do |team, error, options|
 end
 ```
 
+A number of extensions use service manager callbacks to implement useful functionality.
+
+* [slack-ruby-bot-server-mailchimp](https://github.com/slack-ruby/slack-ruby-bot-server-mailchimp): Subscribes new bot users to a Mailchimp mailing list.
+
 #### Server Class
 
 You can override the server class to handle additional events, and configure the service to use it.
