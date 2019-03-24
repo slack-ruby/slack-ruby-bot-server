@@ -3,9 +3,6 @@ module SlackRubyBotServer
     def prepare!
       check_database!
       init_database!
-      mark_teams_active!
-      migrate_from_single_team!
-      update_team_name_and_id!
       purge_inactive_teams!
       configure_global_aliases!
     end
@@ -29,30 +26,6 @@ module SlackRubyBotServer
 
     def init_database!
       SlackRubyBotServer::DatabaseAdapter.init!
-    end
-
-    def mark_teams_active!
-      Team.where(active: nil).update_all(active: true)
-    end
-
-    def update_team_name_and_id!
-      Team.active.where(team_id: nil).each do |team|
-        begin
-          auth = team.ping![:auth]
-          team.update_attributes!(team_id: auth['team_id'], name: auth['team'])
-        rescue StandardError => e
-          logger.warn "Error pinging team #{team.id}: #{e.message}."
-          team.set(active: false)
-        end
-      end
-    end
-
-    def migrate_from_single_team!
-      return unless ENV.key?('SLACK_API_TOKEN')
-      logger.info 'Migrating from env SLACK_API_TOKEN ...'
-      team = Team.find_or_create_from_env!
-      logger.info "Automatically migrated team: #{team}."
-      logger.warn "You should unset ENV['SLACK_API_TOKEN']."
     end
 
     def purge_inactive_teams!

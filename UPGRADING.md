@@ -3,6 +3,12 @@ Upgrading Slack-Ruby-Bot-Server
 
 ### Upgrading to >= 0.10.1
 
+#### Removed Legacy Migrations
+
+Several legacy migrations have been removed, including the code to automatically create a team from a legacy `SLACK_API_TOKEN`, setting `Team#active`, `name` and `team_id`.
+
+See [#101](https://github.com/slack-ruby/slack-ruby-bot-server/pull/101) for more information.
+
 #### Unicorn Dependency
 
 The dependency on `unicorn` has been removed from gemspec. Use `unicorn` or `puma` or another application server as you see fit by explicitly adding a dependency in your Gemfile.
