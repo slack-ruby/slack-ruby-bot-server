@@ -5,7 +5,11 @@ Slack Ruby Bot Server
 [![Build Status](https://travis-ci.org/slack-ruby/slack-ruby-bot-server.svg?branch=master)](https://travis-ci.org/slack-ruby/slack-ruby-bot-server)
 [![Code Climate](https://codeclimate.com/github/slack-ruby/slack-ruby-bot-server.svg)](https://codeclimate.com/github/slack-ruby/slack-ruby-bot-server)
 
-A library that enables you to write a complete Slack bot service with Slack button integration, in Ruby. If you are not familiar with Slack bots or Slack API concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html). A good demo of a service built on top of this is [missingkidsbot.org](http://missingkidsbot.org).
+Build a complete Slack bot service with Slack button integration, in Ruby.
+
+If you are not familiar with Slack bots or Slack API concepts, you might want to watch [this video](http://code.dblock.org/2016/03/11/your-first-slack-bot-service-video.html).
+
+A good [open-source demo](https://github.com/dblock/slack-strava) of a service built on top of this library is [Strava integration with Slack](https://slava.playplay.io).
 
 ### What is this?
 
@@ -58,13 +62,15 @@ See the [sample app using ActiveRecord](sample_apps/sample_app_activerecord) for
 
 ### Usage
 
-[Create a New Application](https://api.slack.com/applications/new) on Slack.
+Start with one of the samples above, which contain a couple of custom commands, necessary dependencies and tests, then [create a new application](https://api.slack.com/applications/new) on Slack.
 
 ![](images/new.png)
 
-Follow the instructions, note the app's client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app, for testing purposes use `http://localhost:9292`. Edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it. Run `bundle install` and `foreman start`. Navigate to [localhost:9292](http://localhost:9292). Register using the Slack button.
+Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app, for local testing purposes use `http://localhost:9292`.
 
-If you deploy to Heroku set `SLACK_CLIENT_ID` and `SLACK_CLIENT_SECRET` via `heroku config:add SLACK_CLIENT_ID=... SLACK_CLIENT_SECRET=...`.
+Within your application, edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it.
+
+Run `bundle install` and `foreman start` to boot the app. Navigate to [localhost:9292](http://localhost:9292). You should see an "Add to Slack" button. Use it to install the app into your own Slack team.
 
 ### API
 
@@ -212,6 +218,6 @@ You can see a sample implementation in [slack-sup#3a497b](https://github.com/dbl
 
 ### Copyright & License
 
-Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2018
+Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2019
 
 [MIT License](LICENSE)
