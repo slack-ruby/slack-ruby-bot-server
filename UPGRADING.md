@@ -3,6 +3,12 @@ Upgrading Slack-Ruby-Bot-Server
 
 ### Upgrading to >= 0.10.1
 
+#### Migration from SLACK_API_TOKEN
+
+The code to automatically migrate from a legacy SLACK_API_TOKEN has been removed.
+
+See [#101](https://github.com/slack-ruby/slack-ruby-bot-server/pull/101) for more information.
+
 #### Unicorn Dependency
 
 The dependency on `unicorn` has been removed from gemspec. Use `unicorn` or `puma` or another application server as you see fit by explicitly adding a dependency in your Gemfile.
