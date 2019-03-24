@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.10.1 (Next)
+
+* Your contribution here.
+
 #### 0.10.0 (2019/3/23)
 
 * [#97](https://github.com/slack-ruby/slack-ruby-bot-server/pull/97): Added `Config#service_class` to override the `SlackRubyBotServer::Service.instance` singleton - [@dblock](https://github.com/dblock).
