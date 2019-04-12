@@ -1,6 +1,10 @@
 ### Changelog
 
-#### 0.11.0 (Next)
+#### 0.11.1 (Next)
+
+* Your contribution here.
+
+#### 0.11.0 (2019/4/12)
 
 * [#101](https://github.com/slack-ruby/slack-ruby-bot-server/pull/101): Removed legacy migrations, including `SLACK_API_TOKEN`, team `name`, `team_id` and `active` - [@dblock](https://github.com/dblock).
 * [#98](https://github.com/slack-ruby/slack-ruby-bot-server/pull/98): Removed `unicorn` from gem dependencies - [@dblock](https://github.com/dblock).
