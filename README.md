@@ -17,7 +17,7 @@ A library that contains a [Grape](http://github.com/ruby-grape/grape) API servin
 
 ### Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v0.10.0](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v0.10.0/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **stable** release of slack-ruby-bot-server, v0.11.0. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
 ### Try Me
 

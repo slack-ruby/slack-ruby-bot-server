@@ -1,7 +1,7 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
-### Upgrading to >= 0.10.1
+### Upgrading to >= 0.11.0
 
 #### Removed Legacy Migrations
 

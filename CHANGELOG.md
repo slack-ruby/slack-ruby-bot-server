@@ -1,11 +1,10 @@
 ### Changelog
 
-#### 0.10.1 (Next)
+#### 0.11.0 (Next)
 
 * [#101](https://github.com/slack-ruby/slack-ruby-bot-server/pull/101): Removed legacy migrations, including `SLACK_API_TOKEN`, team `name`, `team_id` and `active` - [@dblock](https://github.com/dblock).
 * [#98](https://github.com/slack-ruby/slack-ruby-bot-server/pull/98): Removed `unicorn` from gem dependencies - [@dblock](https://github.com/dblock).
 * [#90](https://github.com/slack-ruby/slack-ruby-bot-server/pull/90): Update ActiveRecord sample app to support ENV variables in `postgresql.yml` - [@ashkan18](https://github.com/ashkan18).
-* Your contribution here.
 
 #### 0.10.0 (2019/3/23)
 
