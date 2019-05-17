@@ -4,6 +4,7 @@ require 'grape-swagger'
 require 'slack-ruby-bot'
 require 'slack-ruby-bot-server/service'
 require 'slack-ruby-bot-server/server'
+require 'slack-ruby-bot-server/ping'
 require 'slack-ruby-bot-server/config'
 
 require 'slack-ruby-bot-server/ext'

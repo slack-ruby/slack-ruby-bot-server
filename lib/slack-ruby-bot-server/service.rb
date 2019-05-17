@@ -31,6 +31,7 @@ module SlackRubyBotServer
       run_callbacks :starting, team
       logger.info "Starting team #{team}."
       options = { team: team }
+      options[:ping] = SlackRubyBotServer::Config.ping if SlackRubyBotServer::Config.ping
       server = SlackRubyBotServer::Config.server_class.new(options)
       start_server! team, server
       run_callbacks :started, team

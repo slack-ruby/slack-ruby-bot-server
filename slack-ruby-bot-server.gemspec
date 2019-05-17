@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec)/}) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'async-websocket'
+  spec.add_dependency 'async-websocket', '~> 0.8.0'
   spec.add_dependency 'foreman'
   spec.add_dependency 'grape'
   spec.add_dependency 'grape-roar', '>= 0.4.0'
