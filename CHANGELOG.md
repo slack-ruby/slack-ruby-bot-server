@@ -1,9 +1,8 @@
 ### Changelog
 
-#### 0.11.1 (Next)
+#### 0.11.1 (2019/5/17)
 
 * [#104](https://github.com/slack-ruby/slack-ruby-bot-server/pull/104): Lock async-websocket at a compatible 0.8.0 version - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 #### 0.11.0 (2019/4/12)
 
