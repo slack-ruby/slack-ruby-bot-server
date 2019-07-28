@@ -62,15 +62,46 @@ See the [sample app using ActiveRecord](sample_apps/sample_app_activerecord) for
 
 ### Usage
 
-Start with one of the samples above, which contain a couple of custom commands, necessary dependencies and tests, then [create a new application](https://api.slack.com/applications/new) on Slack.
+Start with one of the samples above, which contain a couple of custom commands, necessary dependencies and tests, then [create a new Slack App](https://api.slack.com/applications/new).
 
-![](images/new.png)
+![](images/create-app.png)
 
-Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app, for local testing purposes use `http://localhost:9292`.
+Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app; for local testing purposes use a public tunneling service such as [ngrok](https://ngrok.com/) to expose local port 9292.
 
 Within your application, edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it.
 
 Run `bundle install` and `foreman start` to boot the app. Navigate to [localhost:9292](http://localhost:9292). You should see an "Add to Slack" button. Use it to install the app into your own Slack team.
+
+### OAuth Code Grant
+
+The "Add to Slack" button uses the standard OAuth code grant flow as described in the [Slack docs](https://api.slack.com/docs/oauth#flow).
+
+The button itself contains a link that looks like this:
+
+```
+https://slack.com/oauth/authorize?scope=bot&client_id=<%= ENV['SLACK_CLIENT_ID'] %>
+```
+
+Once clicked, the user is taken through the authorization process at Slack's site. Upon successful completion, a callback containing a temporary code is sent to the redirect URL you specified. The endpoint at that URL should contain code that looks like this:
+
+```ruby
+# Instantiate a web client
+client = Slack::Web::Client.new
+
+# Request a token using the temporary code
+rc = client.oauth_access(
+  client_id: ENV['SLACK_CLIENT_ID'],
+  client_secret: ENV['SLACK_CLIENT_SECRET'],
+  code: params[:code]
+)
+
+# Pluck the token from the response
+token = rc['bot']['bot_access_token']
+```
+
+The token should be stored in persistent storage and used each time a Slack client is instantiated for the specific team.
+
+Note that other libraries may be used to assist with OAuth interactions, such as [OAuth2](https://github.com/oauth-xx/oauth2).
 
 ### API
 

@@ -2,6 +2,7 @@
 
 #### 0.11.2 (Next)
 
+* [#105](https://github.com/slack-ruby/slack-ruby-bot-server/pull/105): Update README with OAuth code grant detail - [@jcraigk](https://github.com/jcraigk).
 * Your contribution here.
 
 #### 0.11.1 (2019/5/17)
