@@ -7,6 +7,7 @@ module SlackRubyBotServer
         def sort_order(options = {})
           params[:sort] = options[:default_sort_order] unless params[:sort]
           return [] unless params[:sort]
+
           sort_order = params[:sort].to_s
           unless options[:default_sort_order] == sort_order
             supported_sort_orders = route_sort

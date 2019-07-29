@@ -49,7 +49,7 @@ module SlackRubyBotServer
     def stop!(team)
       logger.info "Stopping team #{team}."
       run_callbacks :stopping, team
-      team.server.stop! if team.server
+      team.server&.stop!
       run_callbacks :stopped, team
     rescue StandardError => e
       run_callbacks :error, team, e
@@ -106,6 +106,7 @@ module SlackRubyBotServer
     def run_callbacks(type, team = nil, error = nil, options = {})
       callbacks = @callbacks[type.to_s]
       return false unless callbacks
+
       callbacks.each do |c|
         c.call team, error, options
       end

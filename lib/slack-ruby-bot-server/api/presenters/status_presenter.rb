@@ -23,6 +23,7 @@ module SlackRubyBotServer
             raise 'Unsupported database driver.'
           end
           return unless team
+
           team.ping!
         end
 

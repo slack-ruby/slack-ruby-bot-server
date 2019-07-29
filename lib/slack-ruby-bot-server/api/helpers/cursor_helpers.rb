@@ -11,6 +11,7 @@ module SlackRubyBotServer
         if SlackRubyBotServer::Config.mongoid?
           def paginate_by_cursor(coll, _options)
             raise 'Both cursor and offset parameters are present, these are mutually exclusive.' if params.key?(:offset) && params.key?(:cursor)
+
             results = { results: [], next: nil }
             coll = coll.skip(params[:offset].to_i) if params.key?(:offset)
             size = (params[:size] || 10).to_i
@@ -26,6 +27,7 @@ module SlackRubyBotServer
         elsif SlackRubyBotServer::Config.activerecord?
           def paginate_by_cursor(coll, options)
             raise 'Both cursor and offset parameters are present, these are mutually exclusive.' if params.key?(:offset) && params.key?(:cursor)
+
             results = { results: [], next: nil }
             size = (params[:size] || 10).to_i
             results[:total_count] = coll.count(:all) if params[:total_count]

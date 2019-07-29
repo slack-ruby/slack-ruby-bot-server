@@ -16,6 +16,7 @@ describe SlackRubyBotServer::Api::Endpoints::RootEndpoint do
     links.each_pair do |_key, h|
       href = h['href']
       next if href.include?('{') # templated link
+
       get href.gsub('http://example.org', '')
       expect(last_response.status).to eq 200
       expect(JSON.parse(last_response.body)).to_not eq({})

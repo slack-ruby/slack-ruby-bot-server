@@ -11,7 +11,7 @@ when 'activerecord' then
   gem 'otr-activerecord', '~> 1.2.1'
   gem 'cursor_pagination' # rubocop:disable Bundler/OrderedGems
   gem 'pg'
-when nil then
+when nil
   warn "Missing ENV['DATABASE_ADAPTER']."
 else
   warn "Invalid ENV['DATABASE_ADAPTER']: #{ENV['DATABASE_ADAPTER']}."
@@ -31,7 +31,7 @@ group :development, :test do
   gem 'rack-test'
   gem 'rake'
   gem 'rspec'
-  gem 'rubocop', '0.58.2'
+  gem 'rubocop', '0.73.0'
   gem 'selenium-webdriver', '~> 3.4.4'
   gem 'vcr'
   gem 'webmock'
