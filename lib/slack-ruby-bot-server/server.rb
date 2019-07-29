@@ -8,6 +8,7 @@ module SlackRubyBotServer
       attrs = attrs.dup
       @team = attrs.delete(:team)
       raise 'Missing team' unless @team
+
       attrs[:token] = @team.token
       super(attrs)
       open!

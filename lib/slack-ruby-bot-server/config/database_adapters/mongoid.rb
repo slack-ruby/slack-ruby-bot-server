@@ -6,7 +6,8 @@ module SlackRubyBotServer
   module DatabaseAdapter
     def self.check!
       rc = Mongoid.default_client.command(ping: 1)
-      return if rc && rc.ok?
+      return if rc&.ok?
+
       raise rc.documents.first['error'] || 'Unexpected error.'
     rescue StandardError => e
       warn "Error connecting to MongoDB: #{e.message}"
