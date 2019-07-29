@@ -66,7 +66,7 @@ Start with one of the samples above, which contain a couple of custom commands, 
 
 ![](images/create-app.png)
 
-Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app; for local testing purposes use a public tunneling service such as [ngrok](https://ngrok.com/) to expose local port 9292.
+Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app. For local testing purposes use a public tunneling service such as [ngrok](https://ngrok.com/) to expose local port 9292.
 
 Within your application, edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it.
 
@@ -82,7 +82,7 @@ The button itself contains a link that looks like this:
 https://slack.com/oauth/authorize?scope=bot&client_id=<%= ENV['SLACK_CLIENT_ID'] %>
 ```
 
-Once clicked, the user is taken through the authorization process at Slack's site. Upon successful completion, a callback containing a temporary code is sent to the redirect URL you specified. The endpoint at that URL should contain code that looks like this:
+Once clicked, the user is taken through the authorization process at Slack's site. Upon successful completion, a callback containing a temporary code is sent to the redirect URL you specified. The endpoint at that URL contains code that looks like this:
 
 ```ruby
 # Instantiate a web client
@@ -99,9 +99,7 @@ rc = client.oauth_access(
 token = rc['bot']['bot_access_token']
 ```
 
-The token should be stored in persistent storage and used each time a Slack client is instantiated for the specific team.
-
-Note that other libraries may be used to assist with OAuth interactions, such as [OAuth2](https://github.com/oauth-xx/oauth2).
+The token is stored in persistent storage and used each time a Slack client is instantiated for the specific team.
 
 ### API
 
