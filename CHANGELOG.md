@@ -2,7 +2,8 @@
 
 #### 0.11.2 (Next)
 
-* Update the sample_app_activerecord Gemfile and README to make them function as expected.
+* Your contribution here.
+* [#110](https://github.com/slack-ruby/slack-ruby-bot-server/pull/110): Update the sample_app_activerecord Gemfile and README to make them function as expected.
 
 #### 0.11.1 (2019/5/17)
 
