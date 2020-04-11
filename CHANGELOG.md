@@ -2,7 +2,7 @@
 
 #### 0.11.2 (Next)
 
-* Your contribution here.
+* Update the sample_app_activerecord Gemfile and README to make them function as expected.
 
 #### 0.11.1 (2019/5/17)
 
