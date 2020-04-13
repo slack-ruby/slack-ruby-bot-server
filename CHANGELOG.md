@@ -3,6 +3,7 @@
 #### 0.11.2 (Next)
 
 * Your contribution here.
+* [#110](https://github.com/slack-ruby/slack-ruby-bot-server/pull/110): Fix ActiveRecord sample app - [@CeeBeeUK](https://github.com/CeeBeeUK).
 
 #### 0.11.1 (2019/5/17)
 
