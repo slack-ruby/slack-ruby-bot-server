@@ -28,4 +28,4 @@ module SlackRubyBotServer
   end
 end
 
-::Boolean = Virtus::Attribute::Boolean
+::Boolean = Grape::API::Boolean

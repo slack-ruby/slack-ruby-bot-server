@@ -7,8 +7,6 @@ when 'mongoid' then
   gem 'mongoid-scroll'
   gem 'mongoid-shell'
 when 'activerecord' then
-  gem 'virtus'
-
   gem 'activerecord', '~> 5.0.0'
   gem 'otr-activerecord', '~> 1.2.1'
   gem 'cursor_pagination' # rubocop:disable Bundler/OrderedGems
