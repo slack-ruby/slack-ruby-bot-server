@@ -138,6 +138,10 @@ You can introduce custom behavior into the service lifecycle via callbacks. This
 ```ruby
 instance = SlackRubyBotServer::Service.instance
 
+instance.on :started, :stopped do |team|
+  # team has been started or stopped
+end
+
 instance.on :created do |team, error, options|
   # a new team has been registered
 end
