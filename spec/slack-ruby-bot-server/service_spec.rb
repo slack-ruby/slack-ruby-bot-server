@@ -60,9 +60,10 @@ describe SlackRubyBotServer::Service do
     end
   end
   context 'callbacks' do
-    before do
-      @events = []
-      SlackRubyBotServer::Service.instance.tap do |instance|
+    let(:instance) { SlackRubyBotServer::Service.instance }
+    context 'single' do
+      before do
+        @events = []
         [:starting].each do |event|
           instance.on event do |team, _e|
             expect(team).to_not be_nil
@@ -78,49 +79,97 @@ describe SlackRubyBotServer::Service do
           end
         end
       end
+      it 'invokes start and stop callbacks' do
+        allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
+        instance.start!(team)
+        allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
+        instance.stop!(team)
+        expect(@events).to eq %w[starting started stopping stopped]
+      end
     end
-    it 'invokes start and stop callbacks' do
-      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
-      SlackRubyBotServer::Service.instance.start!(team)
-      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
-      SlackRubyBotServer::Service.instance.stop!(team)
-      expect(@events).to eq %w[starting started stopping stopped]
-    end
-  end
-  context 'multiple callbacks' do
-    before do
-      @events = []
-      SlackRubyBotServer::Service.instance.tap do |instance|
+    context 'multiple callbacks' do
+      before do
+        @events = []
         instance.on :starting, :stopping do |team|
           expect(team).to_not be_nil
           @events << 'call'
         end
       end
+      it 'invokes starting and stopping callbacks' do
+        allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
+        instance.start!(team)
+        allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
+        instance.stop!(team)
+        expect(@events).to eq %w[call call]
+      end
     end
-    it 'invokes starting and stopping callbacks' do
-      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
-      SlackRubyBotServer::Service.instance.start!(team)
-      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
-      SlackRubyBotServer::Service.instance.stop!(team)
-      expect(@events).to eq %w[call call]
-    end
-  end
-  context 'multiple callback blocks' do
-    before do
-      @events = []
-      SlackRubyBotServer::Service.instance.tap do |instance|
+    context 'multiple callback blocks' do
+      before do
+        @events = []
         instance.on :starting, :starting do |team|
           expect(team).to_not be_nil
           @events << 'starting'
         end
       end
+      it 'invokes starting and stopping callbacks' do
+        allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
+        instance.start!(team)
+        allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
+        instance.stop!(team)
+        expect(@events).to eq %w[starting starting]
+      end
     end
-    it 'invokes starting and stopping callbacks' do
-      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
-      SlackRubyBotServer::Service.instance.start!(team)
-      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
-      SlackRubyBotServer::Service.instance.stop!(team)
-      expect(@events).to eq %w[starting starting]
+  end
+  context 'timers' do
+    let(:instance) { SlackRubyBotServer::Service.instance }
+    context 'without timers' do
+      it 'noop' do
+        Async::Reactor.run do |task|
+          instance.start_intervals!
+          task.stop
+        end
+        expect(instance.instance_variable_get(:@intervals).keys).to eq []
+      end
+    end
+    context 'invalid interval' do
+      it 'string' do
+        expect { instance.every 'invalid' }.to raise_error 'Invalid interval "invalid".'
+      end
+      it 'symbol' do
+        expect { instance.every :invalid }.to raise_error 'Invalid interval "invalid".'
+      end
+      it 'zero' do
+        expect { instance.every 0 }.to raise_error 'Invalid interval "0".'
+      end
+      it 'negative' do
+        expect { instance.every -1 }.to raise_error 'Invalid interval "-1".'
+      end
+    end
+    context 'with timers' do
+      before do
+        @events = []
+        instance.every :hour, :day do
+          @events << '1h, 1d'
+        end
+        instance.every 1, 2 do
+          @events << '1-2s'
+        end
+        instance.every :minute do
+          @events << '1m'
+        end
+        instance.every 1 do
+          @events << '1s'
+        end
+      end
+      it 'sets up timers' do
+        Async::Reactor.run do |task|
+          instance.start_intervals!
+          task.sleep 3
+          task.stop
+        end
+        expect(instance.instance_variable_get(:@intervals).keys).to eq [3600, 86_400, 1, 2, 60]
+        expect(@events.sort.uniq).to eq %w[1-2s 1s]
+      end
     end
   end
   context 'overriding service_class' do
