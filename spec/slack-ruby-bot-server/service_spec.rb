@@ -87,6 +87,42 @@ describe SlackRubyBotServer::Service do
       expect(@events).to eq %w[starting started stopping stopped]
     end
   end
+  context 'multiple callbacks' do
+    before do
+      @events = []
+      SlackRubyBotServer::Service.instance.tap do |instance|
+        instance.on :starting, :stopping do |team|
+          expect(team).to_not be_nil
+          @events << 'call'
+        end
+      end
+    end
+    it 'invokes starting and stopping callbacks' do
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
+      SlackRubyBotServer::Service.instance.start!(team)
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
+      SlackRubyBotServer::Service.instance.stop!(team)
+      expect(@events).to eq %w[call call]
+    end
+  end
+  context 'multiple callback blocks' do
+    before do
+      @events = []
+      SlackRubyBotServer::Service.instance.tap do |instance|
+        instance.on :starting, :starting do |team|
+          expect(team).to_not be_nil
+          @events << 'starting'
+        end
+      end
+    end
+    it 'invokes starting and stopping callbacks' do
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:start_async)
+      SlackRubyBotServer::Service.instance.start!(team)
+      allow_any_instance_of(SlackRubyBotServer::Server).to receive(:stop!)
+      SlackRubyBotServer::Service.instance.stop!(team)
+      expect(@events).to eq %w[starting starting]
+    end
+  end
   context 'overriding service_class' do
     let(:service_class) do
       Class.new(SlackRubyBotServer::Service) do

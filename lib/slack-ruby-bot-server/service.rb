@@ -17,8 +17,10 @@ module SlackRubyBotServer
       @callbacks = Hash.new { |h, k| h[k] = [] }
     end
 
-    def on(type, &block)
-      @callbacks[type.to_s] << block
+    def on(*types, &block)
+      Array(types).each do |type|
+        @callbacks[type.to_s] << block
+      end
     end
 
     def create!(team, options = {})
