@@ -133,6 +133,8 @@ MyApp.instance.prepare!
 
 #### Service Manager
 
+##### Lifecycle Callbacks
+
 You can introduce custom behavior into the service lifecycle via callbacks. This can be useful when new team has been registered via the API or a team has been deactivated from Slack.
 
 ```ruby
@@ -171,7 +173,6 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 | deactivating   | a team is being deactivated                                      |
 | deactivated    | a team has been deactivated                                      |
 
-
 The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows for an optional `state` parameter that will be returned on completion of the request. The `creating` and `created` callbacks include an options hash where this value can be accessed (to check for forgery attacks for instance).
 ```ruby
 auth = OpenSSL::HMAC.hexdigest("SHA256", "key", "data")
@@ -186,9 +187,43 @@ instance.on :creating do |team, error, options|
 end
 ```
 
-A number of extensions use service manager callbacks to implement useful functionality.
+##### Service Timers
+
+You can introduce custom behavior into the service lifecycle on a timer. For example, check whether a team's trial has expired, or periodically cleanup data.
+
+Note that unlike callbacks, timers are global for the entire service.
+
+```ruby
+instance = SlackRubyBotServer::Service.instance
+
+instance.every :hour do
+  Team.each do |team|
+    begin
+      # do something with every team once an hour
+    rescue StandardError
+    end
+  end
+end
+
+instance.every :minute do
+  # called every minute
+end
+
+instance.every :second do
+  # called every second
+end
+
+instance.every 30 do
+  # called every 30 seconds
+end
+```
+
+##### Extensions
+
+A number of extensions use service manager callbacks and service timers to implement useful functionality.
 
 * [slack-ruby-bot-server-mailchimp](https://github.com/slack-ruby/slack-ruby-bot-server-mailchimp): Subscribes new bot users to a Mailchimp mailing list.
+* [slack-ruby-bot-server-stripe](https://github.com/slack-ruby/slack-ruby-bot-server-stripe): Enables paid bots with trial periods and commerce through Stripe.
 
 #### Server Class
 

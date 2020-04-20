@@ -15,11 +15,28 @@ module SlackRubyBotServer
 
     def initialize
       @callbacks = Hash.new { |h, k| h[k] = [] }
+      @intervals = Hash.new { |h, k| h[k] = [] }
     end
 
     def on(*types, &block)
       Array(types).each do |type|
         @callbacks[type.to_s] << block
+      end
+    end
+
+    def every(*intervals, &block)
+      Array(intervals).each do |interval|
+        case interval
+        when :minute
+          interval = 60
+        when :hour
+          interval = 60 * 60
+        when :day
+          interval = 60 * 60 * 24
+        end
+        raise "Invalid interval \"#{interval}\"." unless interval.is_a?(Integer) && interval > 0
+
+        @intervals[interval] << block
       end
     end
 
@@ -66,6 +83,15 @@ module SlackRubyBotServer
         start!(team)
         run_callbacks :booted, team
       end
+      start_intervals!
+    end
+
+    def start_intervals!
+      @intervals.each_pair do |period, calls|
+        _every period do
+          calls.each(&:call)
+        end
+      end
     end
 
     def deactivate!(team)
@@ -87,6 +113,19 @@ module SlackRubyBotServer
     end
 
     private
+
+    def _every(tt, &_block)
+      ::Async::Reactor.run do |task|
+        loop do
+          begin
+            task.sleep tt
+            yield
+          rescue StandardError => e
+            logger.error e
+          end
+        end
+      end
+    end
 
     def start_server!(team, server, wait = 1)
       team.server = server
