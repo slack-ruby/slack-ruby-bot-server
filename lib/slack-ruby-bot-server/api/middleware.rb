@@ -30,11 +30,7 @@ module SlackRubyBotServer
           end
 
           use Rack::ServerPages do |config|
-            config.view_path = [
-              'views', # relative to Dir.pwd
-              'public', # relative to Dir.pwd
-              File.expand_path(File.join(__dir__, '../../../public')) # built-in fallback
-            ]
+            config.view_path = SlackRubyBotServer::Config.view_paths
           end
 
           run Middleware.new
