@@ -19,7 +19,7 @@ describe SlackRubyBotServer::Api::Middleware do
       SlackRubyBotServer.configure do |config|
         config.view_paths << 'custom'
       end
-      server_pages = middleware_classes(SlackRubyBotServer::Api::Middleware.instance)[2]
+      server_pages = middleware_classes(SlackRubyBotServer::Api::Middleware.instance)[-2]
       expect(server_pages).to be_a Rack::ServerPages
       config = server_pages.instance_variable_get(:@config)
       expect(config[:view_path].count).to eq 4
