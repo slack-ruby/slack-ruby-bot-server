@@ -266,7 +266,15 @@ SlackRubyBotServer::Service.instance.url # https://www.example.com
 
 ### HTML Templates
 
-This library provides a [default HTML template and JS scripts](public) that implement the "Add to Slack" button workflow. Customize your pages by adding a `public` directory in your application and starting with a [index.html.erb](public/index.html.erb) template. The `views` and `public` folders are [loaded by default](lib/slack-ruby-bot-server/api/middleware.rb#L32).
+This library provides a [default HTML template and JS scripts](public) that implement the "Add to Slack" button workflow. Customize your pages by adding a `public` directory in your application and starting with a [index.html.erb](public/index.html.erb) template. The application's `views` and `public` folders are [loaded by default](lib/slack-ruby-bot-server/api/middleware.rb#L32).
+
+You can add to or override template paths as follows.
+
+`ruby
+SlackRubyBotServer.configure do |config|
+  config.view_paths << File.expand_path(File.join(__dir__, 'public'))
+end
+```
 
 ### Access Tokens
 

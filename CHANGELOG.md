@@ -6,8 +6,9 @@
 * [#113](https://github.com/slack-ruby/slack-ruby-bot-server/pull/113): Added support for intervals with `.every` - [@dblock](https://github.com/dblock).
 * [#112](https://github.com/slack-ruby/slack-ruby-bot-server/pull/112): Added support for multiple `.on` events as an argument - [@dblock](https://github.com/dblock).
 * [#111](https://github.com/slack-ruby/slack-ruby-bot-server/pull/111): Removed dependency on Virtus - [@dblock](https://github.com/dblock).
-* [#110](https://github.com/slack-ruby/slack-ruby-bot-server/pull/110): Fix ActiveRecord sample app - [@CeeBeeUK](https://github.com/CeeBeeUK).
-* [#114](https://github.com/slack-ruby/slack-ruby-bot-server/pull/114): Use `require_relative` to prevent local collisions - [@dblock](https://github.com/dblock).
+* [#110](https://github.com/slack-ruby/slack-ruby-bot-server/pull/110): Fixed ActiveRecord sample app - [@CeeBeeUK](https://github.com/CeeBeeUK).
+* [#114](https://github.com/slack-ruby/slack-ruby-bot-server/pull/114): Used `require_relative` to prevent local collisions - [@dblock](https://github.com/dblock).
+* [#115](https://github.com/slack-ruby/slack-ruby-bot-server/pull/115): Added `Config#view_paths` to be used by Rack middleware - [@dblock](https://github.com/dblock).
 
 #### 0.11.1 (2019/5/17)
 
