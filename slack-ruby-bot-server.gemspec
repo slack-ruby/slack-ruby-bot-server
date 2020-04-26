@@ -1,6 +1,6 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'slack-ruby-bot-server/version'
+require_relative 'lib/slack-ruby-bot-server/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'slack-ruby-bot-server'

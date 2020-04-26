@@ -1,4 +1,5 @@
-require 'slack-ruby-bot-server/models/team/mongoid.rb'
+require_relative '../../models/team/mongoid.rb'
+
 require 'kaminari/grape'
 require 'mongoid-scroll'
 

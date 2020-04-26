@@ -1,4 +1,4 @@
-require 'slack-ruby-bot-server/models/team/activerecord.rb'
+require_relative '../../models/team/activerecord.rb'
 
 module SlackRubyBotServer
   module DatabaseAdapter
