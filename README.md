@@ -103,7 +103,7 @@ The token is stored in persistent storage and used each time a Slack client is i
 
 ### API
 
-This library implements an app, [SlackRubyBotServer::App](lib/slack-ruby-bot-server/app.rb), a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb) that creates multiple instances of a bot server class, [SlackRubyBotServer::Server](lib/slack-ruby-bot-server/server.rb), one per team.
+This library implements an app, [SlackRubyBotServer::App](lib/slack-ruby-bot-server/app.rb), a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb) that creates multiple instances of a bot server class, [SlackRubyBotServer::Server](lib/slack-ruby-bot-server/server.rb), one per team. It also provides [default HTML templates and JS scripts](public) for Slack integration.
 
 #### App
 
@@ -264,6 +264,10 @@ SlackRubyBotServer::Service.instance # MyService
 SlackRubyBotServer::Service.instance.url # https://www.example.com
 ```
 
+### HTML Templates
+
+This library provides a [default HTML template and JS scripts](public) that implement the "Add to Slack" button workflow. Customize your pages by adding a `public` directory in your application and starting with a [index.html.erb](public/index.html.erb) template. The `views` and `public` folders are [loaded by default](lib/slack-ruby-bot-server/api/middleware.rb#L32).
+
 ### Access Tokens
 
 By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) stores a `bot_access_token` as `token` that grants a certain amount of privileges to the bot user as described in [Slack OAuth Docs](https://api.slack.com/docs/oauth) along with `activated_user_access_token` that represents the token of the installing user. You may not want a bot user at all, or may require different auth scopes, such as `users.profile:read` to access user profile information via `Slack::Web::Client#users_profile_get`. To change required scopes make the following changes.
@@ -274,18 +278,19 @@ By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) s
 
 You can see a sample implementation in [slack-sup#3a497b](https://github.com/dblock/slack-sup/commit/3a497b436d25d3a7738562655cda64b180ae0096).
 
-### Examples Using Slack Ruby Bot Server
+### Example Bots Using Slack Ruby Bot Server
 
-* [slack-sup](https://github.com/dblock/slack-sup), free service at [sup.playplay.io](https://sup.playplay.io)
-* [slack-gamebot](https://github.com/dblock/slack-gamebot), free service at [www.playplay.io](https://www.playplay.io)
-* [slack-market](https://github.com/dblock/slack-market), free service at [market.playplay.io](https://market.playplay.io)
-* [slack-shellbot](https://github.com/slack-ruby/slack-shellbot), free service at [shell.playplay.io](https://shell.playplay.io)
-* [slack-api-explorer](https://github.com/slack-ruby/slack-api-explorer), free service at [api-explorer.playplay.io](https://shell.playplay.io)
-* [slack-strava](https://github.com/dblock/slack-strava), free service at [slava.playplay.io](https://slava.playplay.io)
-* [slack-arena](https://github.com/dblock/slack-arena), free service at [arena.playplay.io](https://arena.playplay.io)
+* [slack-ruby-bot-server-sample](https://github.com/slack-ruby/slack-ruby-bot-server-sample), a generic sample
+* [slack-sup](https://github.com/dblock/slack-sup), see [sup.playplay.io](https://sup.playplay.io)
+* [slack-gamebot](https://github.com/dblock/slack-gamebot), see [www.playplay.io](https://www.playplay.io)
+* [slack-market](https://github.com/dblock/slack-market), see [market.playplay.io](https://market.playplay.io)
+* [slack-shellbot](https://github.com/slack-ruby/slack-shellbot), see [shell.playplay.io](https://shell.playplay.io)
+* [slack-api-explorer](https://github.com/slack-ruby/slack-api-explorer), see [api-explorer.playplay.io](https://shell.playplay.io)
+* [slack-strava](https://github.com/dblock/slack-strava), see [slava.playplay.io](https://slava.playplay.io)
+* [slack-arena](https://github.com/dblock/slack-arena), see [arena.playplay.io](https://arena.playplay.io)
 
 ### Copyright & License
 
-Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2019
+Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2020
 
 [MIT License](LICENSE)
