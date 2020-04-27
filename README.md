@@ -270,7 +270,7 @@ This library provides a [default HTML template and JS scripts](public) that impl
 
 You can add to or override template paths as follows.
 
-`ruby
+```ruby
 SlackRubyBotServer.configure do |config|
   config.view_paths << File.expand_path(File.join(__dir__, 'public'))
 end
