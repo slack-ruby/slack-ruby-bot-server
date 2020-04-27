@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.12.1 (Next)
+
+* Your contribution here.
+
 #### 0.12.0 (2020/4/26)
 
 * [#113](https://github.com/slack-ruby/slack-ruby-bot-server/pull/113): Added support for intervals with `.every` - [@dblock](https://github.com/dblock).
