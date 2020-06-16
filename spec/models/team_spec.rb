@@ -17,5 +17,13 @@ describe Team do
       expect(Team.where(id: inactive_team_two_weeks_ago.id).first).to be nil
       expect(Team.where(id: inactive_team_a_month_ago.id).first).to be nil
     end
+    it 'does not raise errors when a team cannot be destroyed' do
+      allow_any_instance_of(Team).to receive(:destroy).and_raise(StandardError, 'cannot be destroyed')
+      expect do
+        expect do
+          Team.purge!
+        end.to_not change(Team, :count)
+      end.to_not raise_error
+    end
   end
 end

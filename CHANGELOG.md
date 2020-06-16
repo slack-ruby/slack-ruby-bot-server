@@ -2,6 +2,7 @@
 
 #### 0.12.1 (Next)
 
+* [#118](https://github.com/slack-ruby/slack-ruby-bot-server/pull/118): Do not fail to start on errors in `Team#purge!` - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.12.0 (2020/4/26)

@@ -15,11 +15,15 @@ class Team
 
   include Methods
 
-  def self.purge!
+  def self.purge!(dt = 2.weeks.ago)
     # destroy teams inactive for two weeks
-    Team.where(active: false, :updated_at.lte => 2.weeks.ago).each do |team|
-      Mongoid.logger.info "Destroying #{team}, inactive since #{team.updated_at}, over two weeks ago."
-      team.destroy
+    Team.where(active: false, :updated_at.lte => dt).each do |team|
+      begin
+        logger.info "Destroying #{team}, inactive since #{team.updated_at}."
+        team.destroy
+      rescue StandardError => e
+        logger.warn "Error destroying #{team}, #{e.message}."
+      end
     end
   end
 end
