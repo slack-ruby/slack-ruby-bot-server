@@ -9,7 +9,7 @@ module SlackRubyBot
         rescue StandardError => e
           logger.info "#{name.demodulize.upcase}: #{client.owner}, #{e.class}: #{e}"
           logger.debug e.backtrace.join("\n")
-          client.say(channel: data.channel, text: e.message, gif: 'error')
+          client.say(channel: data.channel, text: e.message)
           true
         end
       end

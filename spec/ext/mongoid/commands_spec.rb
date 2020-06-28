@@ -11,7 +11,7 @@ describe SlackRubyBot::Commands::Base do
       end
 
       it 'responds to channel with exception message' do
-        expect(client).to receive(:say).with(channel: 'channel', text: 'mock error', gif: 'error')
+        expect(client).to receive(:say).with(channel: 'channel', text: 'mock error')
         message_hook.call(client, Hashie::Mash.new(text: 'raising exception', channel: 'channel', user: 'user'))
       end
     end
@@ -28,7 +28,7 @@ describe SlackRubyBot::Commands::Base do
       end
 
       it 'responds to channel with exception message' do
-        expect(client).to receive(:say).with(channel: 'channel', text: "undefined method `mock_id' for #{mock_document.inspect}", gif: 'error')
+        expect(client).to receive(:say).with(channel: 'channel', text: "undefined method `mock_id' for #{mock_document.inspect}")
         message_hook.call(client, Hashie::Mash.new(text: 'raising exception', channel: 'channel', user: 'user'))
       end
     end

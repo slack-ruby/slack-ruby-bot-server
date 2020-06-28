@@ -2,6 +2,7 @@
 
 #### 0.12.2 (Next)
 
+* [#120](https://github.com/slack-ruby/slack-ruby-bot-server/pull/120): Removed GIFs - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.12.1 (2020/5/16)
