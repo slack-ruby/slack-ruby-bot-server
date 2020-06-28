@@ -11,6 +11,29 @@ If you are not familiar with Slack bots or Slack API concepts, you might want to
 
 A good [open-source demo](https://github.com/dblock/slack-strava) of a service built on top of this library is [Strava integration with Slack](https://slava.playplay.io).
 
+# Table of Contents
+
+- [What is this?](#what-is-this)
+- [Stable Release](#stable-release)
+- [Try Me](#try-me)
+- [Run Your Own](#run-your-own)
+- [MongoDB](#mongodb)
+- [ActiveRecord](#activerecord)
+- [Usage](#usage)
+- [OAuth Code Grant](#oauth-code-grant)
+- [API](#api)
+  - [App](#app)
+  - [Service Manager](#service-manager)
+    - [Lifecycle Callbacks](#lifecycle-callbacks)
+    - [Service Timers](#service-timers)
+    - [Extensions](#extensions)
+  - [Server Class](#server-class)
+  - [Service Class](#service-class)
+- [HTML Templates](#html-templates)
+- [Access Tokens](#access-tokens)
+- [Example Bots Using Slack Ruby Bot Server](#example-bots-using-slack-ruby-bot-server)
+- [Copyright & License](#copyright--license)
+
 ### What is this?
 
 A library that contains a [Grape](http://github.com/ruby-grape/grape) API serving a [Slack Ruby Bot](https://github.com/slack-ruby/slack-ruby-bot) to multiple teams. This gem combines a web server, a RESTful API and multiple instances of [slack-ruby-bot](https://github.com/slack-ruby/slack-ruby-bot). It integrates with the [Slack Platform API](https://medium.com/slack-developer-blog/launch-platform-114754258b91#.od3y71dyo). Your customers can use a Slack button to install the bot.

@@ -38,6 +38,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'danger-toc', '~> 0.2.0', require: false
   gem 'slack-ruby-danger', '~> 0.1.0', require: false
 end
 
