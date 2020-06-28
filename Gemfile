@@ -40,3 +40,5 @@ end
 group :test do
   gem 'slack-ruby-danger', '~> 0.1.0', require: false
 end
+
+gem 'slack-ruby-bot', github: 'slack-ruby/slack-ruby-bot'
