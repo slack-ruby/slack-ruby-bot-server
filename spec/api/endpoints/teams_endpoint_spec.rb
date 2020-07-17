@@ -106,7 +106,24 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           expect(team.bot_user_id).to eq 'bot_user_id'
         end.to_not change(Team, :count)
       end
+      it 'reactivates a team deactivated on slack' do
+        expect(SlackRubyBotServer::Service.instance).to receive(:start!)
+        existing_team = Fabricate(:team, token: 'token')
+        expect do
+          expect_any_instance_of(Team).to receive(:ping!) { raise Slack::Web::Api::Errors::SlackError, 'invalid_auth' }
+          team = client.teams._post(code: 'code')
+          expect(team.team_id).to eq existing_team.team_id
+          expect(team.name).to eq existing_team.name
+          expect(team.active).to be true
+          team = Team.find(team.id)
+          expect(team.token).to eq 'token'
+          expect(team.active).to be true
+          expect(team.bot_user_id).to eq 'bot_user_id'
+          expect(team.activated_user_id).to eq 'user_id'
+        end.to_not change(Team, :count)
+      end
       it 'returns a useful error when team already exists' do
+        expect_any_instance_of(Team).to receive(:ping_if_active!)
         existing_team = Fabricate(:team, token: 'token')
         expect { client.teams._post(code: 'code') }.to raise_error Faraday::ClientError do |e|
           json = JSON.parse(e.response[:body])

@@ -2,6 +2,7 @@
 
 #### 0.12.3 (Next)
 
+* [#123](https://github.com/slack-ruby/slack-ruby-bot-server/pull/123): Reactivate a team that was disabled from Slack - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.12.2 (2020/7/26)
