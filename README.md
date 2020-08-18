@@ -112,14 +112,14 @@ Once clicked, the user is taken through the authorization process at Slack's sit
 client = Slack::Web::Client.new
 
 # Request a token using the temporary code
-rc = client.oauth_access(
+rc = client.oauth_v2_access(
   client_id: ENV['SLACK_CLIENT_ID'],
   client_secret: ENV['SLACK_CLIENT_SECRET'],
   code: params[:code]
 )
 
 # Pluck the token from the response
-token = rc['bot']['bot_access_token']
+token = rc[:access_token]
 ```
 
 The token is stored in persistent storage and used each time a Slack client is instantiated for the specific team.
