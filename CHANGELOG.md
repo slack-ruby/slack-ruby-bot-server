@@ -1,8 +1,8 @@
 ### Changelog
 
-#### 0.12.3 (Next)
+#### 0.12.3 (2020/8/17)
 
-* Your contribution here.
+* [#125](https://github.com/slack-ruby/slack-ruby-bot-server/pull/125): Update readme to use oauth v2 for slack button - [@amclelland](https://github.com/amclelland).
 
 #### 0.12.2 (2020/7/26)
 
