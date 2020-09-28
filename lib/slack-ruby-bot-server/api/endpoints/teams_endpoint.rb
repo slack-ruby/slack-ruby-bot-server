@@ -54,11 +54,14 @@ module SlackRubyBotServer
             team ||= Team.where(team_id: rc['team_id']).first
 
             if team
+              team.ping_if_active!
+
               team.update_attributes!(
                 activated_user_id: user_id,
                 activated_user_access_token: access_token,
                 bot_user_id: bot_user_id
               )
+
               raise "Team #{team.name} is already registered." if team.active?
 
               team.activate!(token)
