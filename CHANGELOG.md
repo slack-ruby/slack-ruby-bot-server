@@ -3,7 +3,7 @@
 #### 0.12.3 (Next)
 
 * Your contribution here.
-* * [#127](https://github.com/slack-ruby/slack-ruby-bot-server/pull/127): Added a Rails bot starter built on top of the slack ruby bot server - [@CrazyOptimist](https://github.com/CrazyOptimist).
+* [#127](https://github.com/slack-ruby/slack-ruby-bot-server/pull/127): Added a Rails bot example link - [@CrazyOptimist](https://github.com/CrazyOptimist).
 
 #### 0.12.2 (2020/7/26)
 
