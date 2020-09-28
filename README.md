@@ -320,6 +320,7 @@ You can see a sample implementation in [slack-sup#3a497b](https://github.com/dbl
 * [slack-api-explorer](https://github.com/slack-ruby/slack-api-explorer), see [api-explorer.playplay.io](https://shell.playplay.io)
 * [slack-strava](https://github.com/dblock/slack-strava), see [slava.playplay.io](https://slava.playplay.io)
 * [slack-arena](https://github.com/dblock/slack-arena), see [arena.playplay.io](https://arena.playplay.io)
+* [slack-rails-bot-starter](https://github.com/CrazyOptimist/slack-rails-bot-starter), an all-in-one rails starter kit built on top of the slack-ruby-bot-server and the slack-ruby-bot-server-events
 
 ### Copyright & License
 
