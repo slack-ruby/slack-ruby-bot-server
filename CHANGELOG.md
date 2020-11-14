@@ -1,9 +1,8 @@
 ### Changelog
 
-#### 0.12.3 (Next)
+#### 0.12.3 (2020/11/14)
 
 * [#123](https://github.com/slack-ruby/slack-ruby-bot-server/pull/123): Reactivate a team that was disabled from Slack - [@dblock](https://github.com/dblock).
-* Your contribution here.
 * [#127](https://github.com/slack-ruby/slack-ruby-bot-server/pull/127): Added a Rails bot example link - [@CrazyOptimist](https://github.com/CrazyOptimist).
 
 #### 0.12.2 (2020/7/26)
