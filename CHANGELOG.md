@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.12.4 (Next)
+
+* Your contribution here.
+
 #### 0.12.3 (2020/11/14)
 
 * [#123](https://github.com/slack-ruby/slack-ruby-bot-server/pull/123): Reactivate a team that was disabled from Slack - [@dblock](https://github.com/dblock).
