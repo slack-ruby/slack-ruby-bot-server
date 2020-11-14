@@ -102,7 +102,7 @@ The "Add to Slack" button uses the standard OAuth code grant flow as described i
 The button itself contains a link that looks like this:
 
 ```
-https://slack.com/oauth/authorize?scope=bot&client_id=<%= ENV['SLACK_CLIENT_ID'] %>
+https://slack.com/oauth/authorize?scope=<%= SlackRubyBotServer::Config.oauth_scope_s %>&client_id=<%= ENV['SLACK_CLIENT_ID'] %>
 ```
 
 Once clicked, the user is taken through the authorization process at Slack's site. Upon successful completion, a callback containing a temporary code is sent to the redirect URL you specified. The endpoint at that URL contains code that looks like this:
@@ -201,7 +201,7 @@ The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows f
 auth = OpenSSL::HMAC.hexdigest("SHA256", "key", "data")
 ```
 ```html
-<a href="https://slack.com/oauth/authorize?scope=bot&client_id=<%= ENV['SLACK_CLIENT_ID'] %>&state=#{auth)"> ... </a>
+<a href="https://slack.com/oauth/authorize?scope=<%= SlackRubyBotServer::Config.oauth_scope_s %>&client_id=<%= ENV['SLACK_CLIENT_ID'] %>&state=#{auth)"> ... </a>
 ```
 ```ruby
 instance = SlackRubyBotServer::Service.instance

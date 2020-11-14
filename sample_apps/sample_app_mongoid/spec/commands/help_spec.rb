@@ -3,7 +3,7 @@ require 'commands/help'
 
 describe Help do
   let!(:team) { Fabricate(:team) }
-  let(:app) { SlackRubyBotServer::Server.new(team: team) }
+  let(:app) { SlackRubyBotServer::RealTime::Server.new(team: team) }
   let(:client) { app.send(:client) }
   let(:message_hook) { SlackRubyBot::Hooks::Message.new }
   it 'default' do

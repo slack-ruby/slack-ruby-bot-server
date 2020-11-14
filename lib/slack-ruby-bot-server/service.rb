@@ -1,6 +1,6 @@
 module SlackRubyBotServer
   class Service
-    include SlackRubyBot::Loggable
+    include SlackRubyBotServer::Loggable
 
     def self.start!
       Thread.new do
@@ -47,34 +47,30 @@ module SlackRubyBotServer
     end
 
     def start!(team)
-      run_callbacks :starting, team
       logger.info "Starting team #{team}."
-      options = { team: team }
-      server = SlackRubyBotServer::Config.server_class.new(options)
-      start_server! team, server
+      run_callbacks :starting, team
       run_callbacks :started, team
-      server
     rescue StandardError => e
       run_callbacks :error, team, e
       logger.error e
     end
 
-    def restart!(team, server, wait = 1)
+    def restart!(team)
+      logger.info "Restarting team #{team}."
       run_callbacks :restarting, team
-      start_server! team, server, wait
       run_callbacks :restarted, team
+    rescue StandardError => e
+      run_callbacks :error, team, e
+      logger.error e
     end
 
     def stop!(team)
       logger.info "Stopping team #{team}."
       run_callbacks :stopping, team
-      team.server&.stop!
       run_callbacks :stopped, team
     rescue StandardError => e
       run_callbacks :error, team, e
       logger.error e
-    ensure
-      team.server = nil
     end
 
     def start_from_database!
@@ -98,14 +94,9 @@ module SlackRubyBotServer
       run_callbacks :deactivating, team
       team.deactivate!
       run_callbacks :deactivated, team
-    rescue Mongoid::Errors::Validations => e
-      run_callbacks :error, team, e
-      logger.error "#{team.name}: #{e.message}, error - #{e.document.class}, #{e.document.errors.to_hash}, ignored."
     rescue StandardError => e
       run_callbacks :error, team, e
       logger.error "#{team.name}: #{e.class}, #{e.message}, ignored."
-    ensure
-      team.server = nil
     end
 
     def self.reset!
@@ -124,23 +115,6 @@ module SlackRubyBotServer
             logger.error e
           end
         end
-      end
-    end
-
-    def start_server!(team, server, wait = 1)
-      team.server = server
-      server.start_async
-    rescue StandardError => e
-      run_callbacks :error, team, e
-      case e.message
-      when 'account_inactive', 'invalid_auth' then
-        logger.error "#{team.name}: #{e.message}, team will be deactivated."
-        deactivate!(team)
-      else
-        wait = e.retry_after if e.is_a?(Slack::Web::Api::Errors::TooManyRequestsError)
-        logger.error "#{team.name}: #{e.message}, restarting in #{wait} second(s)."
-        sleep(wait)
-        start_server! team, server, [wait * 2, 60].min
       end
     end
 

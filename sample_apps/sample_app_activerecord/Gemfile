@@ -7,6 +7,7 @@ gem 'pg'
 gem 'rack-server-pages'
 gem 'rack-test'
 gem 'slack-ruby-bot-server', path: '../../'
+gem 'slack-ruby-bot-server-rtm', github: 'slack-ruby/slack-ruby-bot-server-rtm', branch: 'main'
 gem 'unicorn'
 
 group :development, :test do

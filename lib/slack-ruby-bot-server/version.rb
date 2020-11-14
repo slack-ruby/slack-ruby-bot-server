@@ -1,3 +1,3 @@
 module SlackRubyBotServer
-  VERSION = '0.12.4'.freeze
+  VERSION = '1.0.0'.freeze
 end

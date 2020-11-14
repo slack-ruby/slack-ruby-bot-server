@@ -1,4 +1,3 @@
-require 'slack-ruby-bot/rspec'
 require 'slack-ruby-bot-server'
 require 'fabrication'
 require 'faker'
