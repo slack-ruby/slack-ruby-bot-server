@@ -1,3 +1,0 @@
-config:
-  database: config/postgresql.yml
-
