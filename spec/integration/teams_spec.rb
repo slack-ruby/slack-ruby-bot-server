@@ -9,6 +9,7 @@ describe 'Teams', js: true, type: :feature do
   after do
     ENV.delete 'SLACK_CLIENT_ID'
     ENV.delete 'SLACK_CLIENT_SECRET'
+    SlackRubyBotServer::Config.oauth_scope = nil
   end
   context 'oauth' do
     before do

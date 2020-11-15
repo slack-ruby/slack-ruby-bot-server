@@ -1,0 +1,27 @@
+development:
+  clients:
+    default:
+      database: bot-server_development
+      hosts:
+        - 127.0.0.1:27017
+  options:
+    raise_not_found_error: false
+    use_utc: true
+
+test:
+  clients:
+    default:
+      database: bot-server_test
+      hosts:
+        - 127.0.0.1:27017
+  options:
+    raise_not_found_error: false
+    use_utc: true
+
+production:
+  clients:
+    default:
+      uri: <%= ENV['MONGO_URL'] || ENV['MONGOHQ_URI'] || ENV['MONGOLAB_URI'] || ENV['MONGODB_URI'] %>
+  options:
+    raise_not_found_error: false
+    use_utc: true

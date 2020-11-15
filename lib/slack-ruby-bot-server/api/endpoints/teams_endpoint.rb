@@ -46,10 +46,14 @@ module SlackRubyBotServer
               code: params[:code]
             )
 
-            token = rc['bot']['bot_access_token']
-            bot_user_id = rc['bot']['bot_user_id']
-            user_id = rc['user_id']
             access_token = rc['access_token']
+            user_id = rc['user_id']
+
+            bot = rc['bot']
+
+            token = bot ? bot['bot_access_token'] : access_token
+            bot_user_id = bot['bot_user_id'] if bot
+
             team = Team.where(token: token).first
             team ||= Team.where(team_id: rc['team_id']).first
 
