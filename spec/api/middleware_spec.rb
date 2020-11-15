@@ -12,13 +12,13 @@ describe SlackRubyBotServer::Api::Middleware do
   end
 
   context 'overriding view_paths' do
-    after do
-      SlackRubyBotServer.config.reset!
-    end
-    it 'uses custom view paths' do
+    before do
+      SlackRubyBotServer::Api::Middleware.reset!
       SlackRubyBotServer.configure do |config|
         config.view_paths << 'custom'
       end
+    end
+    it 'uses custom view paths' do
       server_pages = middleware_classes(SlackRubyBotServer::Api::Middleware.instance)[-2]
       expect(server_pages).to be_a Rack::ServerPages
       config = server_pages.instance_variable_get(:@config)

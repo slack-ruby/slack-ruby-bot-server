@@ -4,10 +4,12 @@ describe 'Teams', js: true, type: :feature do
   before do
     ENV['SLACK_CLIENT_ID'] = 'client_id'
     ENV['SLACK_CLIENT_SECRET'] = 'client_secret'
+    SlackRubyBotServer::Config.oauth_scope = ['channels:read', 'channels:write']
   end
   after do
     ENV.delete 'SLACK_CLIENT_ID'
     ENV.delete 'SLACK_CLIENT_SECRET'
+    SlackRubyBotServer::Config.oauth_scope = nil
   end
   context 'oauth' do
     before do
@@ -16,7 +18,6 @@ describe 'Teams', js: true, type: :feature do
     end
     it 'registers a team' do
       allow_any_instance_of(Team).to receive(:ping!).and_return(ok: true)
-      expect(SlackRubyBotServer::Service.instance).to receive(:start!).with(instance_of(Team))
       expect do
         visit '/?code=code'
         expect(page.find('#messages')).to have_content 'Team successfully registered!'
@@ -35,7 +36,7 @@ describe 'Teams', js: true, type: :feature do
       expect(title).to eq('Slack Ruby Bot Server')
     end
     it 'includes a link to add to slack with the client id' do
-      expect(find("a[href='https://slack.com/oauth/authorize?scope=bot&client_id=#{ENV['SLACK_CLIENT_ID']}']"))
+      expect(find("a[href='https://slack.com/oauth/authorize?scope=channels:read+channels:write&client_id=client_id"))
     end
   end
 end

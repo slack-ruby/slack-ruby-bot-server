@@ -1,7 +1,8 @@
 ### Changelog
 
-#### 0.12.4 (Next)
+#### 0.1.0 (Next)
 
+* [#129](https://github.com/slack-ruby/slack-ruby-bot-server/pull/129): Extracted RealTime components into [slack-ruby-bot-server-rtm](https://github.com/slack-ruby/slack-ruby-bot-server-rtm) - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 0.12.3 (2020/11/14)

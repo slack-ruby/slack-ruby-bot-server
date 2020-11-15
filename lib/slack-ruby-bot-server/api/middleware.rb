@@ -6,11 +6,10 @@ require 'otr-activerecord' if SlackRubyBotServer::Config.activerecord? && !defin
 module SlackRubyBotServer
   module Api
     class Middleware
-      def self.logger
-        @logger ||= begin
-          STDOUT.sync = true
-          Logger.new(STDOUT)
-        end
+      include SlackRubyBotServer::Loggable
+
+      def self.reset!
+        @instance = nil
       end
 
       def self.instance

@@ -2,14 +2,16 @@ module SlackRubyBotServer
   module Config
     extend self
 
-    attr_accessor :server_class
+    attr_accessor :logger
     attr_accessor :service_class
     attr_accessor :database_adapter
     attr_accessor :view_paths
+    attr_accessor :oauth_scope
 
     def reset!
-      self.server_class = SlackRubyBotServer::Server
+      self.logger = nil
       self.service_class = SlackRubyBotServer::Service
+      self.oauth_scope = nil
 
       self.view_paths = [
         'views',
@@ -24,6 +26,10 @@ module SlackRubyBotServer
                               else
                                 raise 'One of "mongoid" or "activerecord" is required.'
                               end
+    end
+
+    def oauth_scope_s
+      oauth_scope&.join('+')
     end
 
     def activerecord?
