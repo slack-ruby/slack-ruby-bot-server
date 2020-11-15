@@ -7,46 +7,50 @@ Slack Ruby Bot Server
 
 Build a complete Slack bot service with Slack button integration, in Ruby.
 
-# Table of Contents
+## Table of Contents
 
 - [What is this?](#what-is-this)
 - [Stable Release](#stable-release)
 - [Make Your Own](#make-your-own)
-- [Storage](#storage)
-- [MongoDB](#mongodb)
-- [ActiveRecord](#activerecord)
 - [Usage](#usage)
-- [API](#api)
-  - [App](#app)
-  - [Service Manager](#service-manager)
-    - [Lifecycle Callbacks](#lifecycle-callbacks)
-    - [Service Timers](#service-timers)
-    - [Extensions](#extensions)
-  - [Service Class](#service-class)
-- [HTML Templates](#html-templates)
-- [Access Tokens](#access-tokens)
+  - [Storage](#storage)
+    - [MongoDB](#mongodb)
+    - [ActiveRecord](#activerecord)
+  - [OAuth Scopes](#oauth-scopes)
+  - [Slack App](#slack-app)
+  - [API](#api)
+    - [App](#app)
+    - [Service Manager](#service-manager)
+      - [Lifecycle Callbacks](#lifecycle-callbacks)
+      - [Service Timers](#service-timers)
+      - [Extensions](#extensions)
+    - [Service Class](#service-class)
+  - [HTML Templates](#html-templates)
+  - [Access Tokens](#access-tokens)
 - [Sample Bots Using Slack Ruby Bot Server](#sample-bots-using-slack-ruby-bot-server)
   - [Slack Bots with Granular Permissions](#slack-bots-with-granular-permissions)
   - [Legacy Slack Bots](#legacy-slack-bots)
 - [Copyright & License](#copyright--license)
 
-### What is this?
+## What is this?
 
 A library that contains a web server and a RESTful [Grape](http://github.com/ruby-grape/grape) API serving a Slack bot to multiple teams. Use in conjunction with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events) to build a complete Slack bot service, or [slack-ruby-bot-server-rtm](https://github.com/slack-ruby/slack-ruby-bot-server-rtm) to build a Class RealTime Slack bot. Your customers can use a Slack button to install the bot.
 
-### Stable Release
+## Stable Release
 
 You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v1.0.0](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v1.0.0/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 
-### Make Your Own
+## Make Your Own
 
-We recommend you get started from a [slack-ruby-bot-events-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-sample) app to bootstrap your project.
+This library alone will only register a new bot, but will not include any bot functionality. To make something useful, we recommend you get started from a [slack-ruby-bot-events-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-sample) app to bootstrap your project.
+
+## Usage
 
 ### Storage
 
 A database is required to store teams.
 
-### MongoDB
+#### MongoDB
 
 Use MongoDB with [Mongoid](https://github.com/mongodb/mongoid) as ODM. Configure the database connection in `mongoid.yml`. Add the `mongoid` gem in your Gemfile.
 
@@ -57,7 +61,7 @@ gem 'mongoid-scroll'
 gem 'slack-ruby-bot-server'
 ```
 
-### ActiveRecord
+#### ActiveRecord
 
 Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Configure the database connection in `postgresql.yml`. Add the `activerecord`, `pg`, `otr-activerecord` and `cursor_pagination` gems to your Gemfile.
 
@@ -69,15 +73,7 @@ gem 'otr-activerecord'
 gem 'cursor_pagination'
 ```
 
-### Usage
-
-Start with the [slack-ruby-bot-events-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-sample) sample, which contain a couple of custom commands, necessary dependencies and tests, then [create a new Slack App](https://api.slack.com/applications/new).
-
-![](images/create-app.png)
-
-Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app. For local testing purposes use a public tunneling service such as [ngrok](https://ngrok.com/) to expose local port 9292.
-
-Within your application, edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it.
+### OAuth Scopes
 
 Configure your app's [OAuth scopes](https://api.slack.com/legacy/oauth-scopes) as needed by your application.
 
@@ -88,6 +84,16 @@ end
 ```
 
 The "Add to Slack" button uses the standard OAuth code grant flow as described in the [Slack docs](https://api.slack.com/docs/oauth#flow). Once clicked, the user is taken through the authorization process at Slack's site. Upon successful completion, a callback containing a temporary code is sent to the redirect URL you specified. The endpoint at that URL contains code that persists the bot token each time a Slack client is instantiated for the specific team.
+
+### Slack App
+
+Create a new Slack App [here](https://api.slack.com/applications/new).
+
+![](images/create-app.png)
+
+Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app. For local testing purposes use a public tunneling service such as [ngrok](https://ngrok.com/) to expose local port 9292.
+
+Within your application, edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it.
 
 Run `bundle install` and `foreman start` to boot the app. Navigate to [localhost:9292](http://localhost:9292). You should see an "Add to Slack" button. Use it to install the app into your own Slack team.
 
@@ -252,14 +258,14 @@ end
 
 By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) stores the value of the token with all the requested OAuth scopes in both `token` and `activated_user_access_token` (for backwards compatibility). If a legacy Slack bot integration `bot_access_token` is present, it is stored as `token`, and `activated_user_access_token`is the token that has all the requested OAuth scopes.
 
-### Sample Bots Using Slack Ruby Bot Server
+## Sample Bots Using Slack Ruby Bot Server
 
-#### Slack Bots with Granular Permissions
+### Slack Bots with Granular Permissions
 
 * [slack-ruby-bot-server-events-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-sample), a generic sample
 * [slack-rails-bot-starter](https://github.com/CrazyOptimist/slack-rails-bot-starter), an all-in-one Rails starter kit
 
-#### Legacy Slack Bots
+### Legacy Slack Bots
 
 * [slack-ruby-bot-server-sample](https://github.com/slack-ruby/slack-ruby-bot-server-sample), a generic sample
 * [slack-sup](https://github.com/dblock/slack-sup), see [sup.playplay.io](https://sup.playplay.io)
@@ -270,7 +276,7 @@ By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) s
 * [slack-strava](https://github.com/dblock/slack-strava), see [slava.playplay.io](https://slava.playplay.io)
 * [slack-arena](https://github.com/dblock/slack-arena), see [arena.playplay.io](https://arena.playplay.io)
 
-### Copyright & License
+## Copyright & License
 
 Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2020
 
