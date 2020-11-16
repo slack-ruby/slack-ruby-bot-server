@@ -1,7 +1,8 @@
 ### Changelog
 
-#### 1.0.1 (Next)
+#### 1.1.0 (Next)
 
+* [#132](https://github.com/slack-ruby/slack-ruby-bot-server/pull/132): Add support for OAuth v2 - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 1.0.0 (2020/11/15)

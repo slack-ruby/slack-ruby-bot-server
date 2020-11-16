@@ -40,22 +40,41 @@ module SlackRubyBotServer
 
             raise 'Missing SLACK_CLIENT_ID or SLACK_CLIENT_SECRET.' unless ENV.key?('SLACK_CLIENT_ID') && ENV.key?('SLACK_CLIENT_SECRET')
 
-            rc = client.oauth_access(
+            options = {
               client_id: ENV['SLACK_CLIENT_ID'],
               client_secret: ENV['SLACK_CLIENT_SECRET'],
               code: params[:code]
-            )
+            }
 
-            access_token = rc['access_token']
-            user_id = rc['user_id']
+            rc = client.send(SlackRubyBotServer.config.oauth_access_method, options)
 
-            bot = rc['bot']
+            token = nil
+            access_token = nil
+            user_id = nil
+            bot_user_id = nil
+            team_id = nil
+            team_name = nil
 
-            token = bot ? bot['bot_access_token'] : access_token
-            bot_user_id = bot['bot_user_id'] if bot
+            case SlackRubyBotServer::Config.oauth_version
+            when :v2
+              access_token = rc.access_token
+              token = rc.access_token
+              user_id = rc.authed_user&.id
+              bot_user_id = rc.bot_user_id
+              team_id = rc.team&.id
+              team_name = rc.team&.name
+            when :v1
+              access_token = rc.access_token
+              bot = rc.bot if rc.key?(:bot)
+              token = bot ? bot.bot_access_token : access_token
+              user_id = rc.user_id
+              bot_user_id = bot ? bot.bot_user_id : nil
+              team_id = rc.team_id
+              team_name = rc.team_name
+            end
 
             team = Team.where(token: token).first
-            team ||= Team.where(team_id: rc['team_id']).first
+            team ||= Team.where(team_id: team_id).first
 
             if team
               team.ping_if_active!
@@ -72,8 +91,8 @@ module SlackRubyBotServer
             else
               team = Team.create!(
                 token: token,
-                team_id: rc['team_id'],
-                name: rc['team_name'],
+                team_id: team_id,
+                name: team_name,
                 activated_user_id: user_id,
                 activated_user_access_token: access_token,
                 bot_user_id: bot_user_id

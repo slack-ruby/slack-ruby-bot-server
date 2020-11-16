@@ -16,7 +16,7 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
   - [Storage](#storage)
     - [MongoDB](#mongodb)
     - [ActiveRecord](#activerecord)
-  - [OAuth Scopes](#oauth-scopes)
+  - [OAuth Version and Scopes](#oauth-version-and-scopes)
   - [Slack App](#slack-app)
   - [API](#api)
     - [App](#app)
@@ -73,13 +73,14 @@ gem 'otr-activerecord'
 gem 'cursor_pagination'
 ```
 
-### OAuth Scopes
+### OAuth Version and Scopes
 
-Configure your app's [OAuth scopes](https://api.slack.com/legacy/oauth-scopes) as needed by your application.
+Configure your app's [OAuth version](https://api.slack.com/authentication/oauth-v2) and [scopes](https://api.slack.com/legacy/oauth-scopes) as needed by your application.
 
 ```ruby
 SlackRubyBotServer.configure do |config|
-  config.oauth_scope = ['channels:read', 'chat:write:user']
+  config.oauth_version = :v2
+  config.oauth_scope = ['channels:read', 'chat:write']
 end
 ```
 
@@ -91,11 +92,26 @@ Create a new Slack App [here](https://api.slack.com/applications/new).
 
 ![](images/create-app.png)
 
-Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc. The redirect URL should be the location of your app. For local testing purposes use a public tunneling service such as [ngrok](https://ngrok.com/) to expose local port 9292.
+Follow Slack's instructions, note the app client ID and secret, give the bot a default name, etc.
 
 Within your application, edit your `.env` file and add `SLACK_CLIENT_ID=...` and `SLACK_CLIENT_SECRET=...` in it.
 
-Run `bundle install` and `foreman start` to boot the app. Navigate to [localhost:9292](http://localhost:9292). You should see an "Add to Slack" button. Use it to install the app into your own Slack team.
+Run `bundle install` and `foreman start` to boot the app.
+
+```
+$ foreman start
+07:44:47 web.1  | started with pid 59258
+07:44:50 web.1  | * Listening on tcp://0.0.0.0:5000
+```
+
+Set the redirect URL in "OAuth & Permissions" be the location of your app. Since you cannot receive notifications on localhost from Slack use a public tunneling service such as [ngrok](https://ngrok.com/) to expose local port 9292 for testing.
+
+```
+$ ngrok http 5000
+Forwarding https://ddfd97f80615.ngrok.io -> http://localhost:5000
+```
+
+Navigate to either [localhost:9292](http://localhost:9292) or the ngrok URL above. You should see an "Add to Slack" button. Use it to install the app into your own Slack team.
 
 ### API
 
@@ -174,7 +190,7 @@ The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows f
 auth = OpenSSL::HMAC.hexdigest("SHA256", "key", "data")
 ```
 ```html
-<a href="https://slack.com/oauth/authorize?scope=<%= SlackRubyBotServer::Config.oauth_scope_s %>&client_id=<%= ENV['SLACK_CLIENT_ID'] %>&state=#{auth)"> ... </a>
+<a href="<%= SlackRubyBotServer::Config.oauth_authorize_url %>?scope=<%= SlackRubyBotServer::Config.oauth_scope_s %>&client_id=<%= ENV['SLACK_CLIENT_ID'] %>&state=#{auth)"> ... </a>
 ```
 ```ruby
 instance = SlackRubyBotServer::Service.instance
