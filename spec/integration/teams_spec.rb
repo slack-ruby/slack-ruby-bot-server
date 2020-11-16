@@ -23,23 +23,21 @@ describe 'Teams', js: true, type: :feature do
       end
       it 'registers a team' do
         expect do
-          visit '/?code=code'
+          visit '/?v1&code=code'
           expect(page.find('#messages')).to have_content 'Team successfully registered!'
         end.to change(Team, :count).by(1)
       end
       it 'includes optional parameter' do
         expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
-        visit '/?code=code&state=property'
+        visit '/?v1&code=code&state=property'
       end
     end
     context 'homepage' do
       before do
         visit '/?v1'
       end
-      it 'displays index.html page' do
-        expect(title).to eq('Slack Ruby Bot Server')
-      end
       it 'includes a link to add to slack with the client id' do
+        expect(title).to eq('Slack Ruby Bot Server')
         expect(find("a[href='https://slack.com/oauth/authorize?scope=channels:read+channels:write&client_id=client_id"))
       end
     end
@@ -55,26 +53,22 @@ describe 'Teams', js: true, type: :feature do
       end
       it 'registers a team' do
         expect do
-          visit '/?code=code'
+          visit '/?v2&code=code'
           expect(page.find('#messages')).to have_content 'Team successfully registered!'
         end.to change(Team, :count).by(1)
       end
       it 'includes optional parameter' do
         expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
-        visit '/?code=code&state=property'
+        visit '/?v2&code=code&state=property'
       end
     end
     context 'homepage' do
       before do
         visit '/?v2'
       end
-      it 'displays index.html page' do
+      it 'includes a link to add to slack with the client id' do
         expect(title).to eq('Slack Ruby Bot Server')
-      end
-      context 'oauth' do
-        it 'includes a link to add to slack with the client id' do
-          expect(find("a[href='https://slack.com/oauth/v2/authorize?scope=channels:read+channels:write&client_id=client_id"))
-        end
+        expect(find("a[href='https://slack.com/oauth/v2/authorize?scope=channels:read+channels:write&client_id=client_id"))
       end
     end
   end
