@@ -1,7 +1,7 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
-### Upgrading to >= 1.0.0
+### Upgrading to >= 1.1.0
 
 #### Extracted RealTime (Legacy) Support
 
@@ -12,6 +12,13 @@ To upgrade an existing classic Slack app that uses slack-ruby-bot-server do the 
 1. Add `slack-ruby-bot-server-rtm` as an additional dependency.
 2. Replace any reference to `SlackRubyBotServer::Server` to `SlackRubyBotServer::RealTime::Server`.
 3. Replace any `require 'slack-ruby-bot-server/rspec'` with `require 'slack-ruby-bot-server-rtm/rspec'`.
+4. Use Slack OAuth 1.0 and configure scopes.
+   ```ruby
+   SlackRubyBotServer.configure do |config|
+     config.oauth_version = :v1
+     config.oauth_scope = ['bot']
+   end
+   ```
 
 Existing RTM Slack bots will continue working and be listed in the Slack App Directory. On December 4th, 2020 Slack will no longer accept resubmissions from apps that are not using granular permissions. On November 18, 2021 Slack will start delisting apps that have not migrated to use granular permissions. Use [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events) to create a Slack bot with granular permissions. See [migration](https://api.slack.com/authentication/migration) for more details.
 
