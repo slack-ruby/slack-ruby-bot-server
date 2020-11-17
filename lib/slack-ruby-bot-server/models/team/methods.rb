@@ -32,10 +32,18 @@ module Methods
 
     def ping!
       client = Slack::Web::Client.new(token: token)
+
       auth = client.auth_test
+
+      presence = begin
+        client.users_getPresence(user: auth['user_id'])
+                 rescue Slack::Web::Api::Errors::MissingScope
+                   nil
+      end
+
       {
         auth: auth,
-        presence: client.users_getPresence(user: auth['user_id'])
+        presence: presence
       }
     end
 
