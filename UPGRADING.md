@@ -1,6 +1,28 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 1.2.0
+
+#### New Team Fields
+
+The following fields have been added to `Team`.
+
+* `oauth_scope`: Slack OAuth scope
+* `oauth_version`: Slack OAuth version used
+
+No action is required for Mongoid.
+
+If you're using ActiveRecord, create a migration to add these fields.
+
+```ruby
+class AddOauthFields < ActiveRecord::Migration[5.0]
+  def change
+    add_column :teams, :oauth_scope, :string
+    add_column :teams, :oauth_version, :string, default: 'v1', null: false
+  end
+end
+```
+
 ### Upgrading to >= 1.1.0
 
 #### Extracted RealTime (Legacy) Support

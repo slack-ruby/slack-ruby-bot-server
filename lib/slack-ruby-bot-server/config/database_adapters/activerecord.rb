@@ -18,6 +18,8 @@ module SlackRubyBotServer
         t.string :name
         t.string :domain
         t.string :token
+        t.string :oauth_scope
+        t.string :oauth_version, default: 'v1', null: false
         t.string :bot_user_id
         t.string :activated_user_id
         t.string :activated_user_access_token

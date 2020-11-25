@@ -8,6 +8,8 @@ class Team
   field :name, type: String
   field :domain, type: String
   field :token, type: String
+  field :oauth_scope, type: String
+  field :oauth_version, type: String, default: 'v1'
   field :active, type: Boolean, default: true
   field :bot_user_id, type: String
   field :activated_user_id, type: String
