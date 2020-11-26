@@ -54,8 +54,10 @@ module SlackRubyBotServer
             bot_user_id = nil
             team_id = nil
             team_name = nil
+            oauth_scope = nil
+            oauth_version = SlackRubyBotServer::Config.oauth_version
 
-            case SlackRubyBotServer::Config.oauth_version
+            case oauth_version
             when :v2
               access_token = rc.access_token
               token = rc.access_token
@@ -63,6 +65,7 @@ module SlackRubyBotServer
               bot_user_id = rc.bot_user_id
               team_id = rc.team&.id
               team_name = rc.team&.name
+              oauth_scope = rc.scope
             when :v1
               access_token = rc.access_token
               bot = rc.bot if rc.key?(:bot)
@@ -71,15 +74,19 @@ module SlackRubyBotServer
               bot_user_id = bot ? bot.bot_user_id : nil
               team_id = rc.team_id
               team_name = rc.team_name
+              oauth_scope = rc.scope
             end
 
             team = Team.where(token: token).first
+            team ||= Team.where(team_id: team_id, oauth_version: oauth_version).first
             team ||= Team.where(team_id: team_id).first
 
             if team
               team.ping_if_active!
 
               team.update_attributes!(
+                oauth_version: oauth_version,
+                oauth_scope: oauth_scope,
                 activated_user_id: user_id,
                 activated_user_access_token: access_token,
                 bot_user_id: bot_user_id
@@ -91,6 +98,8 @@ module SlackRubyBotServer
             else
               team = Team.create!(
                 token: token,
+                oauth_version: oauth_version,
+                oauth_scope: oauth_scope,
                 team_id: team_id,
                 name: team_name,
                 activated_user_id: user_id,

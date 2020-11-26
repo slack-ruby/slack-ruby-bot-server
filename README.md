@@ -272,7 +272,7 @@ end
 
 ### Access Tokens
 
-By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) stores the value of the token with all the requested OAuth scopes in both `token` and `activated_user_access_token` (for backwards compatibility). If a legacy Slack bot integration `bot_access_token` is present, it is stored as `token`, and `activated_user_access_token`is the token that has all the requested OAuth scopes.
+By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) stores the value of the token with all the requested OAuth scopes in both `token` and `activated_user_access_token` (for backwards compatibility), along with `oauth_version` and `oauth_scope`. If a legacy Slack bot integration `bot_access_token` is present, it is stored as `token`, and `activated_user_access_token` is the token that has all the requested OAuth scopes.
 
 ## Sample Bots Using Slack Ruby Bot Server
 
