@@ -1,9 +1,8 @@
 ### Changelog
 
-#### 1.2.0 (Next)
+#### 1.2.0 (2020/11/27)
 
 * [#133](https://github.com/slack-ruby/slack-ruby-bot-server/pull/133): Added `Team#oauth_version` and `#scope` - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 #### 1.1.0 (2020/11/17)
 
