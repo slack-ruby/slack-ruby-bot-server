@@ -23,6 +23,8 @@ class AddOauthFields < ActiveRecord::Migration[5.0]
 end
 ```
 
+See [MIGRATING](MIGRATING.md) for help with migrating Legacy Slack Apps to Granular Scopes.
+
 ### Upgrading to >= 1.1.0
 
 #### Extracted RealTime (Legacy) Support
