@@ -34,7 +34,7 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
 
 ## What is this?
 
-A library that contains a web server and a RESTful [Grape](http://github.com/ruby-grape/grape) API serving a Slack bot to multiple teams. Use in conjunction with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events) to build a complete Slack bot service, or [slack-ruby-bot-server-rtm](https://github.com/slack-ruby/slack-ruby-bot-server-rtm) to build a Class RealTime Slack bot. Your customers can use a Slack button to install the bot.
+A library that contains a web server and a RESTful [Grape](http://github.com/ruby-grape/grape) API serving a Slack bot to multiple teams. Use in conjunction with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events) to build a complete Slack bot service, or [slack-ruby-bot-server-rtm](https://github.com/slack-ruby/slack-ruby-bot-server-rtm) to build a (legacy) Classic RealTime Slack bot. Your customers can use a Slack button to install the bot.
 
 ## Stable Release
 
@@ -42,7 +42,7 @@ You're reading the documentation for the **next** release of slack-ruby-bot-serv
 
 ## Make Your Own
 
-This library alone will only register a new bot, but will not include any bot functionality. To make something useful, we recommend you get started from a [slack-ruby-bot-events-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-sample) app to bootstrap your project.
+This library alone will only register a new bot, but will not include any bot functionality. To make something useful, we recommend you get started from either [slack-ruby-bot-server-events-app-mentions-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-app-mentions-sample) (handles a single kind of event), or [slack-ruby-bot-server-events-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-sample) (handles all kinds of events) to bootstrap your project.
 
 ## Usage
 
