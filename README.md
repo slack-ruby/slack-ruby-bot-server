@@ -63,7 +63,7 @@ gem 'slack-ruby-bot-server'
 
 #### ActiveRecord
 
-Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Configure the database connection in `postgresql.yml`. Add the `activerecord`, `pg`, `otr-activerecord` and `cursor_pagination` gems to your Gemfile.
+Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Add the `activerecord`, `pg`, `otr-activerecord` and `cursor_pagination` gems to your Gemfile.
 
 ```
 gem 'pg'
@@ -71,6 +71,40 @@ gem 'activerecord', require: 'active_record'
 gem 'slack-ruby-bot-server'
 gem 'otr-activerecord'
 gem 'cursor_pagination'
+```
+
+Configure the database connection in `config/postgresql.yml`. 
+
+```yaml
+default: &default
+  adapter: postgresql
+  pool: 10
+  timeout: 5000
+  encoding: unicode
+
+development:
+  <<: *default
+  database: bot_development
+
+test:
+  <<: *default
+  database: bot_test
+
+production:
+  <<: *default
+  database: bot
+```
+
+Establish a connection in your startup code.
+
+```ruby
+ActiveRecord::Base.establish_connection(
+  YAML.safe_load(
+    ERB.new(
+      File.read('config/postgresql.yml')
+    ).result, [], [], true
+  )[ENV['RACK_ENV']]
+)
 ```
 
 ### OAuth Version and Scopes
