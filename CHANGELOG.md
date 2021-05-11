@@ -2,7 +2,7 @@
 
 #### 1.2.1 (Next)
 
-* Your contribution here.
+* [#137](https://github.com/slack-ruby/slack-ruby-bot-server/pull/137): Fix missing Boolean definition - [@icco](https://github.com/icco).
 
 #### 1.2.0 (2020/11/27)
 
