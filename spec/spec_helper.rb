@@ -5,6 +5,7 @@ Bundler.require
 
 require 'hyperclient'
 require 'webmock/rspec'
+require 'rack/test'
 require 'slack-ruby-bot-server/rspec'
 
 Dir[File.join(__dir__, 'support', '**/*.rb')].each do |file|
