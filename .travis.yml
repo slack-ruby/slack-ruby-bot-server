@@ -15,7 +15,23 @@ matrix:
         - xvfb
         - postgresql
     - rvm: 2.6.2
-      env: DATABASE_ADAPTER=mongoid
+      env:
+        - DATABASE_ADAPTER=mongoid
+        - MONGOID_VERSION=6.4.8
+      services:
+        - xvfb
+        - mongodb
+    - rvm: 2.6.2
+      env:
+        - DATABASE_ADAPTER=mongoid
+        - MONGOID_VERSION=7.2.3
+      services:
+        - xvfb
+        - mongodb
+    - rvm: 2.6.2
+      env:
+        - DATABASE_ADAPTER=mongoid
+        - MONGOID_VERSION=7.3.0
       services:
         - xvfb
         - mongodb

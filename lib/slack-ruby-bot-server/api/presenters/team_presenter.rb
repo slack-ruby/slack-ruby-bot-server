@@ -10,7 +10,7 @@ module SlackRubyBotServer
         property :team_id, type: String, desc: 'Slack team ID.'
         property :name, type: String, desc: 'Team name.'
         property :domain, type: String, desc: 'Team domain.'
-        property :active, type: Boolean, desc: 'Team is active.'
+        property :active, type: ::Grape::API::Boolean, desc: 'Team is active.'
         property :created_at, type: DateTime, desc: 'Date/time when the team was created.'
         property :updated_at, type: DateTime, desc: 'Date/time when the team was accepted, declined or canceled.'
 
