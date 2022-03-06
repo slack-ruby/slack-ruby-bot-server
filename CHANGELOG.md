@@ -3,6 +3,7 @@
 #### 1.2.1 (Next)
 
 * [#140](https://github.com/slack-ruby/slack-ruby-bot-server/pull/140): Fix: `NameError` for `Boolean` types with mongoid >= 7.3.0 - [@dblock](https://github.com/dblock).
+* [#142](https://github.com/slack-ruby/slack-ruby-bot-server/pull/142): Replace Travis-CI with GitHub Actions - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 1.2.0 (2020/11/27)

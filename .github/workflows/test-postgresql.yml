@@ -1,0 +1,33 @@
+---
+name: test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        entry:
+          - { ruby: 2.6.2, postgresql: 11 }
+    name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }})
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.entry.ruby }}
+      - uses: browser-actions/setup-geckodriver@latest
+      - run: geckodriver --version
+      - uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: ${{ matrix.entry.postgresql }}
+          postgresql db: slack_ruby_bot_server_test
+          postgresql user: test
+          postgresql password: password
+      - name: Test
+        uses: GabrielBB/xvfb-action@v1
+        env:
+          DATABASE_ADAPTER: activerecord
+          DATABASE_URL: postgres://test:password@localhost/slack_ruby_bot_server_test
+        with:
+          run: |
+            bundle install
+            bundle exec rake spec
