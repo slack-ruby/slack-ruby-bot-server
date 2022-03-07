@@ -4,6 +4,7 @@
 
 * [#145](https://github.com/slack-ruby/slack-ruby-bot-server/pull/145): Added support for Ruby 3.1 - [@dblock](https://github.com/dblock).
 * [#146](https://github.com/slack-ruby/slack-ruby-bot-server/pull/146): Added support for MongoDB 5.0 - [@dblock](https://github.com/dblock).
+* [#147](https://github.com/slack-ruby/slack-ruby-bot-server/pull/147): Added support for PostgreSQL 14 - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 1.2.1 (2022/03/06)
