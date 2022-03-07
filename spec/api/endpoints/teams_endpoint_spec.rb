@@ -85,7 +85,7 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
       end
 
       it 'includes optional state parameter' do
-        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
+        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), { state: 'property' })
         client.teams._post(code: 'code', state: 'property')
       end
 
@@ -194,7 +194,7 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
       end
 
       it 'includes optional state parameter' do
-        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
+        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), { state: 'property' })
         client.teams._post(code: 'code', state: 'property')
       end
 
@@ -307,7 +307,7 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
       end
 
       it 'includes optional state parameter' do
-        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
+        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), { state: 'property' })
         client.teams._post(code: 'code', state: 'property')
       end
 

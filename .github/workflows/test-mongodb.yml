@@ -10,6 +10,7 @@ jobs:
           - { ruby: 2.6.2, mongoid: 6.4.8, mongodb: 4.4 }
           - { ruby: 2.6.2, mongoid: 7.2.3, mongodb: 4.4 }
           - { ruby: 2.6.2, mongoid: 7.3.0, mongodb: 4.4 }
+          - { ruby: 3.1.1, mongoid: 7.3.0, mongodb: 4.4 }
     name: test (ruby=${{ matrix.entry.ruby }}, mongoid=${{ matrix.entry.mongoid }}, mongodb=${{ matrix.entry.mongodb }})
     steps:
       - uses: actions/checkout@v2

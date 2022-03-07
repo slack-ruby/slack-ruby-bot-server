@@ -6,5 +6,6 @@ log
 .env
 *.swp
 Gemfile.lock
+Gemfile.danger.lock
 .ruby-version
 pkg
