@@ -40,7 +40,7 @@ A library that contains a web server and a RESTful [Grape](http://github.com/rub
 
 ## Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v1.2.0](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v1.2.0/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version. See [MIGRATING](MIGRATING.md) for help with migrating Legacy Slack Apps to Granular Scopes.
+You're reading the documentation for the **stable** release of slack-ruby-bot-server. See [UPGRADING](UPGRADING.md) when upgrading from an older version. See [MIGRATING](MIGRATING.md) for help with migrating Legacy Slack Apps to Granular Scopes.
 
 ## Make Your Own
 
