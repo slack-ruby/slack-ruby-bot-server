@@ -28,7 +28,7 @@ describe 'Teams', js: true, type: :feature do
         end.to change(Team, :count).by(1)
       end
       it 'includes optional parameter' do
-        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
+        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), { state: 'property' })
         visit '/?v1&code=code&state=property'
       end
     end
@@ -58,7 +58,7 @@ describe 'Teams', js: true, type: :feature do
         end.to change(Team, :count).by(1)
       end
       it 'includes optional parameter' do
-        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), state: 'property')
+        expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), { state: 'property' })
         visit '/?v2&code=code&state=property'
       end
     end
