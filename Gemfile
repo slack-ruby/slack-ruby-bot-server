@@ -26,6 +26,7 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.8.5'
   gem 'fabrication'
   gem 'faker'
+  gem 'faraday', '0.17.5'
   gem 'hyperclient', '~> 0.9.3'
   gem 'rack-server-pages'
   gem 'rack-test'
@@ -36,9 +37,4 @@ group :development, :test do
   gem 'vcr'
   gem 'webmock'
   gem 'webrick', '~> 1.6.1'
-end
-
-group :test do
-  gem 'danger-toc', '~> 0.2.0', require: false
-  gem 'slack-ruby-danger', '~> 0.1.0', require: false
 end
