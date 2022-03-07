@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 1.2.2 (Next)
+
+* Your contribution here.
+
 #### 1.2.1 (2022/03/06)
 
 * [#140](https://github.com/slack-ruby/slack-ruby-bot-server/pull/140): Fix: `NameError` for `Boolean` types with mongoid >= 7.3.0 - [@dblock](https://github.com/dblock).
