@@ -28,6 +28,7 @@ group :development, :test do
   gem 'faker'
   gem 'faraday', '0.17.5'
   gem 'hyperclient', '~> 0.9.3'
+  gem 'rack', '~> 2.2.3'
   gem 'rack-server-pages'
   gem 'rack-test'
   gem 'rake'
