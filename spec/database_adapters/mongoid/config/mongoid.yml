@@ -11,9 +11,7 @@ development:
 test:
   clients:
     default:
-      database: bot-server_test
-      hosts:
-        - 127.0.0.1:27017
+      uri: <%= ENV["DATABASE_URL"] || 'mongodb://localhost' %>
   options:
     raise_not_found_error: false
     use_utc: true
