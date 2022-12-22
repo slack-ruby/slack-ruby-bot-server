@@ -6,6 +6,7 @@
 * [#146](https://github.com/slack-ruby/slack-ruby-bot-server/pull/146): Added support for MongoDB 5.0 - [@dblock](https://github.com/dblock).
 * [#147](https://github.com/slack-ruby/slack-ruby-bot-server/pull/147): Added support for PostgreSQL 14 - [@dblock](https://github.com/dblock).
 * [#155](https://github.com/slack-ruby/slack-ruby-bot-server/pull/155): Enable mongoid to get connection URI from ENV for test - [@crazyoptimist](https://github.com/crazyoptimist).
+* [#157](https://github.com/slack-ruby/slack-ruby-bot-server/pull/157): Added test env setup guide for linux users - [@crazyoptimist](https://github.com/crazyoptimist).
 * Your contribution here.
 
 #### 1.2.1 (2022/03/06)
