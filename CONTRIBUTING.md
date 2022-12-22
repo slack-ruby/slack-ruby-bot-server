@@ -35,6 +35,13 @@ bundle install
 bundle exec rake
 ```
 
+If you are a linux user, you will need to install [geckodriver](https://github.com/mozilla/geckodriver/releases), [firefox](https://download-installer.cdn.mozilla.net/pub/firefox/releases/), and `Xvfb`.  
+And, to get a display for the headless browser, run `Xvfb` manually. You can see more explanations [here](http://elementalselenium.com/tips/38-headless).
+
+```
+xvfb-run --auto-servernum bundle exec rake
+```
+
 ## Write Tests
 
 Try to write a test that reproduces the problem you're trying to fix or describes a feature that you want to build.
