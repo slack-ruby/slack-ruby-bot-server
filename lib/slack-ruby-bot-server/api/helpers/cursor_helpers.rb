@@ -37,7 +37,7 @@ module SlackRubyBotServer
             cursor_direction = :after
             sort_order(options).each do |order|
               sort_options[order[:column]] = { reverse: true } if order[:direction] == :desc
-              cursor_direction = :before if order[:column] == coll.primary_key and order[:direction] == :desc
+              cursor_direction = :before if order[:column] == coll.primary_key && order[:direction] == :desc
             end
             cursor_vars = { items: size }
             cursor_vars[cursor_direction] = params[:cursor].to_i if params.key?(:cursor)

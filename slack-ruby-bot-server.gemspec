@@ -20,9 +20,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'grape-roar', '>= 0.4.0'
   spec.add_dependency 'grape-swagger'
   spec.add_dependency 'kaminari-grape'
+  spec.add_dependency 'pagy_cursor'
   spec.add_dependency 'rack-cors'
   spec.add_dependency 'rack-rewrite'
   spec.add_dependency 'rack-server-pages'
   spec.add_dependency 'slack-ruby-client'
-  spec.add_dependency 'pagy_cursor'
 end
