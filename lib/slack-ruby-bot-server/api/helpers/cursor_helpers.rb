@@ -31,10 +31,19 @@ module SlackRubyBotServer
 
             results = { results: [], next: nil }
             size = (params[:size] || 10).to_i
-            pagy_cursor, coll = pagy_cursor(coll, items: size)
-
-            puts pagy_cursor.inspect
+            results[:total_count] = coll.count(:all) if params[:total_count]
+            coll = coll.offset(params[:offset].to_i) if params.key?(:offset)
+            sort_options = {}
+            cursor_direction = :after
+            sort_order(options).each do |order|
+              sort_options[order[:column]] = { reverse: true } if order[:direction] == :desc
+              cursor_direction = :before if order[:column] == coll.primary_key and order[:direction] == :desc
+            end
+            cursor_vars = { items: size }
+            cursor_vars[cursor_direction] = params[:cursor].to_i if params.key?(:cursor)
+            pagy_cursor, coll = pagy_cursor(coll, cursor_vars, { order: sort_options })
             results[:results] = coll.to_a
+            results[:next] = coll.last[:id].to_s if pagy_cursor.has_more?
             results
           end
         end
