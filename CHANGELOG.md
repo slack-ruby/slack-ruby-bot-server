@@ -1,6 +1,6 @@
 ### Changelog
 
-#### 1.2.2 (Next)
+#### 2.0.0 (Next)
 
 * [#145](https://github.com/slack-ruby/slack-ruby-bot-server/pull/145): Added support for Ruby 3.1 - [@dblock](https://github.com/dblock).
 * [#146](https://github.com/slack-ruby/slack-ruby-bot-server/pull/146): Added support for MongoDB 5.0 - [@dblock](https://github.com/dblock).
