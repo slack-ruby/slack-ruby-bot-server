@@ -2,6 +2,8 @@ require 'async'
 
 require 'slack-ruby-client'
 require 'grape-swagger'
+require 'pagy'
+require 'pagy_cursor/pagy/extras/cursor'
 
 require_relative 'slack-ruby-bot-server/loggable'
 require_relative 'slack-ruby-bot-server/service'

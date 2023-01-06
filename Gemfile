@@ -9,7 +9,7 @@ when 'mongoid' then
 when 'activerecord' then
   gem 'activerecord', '~> 6.0.0'
   gem 'otr-activerecord'
-  gem 'cursor_pagination', github: 'dblock/cursor_pagination', branch: 'misc' # rubocop:disable Bundler/OrderedGems
+  gem 'pagy_cursor'
   gem 'pg'
 when nil
   warn "Missing ENV['DATABASE_ADAPTER']."

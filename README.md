@@ -65,14 +65,14 @@ gem 'slack-ruby-bot-server'
 
 #### ActiveRecord
 
-Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Add the `activerecord`, `pg`, `otr-activerecord` and `cursor_pagination` gems to your Gemfile.
+Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Add the `activerecord`, `pg`, `otr-activerecord` and `pagy_cursor` gems to your Gemfile.
 
 ```
 gem 'pg'
 gem 'activerecord', require: 'active_record'
 gem 'slack-ruby-bot-server'
 gem 'otr-activerecord'
-gem 'cursor_pagination'
+gem 'pagy_cursor'
 ```
 
 Configure the database connection in `config/postgresql.yml`. 

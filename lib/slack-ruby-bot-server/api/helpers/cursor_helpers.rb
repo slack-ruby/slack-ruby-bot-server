@@ -3,6 +3,7 @@ module SlackRubyBotServer
     module Helpers
       module CursorHelpers
         extend ActiveSupport::Concern
+        include Pagy::Cursor::Backend
 
         # apply cursor-based pagination to a collection
         # returns a hash:
@@ -33,12 +34,16 @@ module SlackRubyBotServer
             results[:total_count] = coll.count(:all) if params[:total_count]
             coll = coll.offset(params[:offset].to_i) if params.key?(:offset)
             sort_options = {}
+            cursor_direction = :after
             sort_order(options).each do |order|
               sort_options[order[:column]] = { reverse: true } if order[:direction] == :desc
+              cursor_direction = :before if order[:column] == coll.primary_key && order[:direction] == :desc
             end
-            coll = coll.cursor(params[:cursor], columns: sort_options).per(size)
+            cursor_vars = { items: size }
+            cursor_vars[cursor_direction] = params[:cursor].to_i if params.key?(:cursor)
+            pagy_cursor, coll = pagy_cursor(coll, cursor_vars, { order: sort_options })
             results[:results] = coll.to_a
-            results[:next] = coll.next_cursor.to_s unless coll.last_page?
+            results[:next] = coll.last[:id].to_s if pagy_cursor.has_more?
             results
           end
         end
