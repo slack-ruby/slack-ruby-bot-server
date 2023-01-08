@@ -19,6 +19,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.entry.ruby }}
       - uses: browser-actions/setup-geckodriver@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - run: geckodriver --version
       - uses: supercharge/mongodb-github-action@1.7.0
         with:
