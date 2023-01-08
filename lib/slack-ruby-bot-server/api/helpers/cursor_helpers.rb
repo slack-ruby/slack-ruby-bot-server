@@ -3,7 +3,6 @@ module SlackRubyBotServer
     module Helpers
       module CursorHelpers
         extend ActiveSupport::Concern
-        include Pagy::Cursor::Backend
 
         # apply cursor-based pagination to a collection
         # returns a hash:
@@ -26,6 +25,8 @@ module SlackRubyBotServer
             results
           end
         elsif SlackRubyBotServer::Config.activerecord?
+          include Pagy::Cursor::Backend
+
           def paginate_by_cursor(coll, options)
             raise 'Both cursor and offset parameters are present, these are mutually exclusive.' if params.key?(:offset) && params.key?(:cursor)
 

@@ -1,5 +1,8 @@
 require_relative '../../models/team/activerecord.rb'
 
+require 'pagy'
+require 'pagy_cursor/pagy/extras/cursor'
+
 module SlackRubyBotServer
   module DatabaseAdapter
     def self.check!
