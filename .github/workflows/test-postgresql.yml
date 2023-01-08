@@ -17,6 +17,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.entry.ruby }}
       - uses: browser-actions/setup-geckodriver@latest
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - run: geckodriver --version
       - uses: harmon758/postgresql-action@v1
         with:
