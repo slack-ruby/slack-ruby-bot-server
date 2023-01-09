@@ -8,6 +8,7 @@
 * [#155](https://github.com/slack-ruby/slack-ruby-bot-server/pull/155): Enable mongoid to get connection URI from ENV for test - [@crazyoptimist](https://github.com/crazyoptimist).
 * [#157](https://github.com/slack-ruby/slack-ruby-bot-server/pull/157): Added test env setup guide for linux users - [@crazyoptimist](https://github.com/crazyoptimist).
 * [#158](https://github.com/slack-ruby/slack-ruby-bot-server/pull/158): Replace `cursor_pagination` with `pagy_cursor` - [@crazyoptimist](https://github.com/crazyoptimist).
+* [#160](https://github.com/slack-ruby/slack-ruby-bot-server/pull/160): Document upgrading to 2.0.0 - [@crazyoptimist](https://github.com/crazyoptimist).
 * Your contribution here.
 
 #### 1.2.1 (2022/03/06)
