@@ -1,6 +1,18 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 2.0.0
+
+#### Replaced Pagination Gem for ActiveRecord
+
+[`cursor_pagination`](https://github.com/Kukunin/cursor_pagination) is abandoned and no longer maintained. It is repaced with [`pagy_cursor`](https://github.com/Uysim/pagy-cursor).
+
+If you're using ActiveRecord, replace `cursor_pagination` with `pagy_cursor` in the Gemfile.
+
+```ruby
+gem 'pagy_cursor'
+```
+
 ### Upgrading to >= 1.2.0
 
 #### New Team Fields
