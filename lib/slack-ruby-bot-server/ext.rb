@@ -1,3 +1,2 @@
-%w[bson/object_id grape/sort_extension].each do |ext|
-  require_relative "ext/#{ext}"
-end
+require_relative 'ext/bson/object_id'
+require_relative 'ext/grape/sort_extension'
