@@ -53,7 +53,7 @@ module SlackRubyBotServer
     end
 
     def oauth_scope_s
-      oauth_scope&.join('+')
+      oauth_scope&.join(',')
     end
 
     def activerecord?

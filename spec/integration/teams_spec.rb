@@ -38,7 +38,7 @@ describe 'Teams', js: true, type: :feature do
       end
       it 'includes a link to add to slack with the client id' do
         expect(title).to eq('Slack Ruby Bot Server')
-        expect(find("a[href='https://slack.com/oauth/authorize?scope=channels:read+channels:write&client_id=client_id"))
+        expect(find("a[href='https://slack.com/oauth/authorize?scope=channels:read,channels:write&client_id=client_id"))
       end
     end
   end
@@ -68,7 +68,7 @@ describe 'Teams', js: true, type: :feature do
       end
       it 'includes a link to add to slack with the client id' do
         expect(title).to eq('Slack Ruby Bot Server')
-        expect(find("a[href='https://slack.com/oauth/v2/authorize?scope=channels:read+channels:write&client_id=client_id"))
+        expect(find("a[href='https://slack.com/oauth/v2/authorize?scope=channels:read,channels:write&client_id=client_id"))
       end
     end
   end
