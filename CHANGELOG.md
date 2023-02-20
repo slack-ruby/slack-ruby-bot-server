@@ -1,6 +1,10 @@
 ### Changelog
 
-#### 2.0.0 (Next)
+#### 2.0.1 (Next)
+
+* Your contribution here.
+
+#### 2.0.0 (2022/02/20)
 
 * [#145](https://github.com/slack-ruby/slack-ruby-bot-server/pull/145): Added support for Ruby 3.1 - [@dblock](https://github.com/dblock).
 * [#146](https://github.com/slack-ruby/slack-ruby-bot-server/pull/146): Added support for MongoDB 5.0 - [@dblock](https://github.com/dblock).
@@ -11,7 +15,6 @@
 * [#160](https://github.com/slack-ruby/slack-ruby-bot-server/pull/160): Document upgrading to 2.0.0 - [@crazyoptimist](https://github.com/crazyoptimist).
 * [#161](https://github.com/slack-ruby/slack-ruby-bot-server/pull/161): Removed unused `ext` module - [@dblock](https://github.com/dblock).
 * [#162](https://github.com/slack-ruby/slack-ruby-bot-server/pull/162): Fix: scopes are comma-separated - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 #### 1.2.1 (2022/03/06)
 
