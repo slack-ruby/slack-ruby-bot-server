@@ -11,12 +11,12 @@ bundle install
 rake
 ```
 
-Check that the last build succeeded in [Travis CI](https://travis-ci.org/slack-ruby/slack-ruby-bot-server) for all supported platforms.
+Check that the last build succeeded in [Github Actions](https://github.com/slack-ruby/slack-ruby-bot-server/actions) for all supported platforms.
 
 Change "Next" in [CHANGELOG.md](CHANGELOG.md) to the current date.
 
 ```
-### 0.2.2 (7/10/2015)
+### 2.0.1 (2023/02/20)
 ```
 
 Remove the line with "Your contribution here.", since there will be no more contributions to this release.
@@ -26,15 +26,15 @@ Change `**next**` in the "Stable Release" section in README that warns users tha
 ```
 ## Stable Release
 
-You're reading the documentation for the **stable** release of slack-ruby-bot-server, 0.2.2. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **stable** release of slack-ruby-bot-server, 2.0.1. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
 ```
 
 Commit your changes.
 
 ```
 git add README.md CHANGELOG.md
-git commit -m "Preparing for release, 0.2.2."
-git push origin master
+git commit -m "Preparing for release, 2.0.1."
+git push upstream master
 ```
 
 Release.
@@ -42,10 +42,10 @@ Release.
 ```
 $ rake release
 
-slack-ruby-bot-server 0.2.2 built to pkg/slack-ruby-bot-server-0.2.2.gem.
-Tagged v0.2.2.
+slack-ruby-bot-server 2.0.1 built to pkg/slack-ruby-bot-server-2.0.1.gem.
+Tagged v2.0.1.
 Pushed git commits and tags.
-Pushed slack-ruby-bot-server 0.2.2 to rubygems.org.
+Pushed slack-ruby-bot-server 2.0.1 to rubygems.org.
 ```
 
 ### Prepare for the Next Version
@@ -53,7 +53,7 @@ Pushed slack-ruby-bot-server 0.2.2 to rubygems.org.
 Add the next release to [CHANGELOG.md](CHANGELOG.md).
 
 ```
-### 0.2.3 (Next)
+### 2.0.2 (Next)
 
 * Your contribution here.
 ```
@@ -65,13 +65,13 @@ Undo your change in README about the stable release.
 ```
 ## Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v0.2.2](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v0.2.2/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version.
+You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v2.0.1](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v2.0.1/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version. See [MIGRATING](MIGRATING.md) for help with migrating Legacy Slack Apps to Granular Scopes.
 ```
 
 Commit your changes.
 
 ```
 git add README.md CHANGELOG.md lib/slack-ruby-bot-server/version.rb
-git commit -m "Preparing for next development iteration, 0.2.3."
-git push origin master
+git commit -m "Preparing for next development iteration, 2.0.2."
+git push upstream master
 ```
