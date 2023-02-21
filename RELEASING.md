@@ -34,7 +34,7 @@ Commit your changes.
 ```
 git add README.md CHANGELOG.md
 git commit -m "Preparing for release, 2.0.1."
-git push upstream master
+git push origin master
 ```
 
 Release.
@@ -73,5 +73,5 @@ Commit your changes.
 ```
 git add README.md CHANGELOG.md lib/slack-ruby-bot-server/version.rb
 git commit -m "Preparing for next development iteration, 2.0.2."
-git push upstream master
+git push origin master
 ```
