@@ -5,7 +5,7 @@ Upgrading Slack-Ruby-Bot-Server
 
 #### Replaced Pagination Gem for ActiveRecord
 
-[`cursor_pagination`](https://github.com/Kukunin/cursor_pagination) is abandoned and no longer maintained. It is repaced with [`pagy_cursor`](https://github.com/Uysim/pagy-cursor).
+[`cursor_pagination`](https://github.com/Kukunin/cursor_pagination) is abandoned and no longer maintained. It is replaced with [`pagy_cursor`](https://github.com/Uysim/pagy-cursor).
 
 If you're using ActiveRecord, replace `cursor_pagination` with `pagy_cursor` in the Gemfile.
 
