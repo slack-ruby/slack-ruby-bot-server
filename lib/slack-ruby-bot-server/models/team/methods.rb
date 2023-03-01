@@ -13,11 +13,11 @@ module Methods
     validates_presence_of :team_id
 
     def deactivate!
-      update_attributes!(active: false)
+      update!(active: false)
     end
 
     def activate!(token)
-      update_attributes!(active: true, token: token)
+      update!(active: true, token: token)
     end
 
     def to_s

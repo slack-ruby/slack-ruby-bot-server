@@ -84,7 +84,7 @@ module SlackRubyBotServer
             if team
               team.ping_if_active!
 
-              team.update_attributes!(
+              team.update!(
                 oauth_version: oauth_version,
                 oauth_scope: oauth_scope,
                 activated_user_id: user_id,

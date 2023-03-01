@@ -6,23 +6,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        entry:
-          - { ruby: 2.6.2, postgresql: 11 }
-          - { ruby: 3.1.1, postgresql: 11 }
-          - { ruby: 3.1.1, postgresql: 14 }
-    name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }})
+        ruby: ['2.6.2', '3.1.1']
+        postgresql: [11, 14]
+        active_record: ['~> 6.0.0', '~> 6.1.0', '~> 7.0.0']
+        exclude:
+          - ruby: '2.6.2'
+            active_record: '~> 7.0.0'
+    name: test (ruby=${{ matrix.ruby }}, postgresql=${{ matrix.postgresql }}, active_record=${{ matrix.active_record }})
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.entry.ruby }}
+          ruby-version: ${{ matrix.ruby }}
       - uses: browser-actions/setup-geckodriver@latest
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: geckodriver --version
       - uses: harmon758/postgresql-action@v1
         with:
-          postgresql version: ${{ matrix.entry.postgresql }}
+          postgresql version: ${{ matrix.postgresql }}
           postgresql db: slack_ruby_bot_server_test
           postgresql user: test
           postgresql password: password
@@ -30,6 +32,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         env:
           DATABASE_ADAPTER: activerecord
+          ACTIVERECORD_VERSION: ${{ matrix.active_record }}
           DATABASE_URL: postgres://test:password@localhost/slack_ruby_bot_server_test
         with:
           run: |
