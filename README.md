@@ -66,6 +66,7 @@ gem 'slack-ruby-bot-server'
 #### ActiveRecord
 
 Use ActiveRecord with, for example, PostgreSQL via [pg](https://github.com/ged/ruby-pg). Add the `activerecord`, `pg`, `otr-activerecord` and `pagy_cursor` gems to your Gemfile.
+Currently supports ActiveRecord/Rails major versions 6.0, 6.1 and 7.0.
 
 ```
 gem 'pg'
