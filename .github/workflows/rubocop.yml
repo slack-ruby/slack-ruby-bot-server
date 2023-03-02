@@ -1,16 +1,16 @@
 ---
-name: test
+name: lint
 on: [push, pull_request]
 jobs:
   lint:
     name: RuboCop
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7
+          ruby-version: '3.1'
           bundler-cache: true
       - name: Run RuboCop
         run: bundle exec rubocop
