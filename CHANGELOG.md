@@ -1,8 +1,9 @@
 ### Changelog
 
-### 2.0.2 (Next)
+### 2.1.0 (Next)
 
 * [#163](https://github.com/slack-ruby/slack-ruby-bot-server/pull/163): Updated releasing documentation - [@crazyoptimist](https://github.com/crazyoptimist).
+* [#164](https://github.com/slack-ruby/slack-ruby-bot-server/pull/164): Support rails 6.1 and 7.0 and test against it - [@maths22](https://github.com/maths22).
 * Your contribution here.
 
 #### 2.0.1 (2023/02/20)

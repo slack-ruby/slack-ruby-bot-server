@@ -7,10 +7,10 @@ jobs:
     strategy:
       matrix:
         entry:
-          - { ruby: 2.6.2, postgresql: 11 }
-          - { ruby: 3.1.1, postgresql: 11 }
-          - { ruby: 3.1.1, postgresql: 14 }
-    name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }})
+          - { ruby: 2.6.2, postgresql: 11, active_record: '~> 6.0.0' }
+          - { ruby: 3.1.1, postgresql: 11, active_record: '~> 6.1.0' }
+          - { ruby: 3.1.1, postgresql: 14, active_record: '~> 7.0.0' }
+    name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }}, active_record=${{ matrix.entry.active_record }})
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
@@ -30,6 +30,7 @@ jobs:
         uses: GabrielBB/xvfb-action@v1
         env:
           DATABASE_ADAPTER: activerecord
+          ACTIVERECORD_VERSION: ${{ matrix.entry.active_record }}
           DATABASE_URL: postgres://test:password@localhost/slack_ruby_bot_server_test
         with:
           run: |

@@ -7,7 +7,7 @@ when 'mongoid' then
   gem 'mongoid-scroll'
   gem 'mongoid-shell'
 when 'activerecord' then
-  gem 'activerecord', '~> 6.0.0'
+  gem 'activerecord', ENV['ACTIVERECORD_VERSION'] || '~> 6.0.0'
   gem 'otr-activerecord'
   gem 'pagy_cursor'
   gem 'pg'
