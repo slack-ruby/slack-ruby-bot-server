@@ -3,8 +3,9 @@
 ### 2.1.0 (Next)
 
 * [#163](https://github.com/slack-ruby/slack-ruby-bot-server/pull/163): Updated releasing documentation - [@crazyoptimist](https://github.com/crazyoptimist).
-* [#164](https://github.com/slack-ruby/slack-ruby-bot-server/pull/164): Support rails 6.1 and 7.0 and test against it - [@maths22](https://github.com/maths22).
+* [#164](https://github.com/slack-ruby/slack-ruby-bot-server/pull/164): Added support for ActiveRecord 6.1 and 7.0 - [@maths22](https://github.com/maths22).
 * [#165](https://github.com/slack-ruby/slack-ruby-bot-server/pull/165): Upgraded Rubocop to v1.47 - [@crazyoptimist](https://github.com/crazyoptimist).
+* [#168](https://github.com/slack-ruby/slack-ruby-bot-server/pull/168): Added support for Ruby 3.2.1 - [@dblock](https://github.com/dblock).
 * Your contribution here.
 
 #### 2.0.1 (2023/02/20)
