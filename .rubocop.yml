@@ -1,3 +1,7 @@
+AllCops:
+  SuggestExtensions: false
+  TargetRubyVersion: 2.6
+
 Metrics:
   Enabled: false
 
@@ -12,4 +16,3 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 inherit_from: .rubocop_todo.yml
-
