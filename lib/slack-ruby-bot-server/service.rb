@@ -24,19 +24,15 @@ module SlackRubyBotServer
       end
     end
 
+    def once_and_every(*intervals, &block)
+      Array(intervals).each do |interval|
+        @intervals[_validate_interval(interval)] << [block, { run_on_start: true }]
+      end
+    end
+
     def every(*intervals, &block)
       Array(intervals).each do |interval|
-        case interval
-        when :minute
-          interval = 60
-        when :hour
-          interval = 60 * 60
-        when :day
-          interval = 60 * 60 * 24
-        end
-        raise "Invalid interval \"#{interval}\"." unless interval.is_a?(Integer) && interval > 0
-
-        @intervals[interval] << block
+        @intervals[_validate_interval(interval)] << [block, {}]
       end
     end
 
@@ -83,9 +79,12 @@ module SlackRubyBotServer
     end
 
     def start_intervals!
-      @intervals.each_pair do |period, calls|
-        _every period do
-          calls.each(&:call)
+      @intervals.each_pair do |period, calls_with_options|
+        calls_with_options.each do |call_with_options|
+          call, options = *call_with_options
+          _every period, options do
+            call.call
+          end
         end
       end
     end
@@ -105,10 +104,28 @@ module SlackRubyBotServer
 
     private
 
-    def _every(tt, &_block)
+    def _validate_interval(interval)
+      case interval
+      when :minute
+        interval = 60
+      when :hour
+        interval = 60 * 60
+      when :day
+        interval = 60 * 60 * 24
+      end
+      raise "Invalid interval \"#{interval}\"." unless interval.is_a?(Integer) && interval > 0
+
+      interval
+    end
+
+    def _every(tt, options = {}, &_block)
       ::Async::Reactor.run do |task|
         loop do
           begin
+            if options[:run_on_start]
+              options = {}
+              yield
+            end
             task.sleep tt
             yield
           rescue StandardError => e

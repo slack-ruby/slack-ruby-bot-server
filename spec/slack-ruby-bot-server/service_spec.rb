@@ -103,6 +103,60 @@ describe SlackRubyBotServer::Service do
         expect(@events.sort.uniq).to eq %w[1-2s 1s]
       end
     end
+    context 'with a failing timer' do
+      before do
+        @events = []
+        instance.every 1 do
+          @events << 'fail'
+          raise 'error'
+        end
+        instance.every 1 do
+          @events << '1'
+        end
+      end
+      it 'does not abort all timers on failure of the first one' do
+        Async::Reactor.run do |task|
+          instance.start_intervals!
+          task.sleep 3
+          task.stop
+        end
+        expect(@events.sort.uniq).to eq %w[1 fail]
+      end
+    end
+    context 'once_and_every' do
+      context '5 seconds' do
+        before do
+          @events = []
+          instance.once_and_every 5 do
+            @events << '1'
+          end
+        end
+        it 'runs the timer once within 3 seconds' do
+          Async::Reactor.run do |task|
+            instance.start_intervals!
+            task.sleep 3
+            task.stop
+          end
+          expect(@events).to eq %w[1]
+        end
+      end
+      context '2 seconds' do
+        before do
+          @events = []
+          instance.once_and_every 2 do
+            @events << '1'
+          end
+        end
+        it 'runs the timer exactly twice within 3 seconds' do
+          Async::Reactor.run do |task|
+            instance.start_intervals!
+            task.sleep 3
+            task.stop
+          end
+          expect(@events).to eq %w[1 1]
+        end
+      end
+    end
   end
   context 'overriding service_class' do
     let(:service_class) do
