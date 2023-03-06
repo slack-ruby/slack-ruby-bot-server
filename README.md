@@ -238,9 +238,7 @@ end
 
 ##### Service Timers
 
-You can introduce custom behavior into the service lifecycle on a timer. For example, check whether a team's trial has expired, or periodically cleanup data.
-
-Note that unlike callbacks, timers are global for the entire service.
+You can introduce custom behavior into the service lifecycle on a timer. For example, check whether a team's trial has expired, or periodically clean-up data. Timers can run once on start (`once_and_every`) and start running after a certain period (`every`).
 
 ```ruby
 instance = SlackRubyBotServer::Service.instance
@@ -252,6 +250,10 @@ instance.every :hour do
     rescue StandardError
     end
   end
+end
+
+instance.once_and_every :minute do
+  # called once on start, then every minute
 end
 
 instance.every :minute do
@@ -266,6 +268,8 @@ instance.every 30 do
   # called every 30 seconds
 end
 ```
+
+Note that, unlike callbacks, timers are global for the entire service. Timers are independent, and a failing timer will not terminate other timers.
 
 ##### Extensions
 
