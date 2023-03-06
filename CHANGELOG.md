@@ -1,5 +1,9 @@
 ### Changelog
 
+### 2.1.1 (Next)
+
+* Your contribution here.
+
 ### 2.1.0 (2023/03/06)
 
 * [#163](https://github.com/slack-ruby/slack-ruby-bot-server/pull/163): Updated releasing documentation - [@crazyoptimist](https://github.com/crazyoptimist).
