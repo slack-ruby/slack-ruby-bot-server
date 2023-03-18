@@ -100,13 +100,23 @@ production:
 Establish a connection in your startup code.
 
 ```ruby
-ActiveRecord::Base.establish_connection(
+# Ensure that YAML can load with all versions of Ruby and Psych.
+# Reference: https://bugs.ruby-lang.org/issues/17866
+config = begin
+  YAML.safe_load(
+    ERB.new(
+      File.read('config/postgresql.yml')
+    ).result, aliases: true
+  )[ENV['RACK_ENV']]
+rescue ArgumentError
   YAML.safe_load(
     ERB.new(
       File.read('config/postgresql.yml')
     ).result, [], [], true
   )[ENV['RACK_ENV']]
-)
+end
+
+ActiveRecord::Base.establish_connection(config)
 ```
 
 ### OAuth Version and Scopes
