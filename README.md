@@ -104,19 +104,15 @@ Establish a connection in your startup code.
 # Reference: https://bugs.ruby-lang.org/issues/17866
 config = begin
   YAML.safe_load(
-    ERB.new(
-      File.read('config/postgresql.yml')
-    ).result, aliases: true
+    File.read('config/postgresql.yml'), aliases: true
   )[ENV['RACK_ENV']]
 rescue ArgumentError
   YAML.safe_load(
-    ERB.new(
-      File.read('config/postgresql.yml')
-    ).result, [], [], true
+    File.read('config/postgresql.yml'), [], [], true
   )[ENV['RACK_ENV']]
 end
 
-ActiveRecord::Base.establish_connection(config)
+ActiveRecord::Base.establish_connection(ERB.new(config).result)
 ```
 
 ### OAuth Version and Scopes
