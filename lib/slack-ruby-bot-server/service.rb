@@ -79,11 +79,13 @@ module SlackRubyBotServer
     end
 
     def start_intervals!
-      @intervals.each_pair do |period, calls_with_options|
-        calls_with_options.each do |call_with_options|
-          call, options = *call_with_options
-          _every period, options do
-            call.call
+      ::Async::Reactor.run do
+        @intervals.each_pair do |period, calls_with_options|
+          calls_with_options.each do |call_with_options|
+            call, options = *call_with_options
+            _every period, options do
+              call.call
+            end
           end
         end
       end
