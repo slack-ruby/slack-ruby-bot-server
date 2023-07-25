@@ -1,9 +1,8 @@
 ### Changelog
 
-### 2.1.1 (Next)
+### 2.1.1 (2023/07/25)
 
 * [#172](https://github.com/slack-ruby/slack-ruby-bot-server/pull/172): Fix: intervals may not always be started in an async block - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 2.1.0 (2023/03/06)
 
