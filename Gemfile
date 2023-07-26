@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-case ENV['DATABASE_ADAPTER']
+case ENV.fetch('DATABASE_ADAPTER', nil)
 when 'mongoid' then
   gem 'kaminari-mongoid'
   gem 'mongoid', ENV['MONGOID_VERSION'] || '~> 7.3.0'
@@ -14,7 +14,7 @@ when 'activerecord' then
 when nil
   warn "Missing ENV['DATABASE_ADAPTER']."
 else
-  warn "Invalid ENV['DATABASE_ADAPTER']: #{ENV['DATABASE_ADAPTER']}."
+  warn "Invalid ENV['DATABASE_ADAPTER']: #{ENV.fetch('DATABASE_ADAPTER', nil)}."
 end
 
 gemspec
