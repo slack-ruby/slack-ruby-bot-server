@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rack-rewrite'
   spec.add_dependency 'rack-server-pages'
   spec.add_dependency 'slack-ruby-client'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

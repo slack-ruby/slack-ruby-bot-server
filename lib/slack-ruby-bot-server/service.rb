@@ -78,8 +78,8 @@ module SlackRubyBotServer
       start_intervals!
     end
 
-    def start_intervals!
-      ::Async::Reactor.run do
+    def start_intervals!(&_block)
+      ::Async::Reactor.run do |task|
         @intervals.each_pair do |period, calls_with_options|
           calls_with_options.each do |call_with_options|
             call, options = *call_with_options
@@ -88,6 +88,7 @@ module SlackRubyBotServer
             end
           end
         end
+        yield task if block_given?
       end
     end
 

@@ -56,10 +56,7 @@ describe SlackRubyBotServer::Service do
     let(:instance) { SlackRubyBotServer::Service.instance }
     context 'without timers' do
       it 'noop' do
-        Async::Reactor.run do |task|
-          instance.start_intervals!
-          task.stop
-        end
+        instance.start_intervals!(&:stop)
         expect(instance.instance_variable_get(:@intervals).keys).to eq []
       end
     end
@@ -94,8 +91,7 @@ describe SlackRubyBotServer::Service do
         end
       end
       it 'sets up timers' do
-        Async::Reactor.run do |task|
-          instance.start_intervals!
+        instance.start_intervals! do |task|
           task.sleep 3
           task.stop
         end
@@ -115,8 +111,7 @@ describe SlackRubyBotServer::Service do
         end
       end
       it 'does not abort all timers on failure of the first one' do
-        Async::Reactor.run do |task|
-          instance.start_intervals!
+        instance.start_intervals! do |task|
           task.sleep 3
           task.stop
         end
@@ -132,8 +127,7 @@ describe SlackRubyBotServer::Service do
           end
         end
         it 'runs the timer once within 3 seconds' do
-          Async::Reactor.run do |task|
-            instance.start_intervals!
+          instance.start_intervals! do |task|
             task.sleep 3
             task.stop
           end
@@ -148,8 +142,7 @@ describe SlackRubyBotServer::Service do
           end
         end
         it 'runs the timer exactly twice within 3 seconds' do
-          Async::Reactor.run do |task|
-            instance.start_intervals!
+          instance.start_intervals! do |task|
             task.sleep 3
             task.stop
           end

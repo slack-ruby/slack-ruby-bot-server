@@ -33,4 +33,4 @@ module SlackRubyBotServer
   end
 end
 
-::Boolean = Grape::API::Boolean
+Boolean = Grape::API::Boolean
