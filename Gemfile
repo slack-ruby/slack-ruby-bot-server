@@ -9,7 +9,7 @@ when 'mongoid' then
 when 'activerecord' then
   gem 'activerecord', ENV['ACTIVERECORD_VERSION'] || '~> 6.0.0'
   gem 'otr-activerecord'
-  gem 'pagy_cursor'
+  gem 'pagy_cursor', '~> 0.6.1'
   gem 'pg'
 when nil
   warn "Missing ENV['DATABASE_ADAPTER']."
@@ -23,7 +23,7 @@ group :development, :test do
   gem 'bundler'
   gem 'byebug'
   gem 'capybara', '~> 3.36.0'
-  gem 'database_cleaner', '~> 1.8.5'
+  gem 'database_cleaner', '~> 2.1.0'
   gem 'fabrication'
   gem 'faker'
   gem 'faraday', '0.17.5'
