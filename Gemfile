@@ -6,11 +6,19 @@ when 'mongoid' then
   gem 'mongoid', ENV['MONGOID_VERSION'] || '~> 7.3.0'
   gem 'mongoid-scroll'
   gem 'mongoid-shell'
+
+  group :development, :test do
+    gem 'database_cleaner-mongoid', '~> 2.0.1'
+  end
 when 'activerecord' then
   gem 'activerecord', ENV['ACTIVERECORD_VERSION'] || '~> 6.0.0'
   gem 'otr-activerecord'
   gem 'pagy_cursor', '~> 0.6.1'
   gem 'pg'
+
+  group :development, :test do
+    gem 'database_cleaner-active_record', '~> 2.2.0'
+  end
 when nil
   warn "Missing ENV['DATABASE_ADAPTER']."
 else
@@ -23,7 +31,6 @@ group :development, :test do
   gem 'bundler'
   gem 'byebug'
   gem 'capybara', '~> 3.36.0'
-  gem 'database_cleaner', '~> 2.1.0'
   gem 'fabrication'
   gem 'faker'
   gem 'faraday', '0.17.5'
