@@ -17,6 +17,7 @@ describe SlackRubyBotServer::App do
     context 'when connection cannot be established' do
       context 'with ActiveRecord >= 7.2' do
         before do
+          skip 'incorrect database adapter' unless ENV['DATABASE_ADAPTER'] == 'activerecord'
           skip 'incorrect ActiveRecord version' if ActiveRecord.version < Gem::Version.new('7.2')
 
           # Make sure ActiveRecord is not connected in any way before the spec starts
@@ -35,6 +36,7 @@ describe SlackRubyBotServer::App do
 
       context 'with ActiveRecord < 7.2' do
         before do
+          skip 'incorrect database adapter' unless ENV['DATABASE_ADAPTER'] == 'activerecord'
           skip 'incorrect ActiveRecord version' if ActiveRecord.version >= Gem::Version.new('7.2')
         end
 
