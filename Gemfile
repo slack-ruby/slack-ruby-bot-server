@@ -4,7 +4,7 @@ case ENV.fetch('DATABASE_ADAPTER', nil)
 when 'mongoid' then
   gem 'kaminari-mongoid'
   gem 'mongoid', ENV['MONGOID_VERSION'] || '~> 7.3.0'
-  gem 'mongoid-scroll'
+  gem 'mongoid-scroll', '~> 1.0.1'
   gem 'mongoid-shell'
 
   group :development, :test do
