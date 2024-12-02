@@ -4,6 +4,7 @@
 
 * Your contribution here.
 * [#175](https://github.com/slack-ruby/slack-ruby-bot-server/pull/175): Fix(activerecord): correctly check for database in rails 7.2+ - [@markokajzer](https://github.com/markokajzer).
+* [#176](https://github.com/slack-ruby/slack-ruby-bot-server/pull/176): Deps: bump mongoid-scroll to 2.0 - [@markokajzer](https://github.com/markokajzer).
 
 ### 2.1.1 (2023/07/25)
 

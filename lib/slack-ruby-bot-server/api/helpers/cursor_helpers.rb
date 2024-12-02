@@ -16,9 +16,9 @@ module SlackRubyBotServer
             coll = coll.skip(params[:offset].to_i) if params.key?(:offset)
             size = (params[:size] || 10).to_i
             coll = coll.limit(size)
-            coll.scroll(params[:cursor]) do |record, next_cursor|
+            coll.scroll(params[:cursor]) do |record, iterator|
               results[:results] << record if record
-              results[:next] = next_cursor.to_s
+              results[:next] = iterator.next_cursor.to_s
               break if results[:results].count >= size
             end
             results[:total_count] = coll.count if params[:total_count] && coll.respond_to?(:count)
