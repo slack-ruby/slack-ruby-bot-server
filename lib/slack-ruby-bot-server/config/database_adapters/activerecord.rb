@@ -6,7 +6,12 @@ require 'pagy_cursor/pagy/extras/cursor'
 module SlackRubyBotServer
   module DatabaseAdapter
     def self.check!
-      ActiveRecord::Base.connection_pool.with_connection(&:active?)
+      if ActiveRecord.version >= Gem::Version.new('7.2')
+        ActiveRecord::Base.connection.database_exists?
+      else
+        ActiveRecord::Base.connection_pool.with_connection(&:active?)
+      end
+
       raise 'Unexpected error.' unless ActiveRecord::Base.connected?
     rescue StandardError => e
       warn "Error connecting to PostgreSQL: #{e.message}"
