@@ -22,7 +22,8 @@ module SlackRubyBotServer
             optional :active, type: ::Grape::API::Boolean, desc: 'Return active teams only.'
             use :pagination
           end
-          sort Team::SORT_ORDERS
+          # sort Team::SORT_ORDERS
+          Team::SORT_ORDERS.sort
           get do
             teams = Team.all
             teams = teams.active if params[:active]
