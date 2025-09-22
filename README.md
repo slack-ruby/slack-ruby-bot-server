@@ -2,7 +2,6 @@ Slack Ruby Bot Server
 =====================
 
 [![Gem Version](https://badge.fury.io/rb/slack-ruby-bot-server.svg)](https://badge.fury.io/rb/slack-ruby-bot-server)
-[![Code Climate](https://codeclimate.com/github/slack-ruby/slack-ruby-bot-server.svg)](https://codeclimate.com/github/slack-ruby/slack-ruby-bot-server)
 [![mongodb](https://github.com/slack-ruby/slack-ruby-bot-server/actions/workflows/test-mongodb.yml/badge.svg)](https://github.com/slack-ruby/slack-ruby-bot-server/actions/workflows/test-mongodb.yml)
 [![postgresql](https://github.com/slack-ruby/slack-ruby-bot-server/actions/workflows/test-postgresql.yml/badge.svg)](https://github.com/slack-ruby/slack-ruby-bot-server/actions/workflows/test-postgresql.yml)
 [![rubocop](https://github.com/slack-ruby/slack-ruby-bot-server/actions/workflows/rubocop.yml/badge.svg)](https://github.com/slack-ruby/slack-ruby-bot-server/actions/workflows/rubocop.yml)
