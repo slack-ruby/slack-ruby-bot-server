@@ -1,6 +1,12 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 2.2.0
+
+#### Cursor Helper Iterator Changes
+
+The mongoid [cursor helper](lib/slack-ruby-bot-server/api/helpers/cursor_helpers.rb) now requires `mongoid-scroll` 2.x, the second argument to `scroll` has changed. See mongoid-scroll [UPGRADING](https://github.com/mongoid/mongoid-scroll/blob/master/UPGRADING.md#upgrading-to--200) for more information.
+
 ### Upgrading to >= 2.0.0
 
 #### Replaced Pagination Gem for ActiveRecord
