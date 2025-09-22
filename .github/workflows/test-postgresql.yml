@@ -12,6 +12,9 @@ jobs:
           - { ruby: 3.2, postgresql: 14, active_record: '~> 7.0.0' }
           - { ruby: 3.3, postgresql: 14, active_record: '~> 7.2.0' }
           - { ruby: 3.4, postgresql: 14, active_record: '~> 7.2.0' }
+          - { ruby: 3.4, postgresql: 15, active_record: '~> 8.0.2' }
+          - { ruby: 3.4, postgresql: 16, active_record: '~> 8.0.2' }
+          - { ruby: 3.4, postgresql: 17, active_record: '~> 8.0.2' }
     name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }}, active_record=${{ matrix.entry.active_record }})
     steps:
       - uses: actions/checkout@v2
