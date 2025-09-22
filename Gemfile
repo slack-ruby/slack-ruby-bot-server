@@ -4,8 +4,9 @@ case ENV.fetch('DATABASE_ADAPTER', nil)
 when 'mongoid' then
   gem 'kaminari-mongoid'
   gem 'mongoid', ENV['MONGOID_VERSION'] || '~> 7.3.0'
-  gem 'mongoid-scroll', '~> 1.0.1'
+  gem 'mongoid-scroll', '~> 2.0'
   gem 'mongoid-shell'
+  gem 'mutex_m'
 
   group :development, :test do
     gem 'database_cleaner-mongoid', '~> 2.0.1'
@@ -30,7 +31,7 @@ gemspec
 group :development, :test do
   gem 'bundler'
   gem 'byebug'
-  gem 'capybara', '~> 3.36.0'
+  gem 'capybara', '~> 3.40.0'
   gem 'fabrication'
   gem 'faker'
   gem 'faraday', '0.17.5'
@@ -40,9 +41,9 @@ group :development, :test do
   gem 'rack-test'
   gem 'rake'
   gem 'rspec'
-  gem 'rubocop', '1.47'
-  gem 'selenium-webdriver', '~> 4.1.0'
+  gem 'rubocop', '1.80.2'
+  gem 'selenium-webdriver', '~> 4.35.0'
   gem 'vcr'
   gem 'webmock'
-  gem 'webrick', '~> 1.6.1'
+  gem 'webrick', '~> 1.9.1'
 end
