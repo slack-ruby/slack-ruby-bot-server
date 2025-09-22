@@ -1,5 +1,9 @@
 ### Changelog
 
+### 2.2.1 (Next)
+
+* Your contribution here.
+
 ### 2.2.0 (2025/09/22)
 
 * [#176](https://github.com/slack-ruby/slack-ruby-bot-server/pull/176): Deps: bump mongoid-scroll to 2.0 - [@markokajzer](https://github.com/markokajzer).
