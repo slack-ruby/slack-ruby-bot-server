@@ -40,7 +40,7 @@ group :development, :test do
   gem 'rack-test'
   gem 'rake'
   gem 'rspec'
-  gem 'rubocop', '1.47'
+  gem 'rubocop', '1.80.2'
   gem 'selenium-webdriver', '~> 4.1.0'
   gem 'vcr'
   gem 'webmock'
