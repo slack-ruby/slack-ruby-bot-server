@@ -29,17 +29,15 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
   - [HTML Templates](#html-templates)
   - [Access Tokens](#access-tokens)
 - [Sample Bots Using Slack Ruby Bot Server](#sample-bots-using-slack-ruby-bot-server)
-  - [Slack Bots with Granular Permissions](#slack-bots-with-granular-permissions)
-  - [Legacy Slack Bots](#legacy-slack-bots)
 - [Copyright & License](#copyright--license)
 
 ## What is this?
 
-A library that contains a web server and a RESTful [Grape](http://github.com/ruby-grape/grape) API serving a Slack bot to multiple teams. Use in conjunction with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events) to build a complete Slack bot service, or [slack-ruby-bot-server-rtm](https://github.com/slack-ruby/slack-ruby-bot-server-rtm) to build a (legacy) Classic RealTime Slack bot. Your customers can use a Slack button to install the bot.
+A library that contains a web server and a RESTful [Grape](http://github.com/ruby-grape/grape) API serving a Slack bot to multiple teams. Use in conjunction with [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events) to build a complete Slack bot service. Your customers can use a Slack button to install the bot.
 
 ## Stable Release
 
-You're reading the documentation for the **next** release of slack-ruby-bot-server. Please see the documentation for the [last stable release, v2.1.1](https://github.com/slack-ruby/slack-ruby-bot-server/blob/v2.1.1/README.md) unless you're integrating with HEAD. See [UPGRADING](UPGRADING.md) when upgrading from an older version. See [MIGRATING](MIGRATING.md) for help with migrating Legacy Slack Apps to Granular Scopes.
+You're reading the documentation for the **stable** release of slack-ruby-bot-server, v2.2.0. See [UPGRADING](UPGRADING.md) when upgrading from an older version. See [MIGRATING](MIGRATING.md) for help with migrating Legacy Slack Apps to Granular Scopes.
 
 ## Make Your Own
 
@@ -277,7 +275,6 @@ A number of extensions use service manager callbacks and service timers to imple
 * [slack-ruby-bot-server-events](https://github.com/slack-ruby/slack-ruby-bot-server-events): Easily handle Slack slash commands, interactive buttons and events.
 * [slack-ruby-bot-server-mailchimp](https://github.com/slack-ruby/slack-ruby-bot-server-mailchimp): Subscribes new bot users to a Mailchimp mailing list.
 * [slack-ruby-bot-server-stripe](https://github.com/slack-ruby/slack-ruby-bot-server-stripe): Enables paid bots with trial periods and commerce through Stripe.
-* [slack-ruby-bot-server-rtm](https://github.com/slack-ruby/slack-ruby-bot-server-rtm): Create RTM Slack bots.
 
 #### Service Class
 
@@ -316,24 +313,13 @@ By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) s
 
 ## Sample Bots Using Slack Ruby Bot Server
 
-### Slack Bots with Granular Permissions
-
 * [slack-ruby-bot-server-events-sample](https://github.com/slack-ruby/slack-ruby-bot-server-events-sample), a generic sample
 * [slack-rails-bot-starter](https://github.com/CrazyOptimist/slack-rails-bot-starter), an all-in-one Rails starter kit
-
-### Legacy Slack Bots
-
-* [slack-ruby-bot-server-sample](https://github.com/slack-ruby/slack-ruby-bot-server-sample), a generic sample
-* [slack-sup](https://github.com/dblock/slack-sup), see [sup.playplay.io](https://sup.playplay.io)
-* [slack-gamebot](https://github.com/dblock/slack-gamebot), see [www.playplay.io](https://www.playplay.io)
-* [slack-market](https://github.com/dblock/slack-market), see [market.playplay.io](https://market.playplay.io)
-* [slack-shellbot](https://github.com/slack-ruby/slack-shellbot), see [shell.playplay.io](https://shell.playplay.io)
-* [slack-api-explorer](https://github.com/slack-ruby/slack-api-explorer), see [api-explorer.playplay.io](https://shell.playplay.io)
-* [slack-strava](https://github.com/dblock/slack-strava), see [slava.playplay.io](https://slava.playplay.io)
-* [slack-arena](https://github.com/dblock/slack-arena), see [arena.playplay.io](https://arena.playplay.io)
-
+* [slack-sup2](https://github.com/dblock/slack-sup2), see [sup2.playplay.io](https://sup2.playplay.io)
+* [slack-gamebot2](https://github.com/dblock/slack-gamebot2), see [gamebot2.playplay.io](https://gamebot2.playplay.io)
+ 
 ## Copyright & License
 
-Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2020
+Copyright [Daniel Doubrovkine](http://code.dblock.org) and Contributors, 2015-2025
 
 [MIT License](LICENSE)

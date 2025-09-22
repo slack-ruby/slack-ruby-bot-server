@@ -1,13 +1,12 @@
 ### Changelog
 
-### 2.2.0 (Next)
+### 2.2.0 (2025/09/22)
 
 * [#176](https://github.com/slack-ruby/slack-ruby-bot-server/pull/176): Deps: bump mongoid-scroll to 2.0 - [@markokajzer](https://github.com/markokajzer).
 * [#175](https://github.com/slack-ruby/slack-ruby-bot-server/pull/175): Fix(activerecord): correctly check for database in rails 7.2+ - [@markokajzer](https://github.com/markokajzer).
 * [#178](https://github.com/slack-ruby/slack-ruby-bot-server/pull/178): Add support for Mongoid 8 - [@dblock](https://github.com/dblock).
 * [#178](https://github.com/slack-ruby/slack-ruby-bot-server/pull/178): Cursor-helper now requires mongoid-scroll 2.x - [@dblock](https://github.com/dblock).
 * [#178](https://github.com/slack-ruby/slack-ruby-bot-server/pull/178): Add support for ActiveRecord 8 - [@dblock](https://github.com/dblock).
-* Your contribution here.
 
 ### 2.1.1 (2023/07/25)
 
