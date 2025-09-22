@@ -30,6 +30,7 @@ describe 'Teams', js: true, type: :feature do
       it 'includes optional parameter' do
         expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), { state: 'property' })
         visit '/?v1&code=code&state=property'
+        expect(page.find('#messages')).to have_content 'Team successfully registered!'
       end
     end
     context 'homepage' do
@@ -60,6 +61,7 @@ describe 'Teams', js: true, type: :feature do
       it 'includes optional parameter' do
         expect(SlackRubyBotServer::Service.instance).to receive(:create!).with(instance_of(Team), { state: 'property' })
         visit '/?v2&code=code&state=property'
+        expect(page.find('#messages')).to have_content 'Team successfully registered!'
       end
     end
     context 'homepage' do
