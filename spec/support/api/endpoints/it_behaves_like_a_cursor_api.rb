@@ -8,12 +8,8 @@ shared_examples_for 'a cursor api' do |model|
       12.times { Fabricate(model_s) }
     end
 
-    it 'returns 10 items by default' do
-      expect(client.send(model_ps, cursor_params).count).to eq 10
-    end
-
-    it 'returns 2 items' do
-      expect(client.send(model_ps, cursor_params.merge(size: 2)).count).to eq 2
+    it 'returns all items by default' do
+      expect(client.send(model_ps, cursor_params).count).to eq 12
     end
 
     it 'returns a first page with a cursor' do
@@ -66,7 +62,7 @@ shared_examples_for 'a cursor api' do |model|
 
     it 'returns all unique ids' do
       instances = client.send(model_ps, cursor_params)
-      expect(instances.map(&:id).uniq.count).to eq 10
+      expect(instances.map(&:id).uniq.count).to eq 12
     end
   end
 end
