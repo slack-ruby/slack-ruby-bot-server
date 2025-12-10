@@ -18,34 +18,34 @@ module SlackRubyBotServer
               backtrace = e.backtrace[0..5].join("\n  ")
               Middleware.logger.warn "#{e.class.name}: #{e.message}\n  #{backtrace}"
               error!({
-                type: 'param_error',
-                message: e.document.errors.full_messages.uniq.join(', ') + '.',
-                detail: e.document.errors.messages.each_with_object({}) do |(k, v), h|
-                  h[k] = v.uniq
-                end
-              }, 400)
+                       type: 'param_error',
+                       message: e.document.errors.full_messages.uniq.join(', ') + '.',
+                       detail: e.document.errors.messages.each_with_object({}) do |(k, v), h|
+                         h[k] = v.uniq
+                       end
+                     }, 400)
             end
           end
           rescue_from Grape::Exceptions::Validation do |e|
             backtrace = e.backtrace[0..5].join("\n  ")
             Middleware.logger.warn "#{e.class.name}: #{e.message}\n  #{backtrace}"
             error!({
-              type: 'param_error',
-              message: 'Invalid parameters.',
-              detail: { e.params.join(', ') => [e.message] }
-            }, 400)
+                     type: 'param_error',
+                     message: 'Invalid parameters.',
+                     detail: { e.params.join(', ') => [e.message] }
+                   }, 400)
           end
           rescue_from Grape::Exceptions::ValidationErrors do |e|
             backtrace = e.backtrace[0..5].join("\n  ")
             Middleware.logger.warn "#{e.class.name}: #{e.message}\n  #{backtrace}"
             error!({
-              type: 'param_error',
-              message: 'Invalid parameters.',
-              detail: e.errors.each_with_object({}) do |(k, v), h|
-                # JSON does not permit having a key of type Array
-                h[k.count == 1 ? k.first : k.join(', ')] = v
-              end
-            }, 400)
+                     type: 'param_error',
+                     message: 'Invalid parameters.',
+                     detail: e.errors.each_with_object({}) do |(k, v), h|
+                       # JSON does not permit having a key of type Array
+                       h[k.count == 1 ? k.first : k.join(', ')] = v
+                     end
+                   }, 400)
           end
         end
       end
