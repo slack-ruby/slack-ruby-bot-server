@@ -3,6 +3,7 @@
 ### 2.2.1 (Next)
 
 * Your contribution here.
+* [#181](https://github.com/slack-ruby/slack-ruby-bot-server/pull/181): Migrated Danger to `danger-pr-comment` workflow - [@dblock](https://github.com/dblock).
 * [#180](https://github.com/slack-ruby/slack-ruby-bot-server/pull/180): Add support for Grape v3 - [@markokajzer](https://github.com/markokajzer).
 
 ### 2.2.0 (2025/09/22)
