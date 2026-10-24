@@ -31,7 +31,9 @@ gem 'fabrication'
 gem 'faker'
 gem 'faraday'
 gem 'faraday-rack'
+gem 'grape', ENV.fetch('GRAPE_VERSION', '>= 0')
 gem 'hyperclient'
+gem 'json', ENV.fetch('JSON_VERSION', '>= 0')
 gem 'mutex_m'
 gem 'rack'
 gem 'rack-server-pages'

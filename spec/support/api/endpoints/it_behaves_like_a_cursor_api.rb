@@ -31,7 +31,7 @@ shared_examples_for 'a cursor api' do |model|
         models_ids.concat(response.map { |instance| instance._links.self._url.gsub("http://example.org/api/#{model_ps}/", '') })
         break unless response._links[:next]
 
-        next_cursor = CGI.parse(URI.parse(response._links.next._url).query).map { |a| [a[0], a[1][0]] }.to_h
+        next_cursor = URI.decode_www_form(URI.parse(response._links.next._url).query).to_h
       end
       expect(models_ids.uniq.count).to eq model.all.count
     end
@@ -44,7 +44,7 @@ shared_examples_for 'a cursor api' do |model|
         models_ids.concat(response.map { |instance| instance._links.self._url.gsub("http://example.org/api/#{model_ps}/", '') })
         break unless response._links[:next]
 
-        next_cursor = CGI.parse(URI.parse(response._links.next._url).query).map { |a| [a[0], a[1][0]] }.to_h
+        next_cursor = URI.decode_www_form(URI.parse(response._links.next._url).query).to_h
       end
       expect(models_ids.uniq.count).to eq model.all.count - 3
     end

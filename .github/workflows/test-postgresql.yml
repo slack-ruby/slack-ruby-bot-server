@@ -1,43 +1,61 @@
 ---
-name: test
+name: PostgreSQL
 on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: postgresql-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      DATABASE_ADAPTER: activerecord
+      ACTIVERECORD_VERSION: ${{ matrix.entry.active_record }}
+      GRAPE_VERSION: ${{ matrix.entry.grape || '>= 0' }}
+      JSON_VERSION: ${{ matrix.entry.json }}
+      DATABASE_URL: postgres://test:password@localhost/slack_ruby_bot_server_test
     strategy:
+      fail-fast: false
       matrix:
         entry:
-          - { ruby: 3.2, postgresql: 11, active_record: '~> 6.0.0' }
-          - { ruby: 3.2, postgresql: 11, active_record: '~> 6.1.0' }
-          - { ruby: 3.2, postgresql: 14, active_record: '~> 7.0.0' }
-          - { ruby: 3.3, postgresql: 14, active_record: '~> 7.2.0' }
-          - { ruby: 3.4, postgresql: 14, active_record: '~> 7.2.0' }
-          - { ruby: 3.4, postgresql: 15, active_record: '~> 8.0.2' }
-          - { ruby: 3.4, postgresql: 16, active_record: '~> 8.0.2' }
-          - { ruby: 3.4, postgresql: 17, active_record: '~> 8.0.2' }
-    name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }}, active_record=${{ matrix.entry.active_record }})
+          # Active Support 6.x, 7.0, and 8.0 pass quirks_mode, removed in JSON 3.
+          - { ruby: '3.2', postgresql: '11', active_record: '~> 6.0.0', json: '~> 2.0' }
+          - { ruby: '3.2', postgresql: '11', active_record: '~> 6.1.0', json: '~> 2.0' }
+          - { ruby: '3.2', postgresql: '14', active_record: '~> 7.0.0', json: '~> 2.0' }
+          - { ruby: '3.3', postgresql: '14', active_record: '~> 7.2.0', json: '~> 3.0' }
+          - { ruby: '3.4', postgresql: '14', active_record: '~> 7.2.0', json: '~> 3.0' }
+          - { ruby: '3.4', postgresql: '15', active_record: '~> 8.0.2', json: '~> 2.0' }
+          - { ruby: '3.4', postgresql: '16', active_record: '~> 8.0.2', json: '~> 2.0' }
+          - { ruby: '3.4', postgresql: '17', active_record: '~> 8.0.2', json: '~> 2.0' }
+          - { ruby: '3.3', postgresql: '18', active_record: '~> 8.1', grape: '~> 3.2', json: '~> 3.0' }
+          - { ruby: '3.4', postgresql: '18', active_record: '~> 8.1', grape: '~> 4.0', json: '~> 3.0' }
+          - { ruby: '4.0', postgresql: '18', active_record: '~> 8.1', grape: '~> 4.0', json: '~> 3.0' }
+    name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }}, active_record=${{ matrix.entry.active_record }}, grape=${{ matrix.entry.grape || 'auto' }}, json=${{ matrix.entry.json }})
+    services:
+      postgresql:
+        image: postgres:${{ matrix.entry.postgresql }}
+        env:
+          POSTGRES_DB: slack_ruby_bot_server_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U test -d slack_ruby_bot_server_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.entry.ruby }}
-      - uses: browser-actions/setup-geckodriver@latest
+          bundler-cache: true
+          cache-version: activerecord-${{ matrix.entry.active_record }}-grape-${{ matrix.entry.grape || 'auto' }}-json-${{ matrix.entry.json }}
+      - uses: browser-actions/setup-firefox@v1.7.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - run: geckodriver --version
-      - uses: harmon758/postgresql-action@v1
-        with:
-          postgresql version: ${{ matrix.entry.postgresql }}
-          postgresql db: slack_ruby_bot_server_test
-          postgresql user: test
-          postgresql password: password
+          firefox-version: latest
       - name: Test
-        uses: GabrielBB/xvfb-action@v1
-        env:
-          DATABASE_ADAPTER: activerecord
-          ACTIVERECORD_VERSION: ${{ matrix.entry.active_record }}
-          DATABASE_URL: postgres://test:password@localhost/slack_ruby_bot_server_test
-        with:
-          run: |
-            bundle install
-            bundle exec rake spec
+        run: xvfb-run --auto-servernum bundle exec rake spec
