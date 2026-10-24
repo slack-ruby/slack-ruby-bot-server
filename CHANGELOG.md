@@ -1,5 +1,9 @@
 ### Changelog
 
+### 2.2.2 (Next)
+
+* Your contribution here.
+
 ### 2.2.1 (2026/10/24)
 
 * [#182](https://github.com/slack-ruby/slack-ruby-bot-server/pull/182): Modernize CI with current actions, native database services, dependency caching, and explicit Ruby 4, Mongoid 9, Active Record 8.1, PostgreSQL 18, Grape 3/4, and JSON 2/3 coverage while retaining existing compatibility combinations - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
