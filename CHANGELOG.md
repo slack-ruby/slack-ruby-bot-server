@@ -1,8 +1,7 @@
 ### Changelog
 
-### 2.2.1 (Next)
+### 2.2.1 (2026/10/24)
 
-* Your contribution here.
 * [#182](https://github.com/slack-ruby/slack-ruby-bot-server/pull/182): Modernize CI with current actions, native database services, dependency caching, and explicit Ruby 4, Mongoid 9, Active Record 8.1, PostgreSQL 18, Grape 3/4, and JSON 2/3 coverage while retaining existing compatibility combinations - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#181](https://github.com/slack-ruby/slack-ruby-bot-server/pull/181): Migrated Danger to `danger-pr-comment` workflow - [@dblock](https://github.com/dblock).
 * [#180](https://github.com/slack-ruby/slack-ruby-bot-server/pull/180): Add support for Grape v3 - [@markokajzer](https://github.com/markokajzer).
