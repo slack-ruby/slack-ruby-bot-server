@@ -1,40 +1,56 @@
 ---
-name: test
+name: MongoDB
 on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: mongodb-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      DATABASE_ADAPTER: mongoid
+      MONGOID_VERSION: ${{ matrix.entry.mongoid }}
+      GRAPE_VERSION: ${{ matrix.entry.grape || '>= 0' }}
+      JSON_VERSION: ${{ matrix.entry.json }}
     strategy:
+      fail-fast: false
       matrix:
         entry:
-          - { ruby: 3.2, mongoid: 6.4.8, mongodb: 4.4 }
-          - { ruby: 3.2, mongoid: 7.2.3, mongodb: 4.4 }
-          - { ruby: 3.2, mongoid: 7.3.0, mongodb: 4.4 }
-          - { ruby: 3.2, mongoid: 7.3.0, mongodb: 4.4 }
-          - { ruby: 3.3, mongoid: 7.3.0, mongodb: 5.0 }
-          - { ruby: 3.4, mongoid: 7.5.2, mongodb: 5.0 }
-          - { ruby: 3.4, mongoid: 8.1.11, mongodb: 6.0 }
-          - { ruby: 3.4, mongoid: 8.1.11, mongodb: 7.0 }
-          - { ruby: 3.4, mongoid: 8.1.11, mongodb: 8.0 }
-    name: test (ruby=${{ matrix.entry.ruby }}, mongoid=${{ matrix.entry.mongoid }}, mongodb=${{ matrix.entry.mongodb }})
+          # These Active Support versions pass quirks_mode, removed in JSON 3.
+          - { ruby: '3.2', mongoid: '6.4.8', mongodb: '4.4', json: '~> 2.0' }
+          - { ruby: '3.2', mongoid: '7.2.3', mongodb: '4.4', json: '~> 2.0' }
+          - { ruby: '3.2', mongoid: '7.3.0', mongodb: '4.4', json: '~> 2.0' }
+          - { ruby: '3.3', mongoid: '7.3.0', mongodb: '5.0', json: '~> 2.0' }
+          - { ruby: '3.4', mongoid: '7.5.2', mongodb: '5.0', json: '~> 2.0' }
+          - { ruby: '3.4', mongoid: '8.1.11', mongodb: '6.0', json: '~> 2.0' }
+          - { ruby: '3.4', mongoid: '8.1.11', mongodb: '7.0', json: '~> 2.0' }
+          - { ruby: '3.4', mongoid: '8.1.11', mongodb: '8.0', json: '~> 2.0' }
+          - { ruby: '3.3', mongoid: '~> 9.1', mongodb: '8.0', grape: '~> 3.2', json: '~> 3.0' }
+          - { ruby: '3.4', mongoid: '~> 9.1', mongodb: '8.0', grape: '~> 4.0', json: '~> 3.0' }
+          - { ruby: '4.0', mongoid: '~> 9.1', mongodb: '8.0', grape: '~> 4.0', json: '~> 3.0' }
+    name: test (ruby=${{ matrix.entry.ruby }}, mongoid=${{ matrix.entry.mongoid }}, mongodb=${{ matrix.entry.mongodb }}, grape=${{ matrix.entry.grape || 'auto' }}, json=${{ matrix.entry.json }})
+    services:
+      mongodb:
+        image: mongo:${{ matrix.entry.mongodb }}
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })' || mongo --quiet --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.entry.ruby }}
-      - uses: browser-actions/setup-geckodriver@latest
+          bundler-cache: true
+          cache-version: mongoid-${{ matrix.entry.mongoid }}-grape-${{ matrix.entry.grape || 'auto' }}-json-${{ matrix.entry.json }}
+      - uses: browser-actions/setup-firefox@v1.7.2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - run: geckodriver --version
-      - uses: supercharge/mongodb-github-action@1.7.0
-        with:
-          mongodb-version: ${{ matrix.entry.mongodb }}
+          firefox-version: latest
       - name: Test
-        uses: GabrielBB/xvfb-action@v1
-        env:
-          DATABASE_ADAPTER: mongoid
-          MONGOID_VERSION: ${{ matrix.entry.mongoid }}
-        with:
-          run: |
-            bundle install
-            bundle exec rake spec
+        run: xvfb-run --auto-servernum bundle exec rake spec
