@@ -27,6 +27,7 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
       - [Extensions](#extensions)
     - [Service Class](#service-class)
   - [HTML Templates](#html-templates)
+    - [Page Middleware Configuration](#page-middleware-configuration)
   - [Access Tokens](#access-tokens)
 - [Sample Bots Using Slack Ruby Bot Server](#sample-bots-using-slack-ruby-bot-server)
 - [Copyright & License](#copyright--license)
@@ -306,6 +307,25 @@ SlackRubyBotServer.configure do |config|
   config.view_paths << File.expand_path(File.join(__dir__, 'public'))
 end
 ```
+
+#### Page Middleware Configuration
+
+Use `config.server_pages` to configure the underlying [`Rack::ServerPages`](https://github.com/migrs/rack-server-pages) middleware in an initializer, before `SlackRubyBotServer::Api::Middleware.instance` is first accessed. The block receives its configuration object after the framework applies `view_paths`, so it can customize any option supported by your installed `rack-server-pages` version.
+
+For example, with `rack-server-pages` 0.3.0 or newer:
+
+```ruby
+SlackRubyBotServer.configure do |config|
+  config.server_pages do |pages|
+    pages.cache_control = 'private, no-cache'
+    pages.static_cache_control = 'public, no-cache'
+  end
+end
+```
+
+`cache_control` sets the default `Cache-Control` header for rendered templates, including generated CSS. `static_cache_control` sets it for static files. `no-cache` allows storage but requires revalidation before reuse; use `private, no-store` for sensitive pages. You can also configure `static_etags` and `static_timestamps` with version 0.3.0 or newer. These settings do not change downstream API responses.
+
+Without a block, the framework preserves the installed library's defaults and existing `view_paths` behavior. Registering another block replaces the previous one, and `SlackRubyBotServer::Config.reset!` clears it. The block runs when the middleware stack is built, not on each request. If you change configuration after initialization, rebuild the stack with `SlackRubyBotServer::Api::Middleware.reset!`; configure it before startup in production.
 
 ### Access Tokens
 
