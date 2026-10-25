@@ -20,6 +20,8 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
   - [OAuth Version and Scopes](#oauth-version-and-scopes)
   - [Slack App](#slack-app)
   - [API](#api)
+    - [Custom Endpoints](#custom-endpoints)
+    - [Team Endpoint Visibility](#team-endpoint-visibility)
     - [App](#app)
     - [Service Manager](#service-manager)
       - [Lifecycle Callbacks](#lifecycle-callbacks)
@@ -151,6 +153,58 @@ Navigate to either [localhost:9292](http://localhost:9292) or the ngrok URL abov
 ### API
 
 This library implements an app, [SlackRubyBotServer::App](lib/slack-ruby-bot-server/app.rb) and a service manager, [SlackRubyBotServer::Service](lib/slack-ruby-bot-server/service.rb). It also provides [default HTML templates and JS scripts](public) for Slack integration.
+
+#### Custom Endpoints
+
+Set `config.api` to a Rack application, typically a `Grape::API` class, to customize the API without reopening the framework's classes. The default is `nil`, which uses `SlackRubyBotServer::Api::Endpoints::RootEndpoint`, including extensions mounted there by other gems. `SlackRubyBotServer::Config.reset!` restores this default.
+
+To add an endpoint alongside the default API:
+
+```ruby
+class ExtraApi < Grape::API
+  prefix 'api'
+  format :json
+
+  get :foobar do
+    { ok: true }
+  end
+end
+
+class ApplicationApi < Grape::API
+  mount SlackRubyBotServer::Api::Endpoints::RootEndpoint
+  mount ExtraApi
+end
+
+SlackRubyBotServer.configure do |config|
+  config.api = ApplicationApi
+end
+```
+
+Configure this before starting the application. In `config.ru`, continue running `SlackRubyBotServer::Api::Middleware.instance`; both `/api/foobar` and the existing `/api` routes then share the framework's CORS, URL-rewrite, and page middleware. A separate `Rack::Cascade` stack is unnecessary.
+
+In Rails, require the file defining `ApplicationApi` from your initializer before assigning `config.api`. For reloadable classes, make the assignment inside `Rails.application.config.to_prepare` so it references the current class. Mount `SlackRubyBotServer::Api::Middleware.instance` in your routes, for example `mount SlackRubyBotServer::Api::Middleware.instance => '/'`, rather than bypassing that middleware stack.
+
+#### Team Endpoint Visibility
+
+The default API exposes `GET /api/teams` and `GET /api/teams/:id` publicly. To retain OAuth registration without those read endpoints, use the separately mountable `TeamsEndpoint::Create`. `TeamsEndpoint::Read` contains the list and detail routes; `TeamsEndpoint` continues to mount both for backward compatibility.
+
+```ruby
+class RegistrationApi < Grape::API
+  include SlackRubyBotServer::Api::Helpers::ErrorHelpers
+
+  prefix 'api'
+  format :json
+  formatter :json, Grape::Formatter::Roar
+
+  mount SlackRubyBotServer::Api::Endpoints::TeamsEndpoint::Create
+end
+
+SlackRubyBotServer.configure do |config|
+  config.api = RegistrationApi
+end
+```
+
+This replaces the default root API: it does not expose its status, root discovery, Swagger, or team-read routes. Do not also mount `RootEndpoint` or `TeamsEndpoint`, since either would restore the public team reads. If you use the Events extension or other custom endpoints, explicitly mount their routes with their required signature verification too. Add your own authentication before mounting `TeamsEndpoint::Read` if you need protected team queries. OAuth registration still requires a valid Slack authorization code; this configuration does not add a general authentication layer.
 
 #### App
 
