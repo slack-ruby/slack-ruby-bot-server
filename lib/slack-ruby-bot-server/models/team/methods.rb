@@ -1,3 +1,5 @@
+require 'uri'
+
 module Methods
   extend ActiveSupport::Concern
 
@@ -34,6 +36,7 @@ module Methods
       client = Slack::Web::Client.new(token: token)
 
       auth = client.auth_test
+      update_info!(auth)
 
       presence = begin
         client.users_getPresence(user: auth['user_id'])
@@ -45,6 +48,21 @@ module Methods
         auth: auth,
         presence: presence
       }
+    end
+
+    def update_info!(auth = nil)
+      auth ||= Slack::Web::Client.new(token: token).auth_test
+      raise ArgumentError, 'Slack authentication belongs to a different workspace.' unless auth.fetch('team_id') == team_id
+
+      name = auth.fetch('team')
+      raise ArgumentError, 'Slack authentication returned an invalid workspace name.' unless name.is_a?(String) && !name.empty?
+
+      url = URI.parse(auth.fetch('url'))
+      raise ArgumentError, 'Slack authentication returned an invalid workspace URL.' unless url.is_a?(URI::HTTP) && url.host
+
+      attributes = { name: name, domain: url.host.split('.').first }
+      update!(attributes) if attributes.any? { |key, value| public_send(key) != value }
+      auth
     end
 
     def ping_if_active!

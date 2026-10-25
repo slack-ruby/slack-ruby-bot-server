@@ -3,6 +3,10 @@ Upgrading Slack-Ruby-Bot-Server
 
 ### Upgrading to >= 2.3.0
 
+#### Workspace Metadata Refresh
+
+`Team#ping!` now persists the current workspace `name` and `domain` when they differ from the successful `auth.test` response. This adds no Slack request, but pings (including `/api/status`) can now write to the `teams` collection/table and surface persistence errors. `domain` is derived from the workspace URL's first hostname label. Applications needing a standalone refresh can call `team.update_info!`.
+
 #### Recommended Test Helper Migration
 
 If your application defines its own `:team` fabricator, replace `require 'slack-ruby-bot-server/rspec'` with `require 'slack-ruby-bot-server/rspec/fabricators'`. This is recommended, not required: the new entry point registers only `:slack_ruby_bot_server_team`, leaving `:team` available regardless of whether your application's fabricator is loaded before or after the helper.
