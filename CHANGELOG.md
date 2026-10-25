@@ -1,5 +1,9 @@
 ### Changelog
 
+### 2.3.1 (Next)
+
+* Your contribution here.
+
 ### 2.3.0 (2026/10/25)
 
 * [#188](https://github.com/slack-ruby/slack-ruby-bot-server/pull/188): Reduce the database CI matrices from 22 to 12 jobs while retaining representative legacy ORM majors and modern Ruby/Grape 3/4 coverage - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
