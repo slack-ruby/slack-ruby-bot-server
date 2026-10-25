@@ -20,14 +20,9 @@ jobs:
       fail-fast: false
       matrix:
         entry:
-          # Active Support 6.x, 7.0, and 8.0 pass quirks_mode, removed in JSON 3.
-          - { ruby: '3.2', postgresql: '11', active_record: '~> 6.0.0', json: '~> 2.0' }
+          # Active Support 6.x and 8.0 pass quirks_mode, removed in JSON 3.
           - { ruby: '3.2', postgresql: '11', active_record: '~> 6.1.0', json: '~> 2.0' }
-          - { ruby: '3.2', postgresql: '14', active_record: '~> 7.0.0', json: '~> 2.0' }
           - { ruby: '3.3', postgresql: '14', active_record: '~> 7.2.0', json: '~> 3.0' }
-          - { ruby: '3.4', postgresql: '14', active_record: '~> 7.2.0', json: '~> 3.0' }
-          - { ruby: '3.4', postgresql: '15', active_record: '~> 8.0.2', json: '~> 2.0' }
-          - { ruby: '3.4', postgresql: '16', active_record: '~> 8.0.2', json: '~> 2.0' }
           - { ruby: '3.4', postgresql: '17', active_record: '~> 8.0.2', json: '~> 2.0' }
           - { ruby: '3.3', postgresql: '18', active_record: '~> 8.1', grape: '~> 3.2', json: '~> 3.0' }
           - { ruby: '3.4', postgresql: '18', active_record: '~> 8.1', grape: '~> 4.0', json: '~> 3.0' }

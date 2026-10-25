@@ -39,7 +39,9 @@ bundle exec rake
 
 For PostgreSQL, set `DATABASE_ADAPTER=activerecord`, `ACTIVERECORD_VERSION`, and `DATABASE_URL` instead. `GRAPE_VERSION` optionally constrains the Grape version for either adapter; without it, Bundler selects a compatible version. CI preserves the older compatibility combinations and adds explicit Grape 3 and 4 jobs with current ORM versions, including Ruby 4. Each database runs in a health-checked service container, while Firefox runs under Xvfb. Selenium Manager provisions the matching driver.
 
-`JSON_VERSION` optionally constrains the development/test JSON dependency; otherwise it is unrestricted. CI uses JSON 2 for Mongoid 6-8 and Active Record 6.x, 7.0, and 8.0 because their Active Support versions pass `quirks_mode`, removed in JSON 3. Mongoid 9, Active Record 7.2, and Active Record 8.1 jobs explicitly test JSON 3. These selectors do not restrict the published gem's runtime dependencies.
+CI runs six jobs per adapter: three representative legacy ORM/database stacks and three modern combinations (Ruby 3.3/Grape 3, Ruby 3.4/Grape 4, and Ruby 4/Grape 4). Mongoid retains 6.4, 7.5, 8.1, and 9.1; Active Record retains 6.1, 7.2, 8.0, and 8.1. Redundant database-server variants and older ORM minor combinations are omitted. A combination no longer appearing in CI is not by itself a change to the gem's supported runtime dependencies.
+
+`JSON_VERSION` optionally constrains the development/test JSON dependency; otherwise it is unrestricted. CI uses JSON 2 for Mongoid 6-8 and Active Record 6.1 and 8.0 because their Active Support versions pass `quirks_mode`, removed in JSON 3. Mongoid 9, Active Record 7.2, and Active Record 8.1 jobs explicitly test JSON 3. These selectors do not restrict the published gem's runtime dependencies.
 
 On Linux, install [Firefox](https://www.mozilla.org/firefox/) and `Xvfb`, then run:
 
