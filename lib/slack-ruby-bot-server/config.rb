@@ -8,6 +8,7 @@ module SlackRubyBotServer
     attr_accessor :view_paths
     attr_accessor :oauth_scope
     attr_accessor :oauth_version
+    attr_accessor :api
 
     def reset!
       self.logger = nil
@@ -15,6 +16,7 @@ module SlackRubyBotServer
       self.oauth_scope = nil
       self.oauth_version = :v2
       @server_pages = nil
+      self.api = nil
 
       self.view_paths = [
         'views',

@@ -38,7 +38,7 @@ module SlackRubyBotServer
       end
 
       def call(env)
-        Endpoints::RootEndpoint.call(env)
+        (SlackRubyBotServer::Config.api || Endpoints::RootEndpoint).call(env)
       end
     end
   end
