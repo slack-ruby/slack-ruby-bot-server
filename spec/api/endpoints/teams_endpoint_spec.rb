@@ -127,11 +127,13 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
       end
       it 'returns a useful error when team already exists' do
         expect_any_instance_of(Team).to receive(:ping_if_active!)
-        existing_team = Fabricate(:team, token: 'access_token')
+        existing_team = Fabricate(:team, token: 'access_token', oauth_scope: 'original-scope', activated_user_id: 'original-user')
         expect { client.teams._post(code: 'code') }.to raise_error Faraday::ClientError do |e|
           json = JSON.parse(e.response[:body])
           expect(json['message']).to eq "Team #{existing_team.name} is already registered."
         end
+        expect(existing_team.reload.oauth_scope).to eq 'original-scope'
+        expect(existing_team.activated_user_id).to eq 'original-user'
       end
       it 'reactivates a deactivated team with a different code' do
         expect(SlackRubyBotServer::Service.instance).to receive(:start!)
@@ -150,6 +152,58 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
           expect(team.activated_user_id).to eq 'user_id'
           expect(team.bot_user_id).to be nil
         end.to_not change(Team, :count)
+      end
+
+      context 'with active reinstallation enabled' do
+        before do
+          SlackRubyBotServer.config.allow_reinstall = true
+          allow_any_instance_of(Team).to receive(:ping_if_active!)
+        end
+
+        it 'refreshes credentials without creating a record or starting another worker' do
+          existing_team = Fabricate(:team, token: 'old-token', team_id: 'team_id', oauth_version: 'v2')
+          expect(SlackRubyBotServer::Service.instance).not_to receive(:start!)
+          expect(SlackRubyBotServer::Service.instance).not_to receive(:create!)
+          expect(SlackRubyBotServer::Service.instance).to receive(:reinstall!).with(
+            instance_of(Team), { state: 'application-state' }
+          ).and_call_original
+
+          expect do
+            response = client.teams._post(code: 'code', state: 'application-state')
+            expect(response.id.to_s).to eq existing_team.id.to_s
+          end.not_to change(Team, :count)
+          existing_team.reload
+          expect(existing_team.token).to eq 'access_token'
+          expect(existing_team.active?).to be true
+          expect(existing_team.oauth_scope).to eq 'commands,incoming-webhook'
+          expect(existing_team.activated_user_access_token).to eq 'access_token'
+          expect(existing_team.activated_user_id).to eq 'user_id'
+        end
+
+        it 'does not bypass the active legacy installation guard' do
+          existing_team = Fabricate(:team, token: 'old-token', team_id: 'team_id', oauth_version: 'v1', oauth_scope: 'original-scope')
+          expect(SlackRubyBotServer::Service.instance).not_to receive(:reinstall!)
+          expect { client.teams._post(code: 'code') }.to raise_error(Faraday::ClientError)
+          existing_team.reload
+          expect(existing_team.token).to eq 'old-token'
+          expect(existing_team.oauth_version).to eq 'v1'
+          expect(existing_team.oauth_scope).to eq 'original-scope'
+        end
+
+        it 'still starts newly created installations normally' do
+          expect(SlackRubyBotServer::Service.instance).to receive(:start!).and_call_original
+          expect(SlackRubyBotServer::Service.instance).not_to receive(:reinstall!)
+          expect { client.teams._post(code: 'code') }.to change(Team, :count).by(1)
+        end
+
+        it 'still starts previously deactivated installations normally' do
+          existing_team = Fabricate(:team, token: 'old-token', team_id: 'team_id', oauth_version: 'v2', active: false)
+          expect(SlackRubyBotServer::Service.instance).to receive(:start!).and_call_original
+          expect(SlackRubyBotServer::Service.instance).not_to receive(:reinstall!)
+          client.teams._post(code: 'code')
+          expect(existing_team.reload.token).to eq 'access_token'
+          expect(existing_team.active?).to be true
+        end
       end
     end
 
@@ -235,8 +289,9 @@ describe SlackRubyBotServer::Api::Endpoints::TeamsEndpoint do
         end.to_not change(Team, :count)
       end
       it 'returns a useful error when team already exists' do
+        SlackRubyBotServer.config.allow_reinstall = true
         expect_any_instance_of(Team).to receive(:ping_if_active!)
-        existing_team = Fabricate(:team, token: 'access_token')
+        existing_team = Fabricate(:team, token: 'access_token', oauth_version: 'v2')
         expect { client.teams._post(code: 'code') }.to raise_error Faraday::ClientError do |e|
           json = JSON.parse(e.response[:body])
           expect(json['message']).to eq "Team #{existing_team.name} is already registered."

@@ -2,6 +2,7 @@
 
 ### 2.3.0 (Next)
 
+* [#190](https://github.com/slack-ruby/slack-ruby-bot-server/pull/190): Add opt-in active OAuth v2 reinstallation with credential refresh and a `reinstalled` callback, preserving default rejection and legacy RTM protection; rejected duplicate registrations no longer overwrite OAuth metadata - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#188](https://github.com/slack-ruby/slack-ruby-bot-server/pull/188): Reduce the database CI matrices from 22 to 12 jobs while retaining representative legacy ORM majors and modern Ruby/Grape 3/4 coverage - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#186](https://github.com/slack-ruby/slack-ruby-bot-server/pull/186): Document persisted custom Team attributes for both adapters and Rails concern loading/reloading - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#183](https://github.com/slack-ruby/slack-ruby-bot-server/pull/183): Add a `config.server_pages` block to configure page middleware options centrally without changing the installed library's defaults - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).

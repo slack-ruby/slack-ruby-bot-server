@@ -7,6 +7,14 @@ describe SlackRubyBotServer::Service do
   end
   context 'callbacks' do
     let(:instance) { SlackRubyBotServer::Service.instance }
+    it 'notifies applications of reinstallation without starting a worker' do
+      expect(instance).not_to receive(:start!)
+      expect do |callback|
+        instance.on(:reinstalled, &callback)
+        instance.reinstall!(team, state: 'application-state')
+      end.to yield_with_args(team, nil, { state: 'application-state' })
+    end
+
     context 'single' do
       before do
         @events = []

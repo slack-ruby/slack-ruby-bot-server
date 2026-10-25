@@ -51,6 +51,11 @@ module SlackRubyBotServer
       logger.error e
     end
 
+    def reinstall!(team, options = {})
+      logger.info "Reinstalled team #{team}."
+      run_callbacks :reinstalled, team, nil, options
+    end
+
     def restart!(team)
       logger.info "Restarting team #{team}."
       run_callbacks :restarting, team
