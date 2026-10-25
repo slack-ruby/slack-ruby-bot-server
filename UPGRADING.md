@@ -3,6 +3,22 @@ Upgrading Slack-Ruby-Bot-Server
 
 ### Upgrading to >= 2.3.0
 
+#### Recommended Test Helper Migration
+
+If your application defines its own `:team` fabricator, replace `require 'slack-ruby-bot-server/rspec'` with `require 'slack-ruby-bot-server/rspec/fabricators'`. This is recommended, not required: the new entry point registers only `:slack_ruby_bot_server_team`, leaving `:team` available regardless of whether your application's fabricator is loaded before or after the helper.
+
+Use `Fabricate(:slack_ruby_bot_server_team)` for the framework defaults, or inherit them in your application's fabricator:
+
+```ruby
+require 'slack-ruby-bot-server/rspec/fabricators'
+
+Fabricator(:team, from: :slack_ruby_bot_server_team) do
+  name { 'My application team' }
+end
+```
+
+The legacy helper remains supported and registers `:team` only if no definition already exists. Replace the old require rather than adding the new one alongside it; loading both still opts into the legacy alias and can conflict with a `:team` definition loaded later.
+
 #### Status Checks and Inactive Installations
 
 `GET /api/status` now pings only active installations. When Slack returns `account_inactive` or `invalid_auth`, the installation is deactivated through `Service#deactivate!`, and the endpoint returns HTTP `200` with `ping: { "ok": false, "error": "account_inactive" }` (or `"invalid_auth"`). The active-team count reflects that deactivation. Monitoring should inspect the failed `ping` as well as the HTTP status.

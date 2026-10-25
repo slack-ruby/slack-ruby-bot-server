@@ -1,0 +1,5 @@
+Fabricator(:slack_ruby_bot_server_team, class_name: 'Team') do
+  token { Fabricate.sequence(:team_token) { |i| "abc-#{i}" } }
+  team_id { Fabricate.sequence(:team_id) { |i| "T#{i}" } }
+  name { Faker::Lorem.word }
+end
