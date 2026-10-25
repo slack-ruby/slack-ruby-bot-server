@@ -7,7 +7,10 @@ concurrency:
   group: postgresql-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  changes:
+    uses: ./.github/workflows/test-changes.yml
   test:
+    needs: changes
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
@@ -35,7 +38,7 @@ jobs:
     name: test (ruby=${{ matrix.entry.ruby }}, postgresql=${{ matrix.entry.postgresql }}, active_record=${{ matrix.entry.active_record }}, grape=${{ matrix.entry.grape || 'auto' }}, json=${{ matrix.entry.json }})
     services:
       postgresql:
-        image: postgres:${{ matrix.entry.postgresql }}
+        image: ${{ needs.changes.outputs.run_tests == 'true' && format('postgres:{0}', matrix.entry.postgresql) || '' }}
         env:
           POSTGRES_DB: slack_ruby_bot_server_test
           POSTGRES_USER: test
@@ -49,13 +52,20 @@ jobs:
           --health-retries 10
     steps:
       - uses: actions/checkout@v7
+        if: needs.changes.outputs.run_tests == 'true'
       - uses: ruby/setup-ruby@v1
+        if: needs.changes.outputs.run_tests == 'true'
         with:
           ruby-version: ${{ matrix.entry.ruby }}
           bundler-cache: true
           cache-version: activerecord-${{ matrix.entry.active_record }}-grape-${{ matrix.entry.grape || 'auto' }}-json-${{ matrix.entry.json }}
       - uses: browser-actions/setup-firefox@v1.7.2
+        if: needs.changes.outputs.run_tests == 'true'
         with:
           firefox-version: latest
       - name: Test
+        if: needs.changes.outputs.run_tests == 'true'
         run: xvfb-run --auto-servernum bundle exec rake spec
+      - name: Documentation only
+        if: needs.changes.outputs.run_tests == 'false'
+        run: echo 'Documentation-only change; database, dependencies, browser, and tests skipped.'

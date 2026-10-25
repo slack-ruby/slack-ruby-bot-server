@@ -47,6 +47,8 @@ On Linux, install [Firefox](https://www.mozilla.org/firefox/) and `Xvfb`, then r
 xvfb-run --auto-servernum bundle exec rake
 ```
 
+Documentation-only changes (`*.md`, `LICENSE`, `LICENSE.txt`, and `images/`) do not start database containers, install dependencies or Firefox, or run the database test suites. The workflows still publish every existing matrix check name so required checks can complete; Danger and RuboCop remain unchanged. Code, assets in `public/`, dependency files, and CI configuration still run the full matrices. New branches or unavailable previous push revisions conservatively run all tests.
+
 ## Write Tests
 
 Try to write a test that reproduces the problem you're trying to fix or describes a feature that you want to build.
