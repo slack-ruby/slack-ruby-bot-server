@@ -21,6 +21,7 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
       - [Mongoid Attributes](#mongoid-attributes)
       - [Active Record Attributes](#active-record-attributes)
       - [Rails Loading and Reloading](#rails-loading-and-reloading)
+    - [Workspace Metadata](#workspace-metadata)
   - [OAuth Version and Scopes](#oauth-version-and-scopes)
   - [Slack App](#slack-app)
   - [API](#api)
@@ -184,6 +185,20 @@ end
 With Active Record, use the migration above instead of declaring a field in the initializer. The callback runs at boot and after development reloads; including the same concern more than once is safe. Keep one-time field declarations outside the callback. Do not query the database or swallow database errors just to attach methods: the extension can be loaded before the `teams` table exists.
 
 The framework currently owns the global `Team` constant. An unrelated application model with the same name is a separate [name-collision limitation](https://github.com/slack-ruby/slack-ruby-bot-server/pull/83), not an extension mechanism.
+
+#### Workspace Metadata
+
+`Team#ping!` refreshes the stored workspace `name` and `domain` from its existing successful [`auth.test`](https://docs.slack.dev/reference/methods/auth.test/) response, without making an additional API request. `domain` is the first hostname label of the workspace URL (for example, `example` from `https://example.slack.com/`). Unchanged metadata is not written to the database. Authentication, malformed-response, and persistence failures propagate instead of returning a successful refresh.
+
+Call `team.update_info!` to refresh only this information without fetching presence. `auth.test` requires no additional scopes, unlike `team.info`. To refresh when an installation starts, opt into an additional authentication request through a lifecycle callback:
+
+```ruby
+SlackRubyBotServer::Service.instance.on :started do |team|
+  team.update_info!
+end
+```
+
+This callback is optional; no new authentication request is added to the default startup lifecycle. It refreshes workspace metadata, not transport connection state.
 
 ### OAuth Version and Scopes
 

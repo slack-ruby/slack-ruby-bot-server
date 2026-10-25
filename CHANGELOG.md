@@ -2,6 +2,7 @@
 
 ### 2.3.0 (Next)
 
+* [#191](https://github.com/slack-ruby/slack-ruby-bot-server/pull/191): Refresh workspace names and domains from successful authentication during pings, and expose `Team#update_info!` for standalone metadata refresh without additional scopes - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#188](https://github.com/slack-ruby/slack-ruby-bot-server/pull/188): Reduce the database CI matrices from 22 to 12 jobs while retaining representative legacy ORM majors and modern Ruby/Grape 3/4 coverage - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#189](https://github.com/slack-ruby/slack-ruby-bot-server/pull/189): Add a prefixed Team fabricator entry point and preserve application-defined `:team` fabricators in the legacy RSpec helper - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#186](https://github.com/slack-ruby/slack-ruby-bot-server/pull/186): Document persisted custom Team attributes for both adapters and Rails concern loading/reloading - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
