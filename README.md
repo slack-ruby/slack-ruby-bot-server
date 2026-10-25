@@ -17,6 +17,10 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
   - [Storage](#storage)
     - [MongoDB](#mongodb)
     - [ActiveRecord](#activerecord)
+    - [Extending Team](#extending-team)
+      - [Mongoid Attributes](#mongoid-attributes)
+      - [Active Record Attributes](#active-record-attributes)
+      - [Rails Loading and Reloading](#rails-loading-and-reloading)
   - [OAuth Version and Scopes](#oauth-version-and-scopes)
   - [Slack App](#slack-app)
   - [API](#api)
@@ -109,6 +113,76 @@ db_config = if Gem::Version.new(Psych::VERSION) >= Gem::Version.new('3.1.0.pre1'
             end
 ActiveRecord::Base.establish_connection(db_config)
 ```
+
+#### Extending Team
+
+The installation model is the top-level `::Team` class for both adapters, not `SlackRubyBotServer::Models::Team`. Load `slack-ruby-bot-server` before extending it. The model already includes its database adapter and timestamps; do not include them again or declare a different superclass.
+
+##### Mongoid Attributes
+
+Add fields by reopening the existing class in an application file, for example `lib/team_extensions.rb`:
+
+```ruby
+require 'slack-ruby-bot-server'
+
+class Team
+  field :subscription_plan, type: String, default: 'free'
+
+  def paid_plan?
+    subscription_plan == 'paid'
+  end
+end
+```
+
+Require that file from your startup code after loading the framework and before serving requests or starting the service. Mongoid does not require a schema migration for the new field.
+
+##### Active Record Attributes
+
+Add a column to the existing `teams` table with an application migration. Use your application's migration version; this example is also compatible with older supported Active Record versions:
+
+```ruby
+class AddSubscriptionPlanToTeams < ActiveRecord::Migration[6.0]
+  def change
+    add_column :teams, :subscription_plan, :string, default: 'free', null: false
+  end
+end
+```
+
+Run the migration before code uses the attribute. Active Record provides its reader and writer from the column; do not use `attr_accessor`, which would bypass persistence. Add methods by reopening `class Team` after loading the framework, as above, but omit the Mongoid-only `field` declaration.
+
+##### Rails Loading and Reloading
+
+Putting another `app/models/team.rb` in a Rails app is not a reliable way to extend a class already loaded by a gem. Put reloadable behavior in a concern instead:
+
+```ruby
+# app/models/concerns/team_extensions.rb
+module TeamExtensions
+  extend ActiveSupport::Concern
+
+  def paid_plan?
+    subscription_plan == 'paid'
+  end
+end
+```
+
+Include it in `::Team` from a reloader callback, rather than autoloading the concern directly during initializer execution:
+
+```ruby
+# config/initializers/team_extensions.rb
+require 'slack-ruby-bot-server'
+
+if SlackRubyBotServer.config.mongoid?
+  ::Team.field :subscription_plan, type: String, default: 'free'
+end
+
+Rails.application.config.to_prepare do
+  ::Team.include(TeamExtensions)
+end
+```
+
+With Active Record, use the migration above instead of declaring a field in the initializer. The callback runs at boot and after development reloads; including the same concern more than once is safe. Keep one-time field declarations outside the callback. Do not query the database or swallow database errors just to attach methods: the extension can be loaded before the `teams` table exists.
+
+The framework currently owns the global `Team` constant. An unrelated application model with the same name is a separate [name-collision limitation](https://github.com/slack-ruby/slack-ruby-bot-server/pull/83), not an extension mechanism.
 
 ### OAuth Version and Scopes
 
