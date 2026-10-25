@@ -14,6 +14,7 @@ module SlackRubyBotServer
       self.service_class = SlackRubyBotServer::Service
       self.oauth_scope = nil
       self.oauth_version = :v2
+      @server_pages = nil
 
       self.view_paths = [
         'views',
@@ -54,6 +55,11 @@ module SlackRubyBotServer
 
     def oauth_scope_s
       oauth_scope&.join(',')
+    end
+
+    def server_pages(&block)
+      @server_pages = block if block
+      @server_pages
     end
 
     def activerecord?

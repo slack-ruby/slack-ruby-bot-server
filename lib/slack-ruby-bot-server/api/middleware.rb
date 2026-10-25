@@ -30,6 +30,7 @@ module SlackRubyBotServer
 
           use Rack::ServerPages do |config|
             config.view_path = SlackRubyBotServer::Config.view_paths
+            SlackRubyBotServer::Config.server_pages&.call(config)
           end
 
           run Middleware.new
