@@ -1,6 +1,6 @@
 ### Changelog
 
-### 2.3.0 (Next)
+### 2.3.0 (2026/10/25)
 
 * [#188](https://github.com/slack-ruby/slack-ruby-bot-server/pull/188): Reduce the database CI matrices from 22 to 12 jobs while retaining representative legacy ORM majors and modern Ruby/Grape 3/4 coverage - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#189](https://github.com/slack-ruby/slack-ruby-bot-server/pull/189): Add a prefixed Team fabricator entry point and preserve application-defined `:team` fabricators in the legacy RSpec helper - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
@@ -8,8 +8,6 @@
 * [#183](https://github.com/slack-ruby/slack-ruby-bot-server/pull/183): Add a `config.server_pages` block to configure page middleware options centrally without changing the installed library's defaults - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#184](https://github.com/slack-ruby/slack-ruby-bot-server/pull/184): Add a configurable API application and separately mountable team read/registration endpoints, preserving the default API while supporting custom routes and registration-only applications - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#185](https://github.com/slack-ruby/slack-ruby-bot-server/pull/185): Skip inactive installations in status checks and deactivate revoked credentials through service callbacks, returning an explicit failed ping instead of failing the whole status response - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
-* Your contribution here.
-
 ### 2.2.1 (2026/10/24)
 
 * [#182](https://github.com/slack-ruby/slack-ruby-bot-server/pull/182): Modernize CI with current actions, native database services, dependency caching, and explicit Ruby 4, Mongoid 9, Active Record 8.1, PostgreSQL 18, Grape 3/4, and JSON 2/3 coverage while retaining existing compatibility combinations - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
