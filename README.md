@@ -35,6 +35,7 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
   - [HTML Templates](#html-templates)
     - [Page Middleware Configuration](#page-middleware-configuration)
   - [Access Tokens](#access-tokens)
+- [Testing](#testing)
 - [Sample Bots Using Slack Ruby Bot Server](#sample-bots-using-slack-ruby-bot-server)
 - [Copyright & License](#copyright--license)
 
@@ -458,6 +459,28 @@ Without a block, the framework preserves the installed library's defaults and ex
 ### Access Tokens
 
 By default the implementation of [Team](lib/slack-ruby-bot-server/models/team) stores the value of the token with all the requested OAuth scopes in both `token` and `activated_user_access_token` (for backwards compatibility), along with `oauth_version` and `oauth_scope`. If a legacy Slack bot integration `bot_access_token` is present, it is stored as `token`, and `activated_user_access_token` is the token that has all the requested OAuth scopes.
+
+## Testing
+
+The optional test helpers use [Fabrication](https://fabricationgem.org/) and Faker. Add `fabrication` and `faker` to your application's test dependencies; neither is a runtime dependency of this gem.
+
+To use the framework's installation defaults without reserving your application's `:team` fabricator name, load the prefixed-only helper:
+
+```ruby
+require 'slack-ruby-bot-server/rspec/fabricators'
+
+team = Fabricate(:slack_ruby_bot_server_team)
+```
+
+This fabricator creates the existing `::Team` model with unique token/team ID sequences and a generated name. Applications can register their own `:team` before or after this helper, or inherit the framework defaults:
+
+```ruby
+Fabricator(:team, from: :slack_ruby_bot_server_team) do
+  name { 'My application team' }
+end
+```
+
+The existing `require 'slack-ruby-bot-server/rspec'` remains supported. It loads the prefixed fabricator and registers the legacy `:team` alias only when no `:team` definition already exists. If your application defines `:team` later, replace the legacy require with `slack-ruby-bot-server/rspec/fabricators`; loading both entry points still opts into the legacy alias.
 
 ## Sample Bots Using Slack Ruby Bot Server
 
