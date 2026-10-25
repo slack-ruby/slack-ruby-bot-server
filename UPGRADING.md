@@ -1,6 +1,14 @@
 Upgrading Slack-Ruby-Bot-Server
 ===============================
 
+### Upgrading to >= 2.3.0
+
+#### Status Checks and Inactive Installations
+
+`GET /api/status` now pings only active installations. When Slack returns `account_inactive` or `invalid_auth`, the installation is deactivated through `Service#deactivate!`, and the endpoint returns HTTP `200` with `ping: { "ok": false, "error": "account_inactive" }` (or `"invalid_auth"`). The active-team count reflects that deactivation. Monitoring should inspect the failed `ping` as well as the HTTP status.
+
+When no active installations remain, no Slack ping is attempted. Other Slack errors retain their existing error response and do not deactivate installations.
+
 ### Upgrading to >= 2.2.0
 
 #### Cursor Helper Iterator Changes
