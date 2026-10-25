@@ -4,6 +4,7 @@
 
 * [#183](https://github.com/slack-ruby/slack-ruby-bot-server/pull/183): Add a `config.server_pages` block to configure page middleware options centrally without changing the installed library's defaults - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * [#184](https://github.com/slack-ruby/slack-ruby-bot-server/pull/184): Add a configurable API application and separately mountable team read/registration endpoints, preserving the default API while supporting custom routes and registration-only applications - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
+* [#185](https://github.com/slack-ruby/slack-ruby-bot-server/pull/185): Skip inactive installations in status checks and deactivate revoked credentials through service callbacks, returning an explicit failed ping instead of failing the whole status response - [@dblock](https://github.com/dblock), [@Copilot](https://github.com/apps/copilot-swe-agent).
 * Your contribution here.
 
 ### 2.2.1 (2026/10/24)
