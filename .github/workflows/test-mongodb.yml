@@ -21,12 +21,7 @@ jobs:
         entry:
           # These Active Support versions pass quirks_mode, removed in JSON 3.
           - { ruby: '3.2', mongoid: '6.4.8', mongodb: '4.4', json: '~> 2.0' }
-          - { ruby: '3.2', mongoid: '7.2.3', mongodb: '4.4', json: '~> 2.0' }
-          - { ruby: '3.2', mongoid: '7.3.0', mongodb: '4.4', json: '~> 2.0' }
-          - { ruby: '3.3', mongoid: '7.3.0', mongodb: '5.0', json: '~> 2.0' }
           - { ruby: '3.4', mongoid: '7.5.2', mongodb: '5.0', json: '~> 2.0' }
-          - { ruby: '3.4', mongoid: '8.1.11', mongodb: '6.0', json: '~> 2.0' }
-          - { ruby: '3.4', mongoid: '8.1.11', mongodb: '7.0', json: '~> 2.0' }
           - { ruby: '3.4', mongoid: '8.1.11', mongodb: '8.0', json: '~> 2.0' }
           - { ruby: '3.3', mongoid: '~> 9.1', mongodb: '8.0', grape: '~> 3.2', json: '~> 3.0' }
           - { ruby: '3.4', mongoid: '~> 9.1', mongodb: '8.0', grape: '~> 4.0', json: '~> 3.0' }

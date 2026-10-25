@@ -44,7 +44,7 @@ Browser tests require Firefox. Selenium Manager provisions geckodriver when need
 
 ## Changes and Compatibility
 
-Preserve both database adapters and the existing unique CI matrix combinations, including explicit Grape 3/4 coverage. Quote version strings in workflow YAML and validate workflow changes with `actionlint`.
+Preserve both database adapters, representative legacy ORM major versions, and the modern Ruby/Grape 3/4 combinations in the six-job-per-adapter CI matrices. Avoid multiplying equivalent jobs across database server versions. Quote version strings in workflow YAML and validate workflow changes with `actionlint`.
 
 Keep JSON 2 constraints scoped to affected legacy matrix jobs through `JSON_VERSION`; modern jobs explicitly test JSON 3. Do not add a blanket JSON upper bound to the Gemfile or gemspec.
 
