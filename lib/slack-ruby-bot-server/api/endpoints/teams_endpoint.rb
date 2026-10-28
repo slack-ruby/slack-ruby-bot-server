@@ -88,36 +88,42 @@ module SlackRubyBotServer
               team ||= Team.where(team_id: team_id, oauth_version: oauth_version).first
               team ||= Team.where(team_id: team_id).first
 
+              attributes = {
+                oauth_version: oauth_version,
+                oauth_scope: oauth_scope,
+                activated_user_id: user_id,
+                activated_user_access_token: access_token,
+                bot_user_id: bot_user_id
+              }
+              reinstall = false
+
               if team
                 team.ping_if_active!
 
-                team.update!(
-                  oauth_version: oauth_version,
-                  oauth_scope: oauth_scope,
-                  activated_user_id: user_id,
-                  activated_user_access_token: access_token,
-                  bot_user_id: bot_user_id
-                )
+                if team.active?
+                  raise "Team #{team.name} is already registered." unless SlackRubyBotServer::Config.allow_reinstall && team.oauth_version == 'v2' && oauth_version == :v2
 
-                raise "Team #{team.name} is already registered." if team.active?
+                  reinstall = true
+                  attributes[:token] = token
+                end
 
-                team.activate!(token)
+                team.update!(attributes)
+                team.activate!(token) unless reinstall
               else
-                team = Team.create!(
-                  token: token,
-                  oauth_version: oauth_version,
-                  oauth_scope: oauth_scope,
-                  team_id: team_id,
-                  name: team_name,
-                  activated_user_id: user_id,
-                  activated_user_access_token: access_token,
-                  bot_user_id: bot_user_id
-                )
+                team = Team.create!(attributes.merge(
+                                      token: token,
+                                      team_id: team_id,
+                                      name: team_name
+                                    ))
               end
 
               options = params.slice(:state)
 
-              Service.instance.create!(team, options)
+              if reinstall
+                Service.instance.reinstall!(team, options)
+              else
+                Service.instance.create!(team, options)
+              end
               present team, with: Presenters::TeamPresenter
             end
           end

@@ -8,6 +8,7 @@ module SlackRubyBotServer
     attr_accessor :view_paths
     attr_accessor :oauth_scope
     attr_accessor :oauth_version
+    attr_accessor :allow_reinstall
     attr_accessor :api
 
     def reset!
@@ -15,6 +16,7 @@ module SlackRubyBotServer
       self.service_class = SlackRubyBotServer::Service
       self.oauth_scope = nil
       self.oauth_version = :v2
+      self.allow_reinstall = false
       @server_pages = nil
       self.api = nil
 

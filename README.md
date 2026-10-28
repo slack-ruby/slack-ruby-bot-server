@@ -22,6 +22,7 @@ Build a complete Slack bot service with Slack button integration, in Ruby.
       - [Active Record Attributes](#active-record-attributes)
       - [Rails Loading and Reloading](#rails-loading-and-reloading)
   - [OAuth Version and Scopes](#oauth-version-and-scopes)
+    - [Active Reinstallation](#active-reinstallation)
   - [Slack App](#slack-app)
   - [API](#api)
     - [Custom Endpoints](#custom-endpoints)
@@ -198,6 +199,26 @@ end
 
 The "Add to Slack" button uses the standard OAuth code grant flow as described in the [Slack docs](https://api.slack.com/docs/oauth#flow). Once clicked, the user is taken through the authorization process at Slack's site. Upon successful completion, a callback containing a temporary code is sent to the redirect URL you specified. The endpoint at that URL contains code that persists the bot token each time a Slack client is instantiated for the specific team.
 
+#### Active Reinstallation
+
+By default, installing an already active bot returns an "already registered" error. Stateless OAuth v2 applications, such as Events API bots, can opt into refreshing an existing installation:
+
+```ruby
+SlackRubyBotServer.configure do |config|
+  config.allow_reinstall = true
+end
+```
+
+Both the existing installation and the new authorization must use OAuth v2. Successful active reinstalls update the stored token, scopes, and authorizing-user metadata, then call `Service#reinstall!` and emit `:reinstalled` with the optional OAuth `state`. They do not create another team or invoke `:creating`, `:created`, `:starting`, or `:started`, so no second worker is started:
+
+```ruby
+SlackRubyBotServer::Service.instance.on :reinstalled do |team, error, options|
+  # Apply application-specific installation settings using options[:state].
+end
+```
+
+Only enable this for applications that do not need an existing connection or worker restarted when credentials change. Active OAuth v1 installations and active OAuth-version migrations still return an error, even with this option enabled, preserving legacy RTM protection. New installations and previously inactive installations retain the normal creation/start lifecycle. `Config.reset!` restores the default `false`.
+
 ### Slack App
 
 Create a new Slack App [here](https://api.slack.com/applications/new).
@@ -340,6 +361,7 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 | error          | an error has occurred                                            |
 | creating       | a new team is being registered                                   |
 | created        | a new team has been registered                                   |
+| reinstalled    | an active OAuth v2 installation has been refreshed without starting a worker |
 | booting        | the service is starting and is connecting a team to Slack        |
 | booted         | the service is starting and has connected a team to Slack        |
 | stopping       | the service is about to disconnect a team from Slack             |
@@ -349,7 +371,7 @@ The following callbacks are supported. All callbacks receive a `team`, except `e
 | deactivating   | a team is being deactivated                                      |
 | deactivated    | a team has been deactivated                                      |
 
-The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows for an optional `state` parameter that will be returned on completion of the request. The `creating` and `created` callbacks include an options hash where this value can be accessed (to check for forgery attacks for instance).
+The [Add to Slack button](https://api.slack.com/docs/slack-button) also allows for an optional `state` parameter that will be returned on completion of the request. The `creating`, `created`, and `reinstalled` callbacks include an options hash where this value can be accessed (to check for forgery attacks for instance).
 ```ruby
 auth = OpenSSL::HMAC.hexdigest("SHA256", "key", "data")
 ```
